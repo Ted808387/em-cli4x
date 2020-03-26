@@ -1,3 +1,5 @@
 module.exports = {
-  publicPath: '/em-cli4x/'
+  publicPath: process.env.NODE_ENV === 'production'
+  ? '/em-cli4x/'
+  : '/'
 }
