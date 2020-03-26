@@ -109,6 +109,8 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  mode: 'hash',
+  base: '/em-cli4x',
   routes
 })
 
