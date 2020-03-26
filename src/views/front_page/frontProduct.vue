@@ -89,7 +89,7 @@ export default {
     },
     methods: {
         getproducts(page) { 
-            const url = ('/API')+`/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`;
+            const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`;
             const vm = this;  
             this.$http.get(url).then((response) => {
                 vm.allproducts = response.data.products;
@@ -99,7 +99,7 @@ export default {
             });
         },
         selectmask() {
-            const url = ('/API')+`/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
+            const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
             const vm = this;
             this.$http.get(url).then((response) => {
                 vm.allproducts = response.data.products;
@@ -110,7 +110,7 @@ export default {
             });
         },
         selectMedical() {
-            const url = ('/API')+`/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
+            const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
             const vm = this;
             this.$http.get(url).then((response) => {
                 vm.allproducts = response.data.products;
@@ -121,7 +121,7 @@ export default {
             });
         },
         selectgazmask() {
-            const url = ('/API')+`/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
+            const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
             const vm = this;
             this.$http.get(url).then((response) => {
                 vm.allproducts = response.data.products;
@@ -140,7 +140,7 @@ export default {
             });
         },
         addtoCar(id, qty = 1) {
-            const url = ('/API')+`/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
+            const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
             const vm = this;  
             vm.status.loading = id;
             const car = {
