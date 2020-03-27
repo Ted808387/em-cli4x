@@ -42,7 +42,7 @@
                         </p>
                         </div>
                         <div class="col-md-5 footer-icon">
-                            <a href="#" class="footer-text-color">
+                            <a href="javascript:void(0)" class="footer-text-color">
                                 <i class="fab fa-facebook fa-3x"></i><br><br>
                             </a>
                             <a href="https://github.com/Ted808387" target="_blank" class="footer-text-color">

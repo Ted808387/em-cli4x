@@ -7,7 +7,7 @@
                 <div class="row pt-5 justify-content-around">
                     <div class="order-process process-undone-color col-12 col-md-3">Information</div>
                     <div class="order-process process-now-color col-12 col-md-3">Payment</div>
-                    <div class="order-process process-undone-color col-12 col-md-3">Consummation</div>
+                    <div class="order-process process-undone-color col-12 col-md-3">Completion</div>
                 </div>
                 <div class="my-5 row justify-content-center">
                     <form class="col-md-6" @submit.prevent="payOder(orderId)">

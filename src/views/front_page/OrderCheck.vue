@@ -7,7 +7,7 @@
                 <div class="row pt-5 justify-content-around">
                     <div class="order-process process-now-color col-12 col-md-3">Information</div>
                     <div class="order-process process-undone-color col-12 col-md-3">Payment</div>
-                    <div class="order-process process-undone-color col-12 col-md-3">Consummation</div>
+                    <div class="order-process process-undone-color col-12 col-md-3">Completion</div>
                 </div>
                 <div class="row">
                     <div class="col-sm-7 mt-5">
