@@ -2,8 +2,9 @@
     <div>
         <section class="home">
             <div class="bg mb-3">
-                <div class="header-text text-center">
+                <div class="header-text text-center text-white">
                     <div class="text-center text-lg font-weight-bold">MASK</div>
+                    <h5>High-efficiency filtration, antibacterial virus filtration can reach up to 99.9%</h5>
                     <router-link to="/frontHome/frontProduct">
                         <button class="btn btn-lg btn-dark mt-5">Show now</button>
                     </router-link>
@@ -176,7 +177,11 @@ export default {
     }
     .scrolldown {
         width: 36px;
-        margin: 100px auto 0;
+        position: absolute;
+        top: 315px;
+        left: 50%;
+        transform: translateX(-50%);
+        /* margin: 5vh auto; */
         font-size: 32px;
         color: #fff;
         opacity: 0.6;
@@ -186,7 +191,7 @@ export default {
         animation-duration: 4s;
     }
     .scrolldown:hover {
-        margin-top: 90px;
+        top: 305px;
         opacity: 1;
         transition: all 0.3s;
         animation-name: stopcolor;

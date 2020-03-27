@@ -16,6 +16,7 @@ import { required, email } from 'vee-validate/dist/rules';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 import 'swiper/css/swiper.css';
 
+
 axios.defaults.withCredentials = false;
 Vue.config.productionTip = false;
 Vue.use(VueAxios, axios);
@@ -26,6 +27,7 @@ Vue.component('ValidationObserver', ValidationObserver);
 Vue.component('ValidationProvider', ValidationProvider);
 localize('zh_TW', TW);
 Vue.use(VueAwesomeSwiper);
+
 
 extend('required', required);
 extend('email', email);

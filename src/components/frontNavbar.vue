@@ -158,6 +158,7 @@ export default {
       this.$http.delete(url).then((response) => {
       vm.status.loading = '';
       this.$bus.$emit('message:push', '已刪除訂單','danger');
+      this.$bus.$emit('changecart');
       this.gettoCart(); 
       });
     },
@@ -339,7 +340,7 @@ export default {
     position: absolute;
     top: 70px;
     right: 50px;
-    width: 250px;
+    width: 300px;
     padding: 10px;
     background-color: #fff;
     border-radius: 10px;

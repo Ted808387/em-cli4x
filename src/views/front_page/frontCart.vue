@@ -182,6 +182,7 @@ export default {
     created() {
         const vm = this;
         this.gettoCar();
+        this.$bus.$on('changecart',this.gettoCar);
     },
 };
 </script>
