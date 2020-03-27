@@ -1,6 +1,6 @@
 <template>
   <div>
-                <h2 class="text-center mb-5 font-weight-bold">Customer Experience</h2>
+                <h2 class="text-center mb-5 font-weight-bold">Customer Reviews</h2>
                     <div class="row no-gutters">
                         <div class="col-md-3 col-6">
                             <div class="customerimgbox">

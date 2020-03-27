@@ -5,7 +5,7 @@
                 <div class="header-text text-center text-white">
                     <div class="text-center text-lg font-weight-bold">MASK</div>
                     <h5>High-efficiency filtration, antibacterial virus filtration can reach up to 99.9%</h5>
-                    <router-link to="/frontHome/frontProduct">
+                    <router-link to="/front-home/frontproduct">
                         <button class="btn btn-lg btn-dark mt-5">Show now</button>
                     </router-link>
                     <div class="scrolldown omouse" @click.stop="scrolldown"><i class="fas fa-chevron-circle-down"></i></div>
@@ -95,7 +95,7 @@
                     </router-link>
                 </div>
             </div>
-            <!-- Customer experience -->
+            <!-- Customer reviews -->
             <div class="customer">
                 <Customer></Customer>
             </div>
