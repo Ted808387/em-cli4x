@@ -2,14 +2,14 @@
     <div>
         <section class="home">
             <div class="bg mb-3">
-                <div class="header-text text-center text-white">
-                    <div class="text-center text-lg font-weight-bold">MASK</div>
-                    <h5>High-efficiency filtration, antibacterial virus filtration can reach up to 99.9%</h5>
-                    <router-link to="/front-home/frontproduct">
-                        <button class="btn btn-lg btn-dark mt-5">Show now</button>
-                    </router-link>
-                    <div class="scrolldown omouse" @click.stop="scrolldown"><i class="fas fa-chevron-circle-down"></i></div>
-                </div>
+            </div>
+            <div class="header-text text-center text-white">
+                <div class="text-center text-lg font-weight-bold">MASK</div>
+                <h5>High-efficiency filtration, antibacterial virus filtration can reach up to 99.9%</h5>
+                <router-link to="/front-home/frontproduct">
+                    <button class="btn btn-lg btn-dark mt-5">Show now</button>
+                </router-link>
+                <div class="scrolldown omouse" @click.stop="scrolldown"><i class="fas fa-chevron-circle-down"></i></div>
             </div>
             <div class="productionitem">
                 <!-- Slide -->
@@ -126,7 +126,7 @@ export default {
 <style>
     .bg {
         width: 100%;
-        padding-top: 60vh;
+        padding-top: 600px;
         background-image: url("../../assets/frontbgimg/homebg.jpg");
         background-position: center;
 	    background-size: cover;
@@ -138,7 +138,7 @@ export default {
         top: 0;
         left: 0;
         width: 100%;
-        padding-top: 60vh;
+        padding-top: 600px;
         background: linear-gradient(360deg, #70B594 69%, #1C1C1C 100%);
         background: -moz-linear-gradient(360deg, #70B594 69%, #1C1C1C 100%);
         background: -webkit-linear-gradient(360deg, #70B594 69%, #1C1C1C 100%);
