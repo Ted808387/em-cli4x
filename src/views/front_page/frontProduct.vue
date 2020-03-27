@@ -1,6 +1,5 @@
 <template>
   <div>
-      <loading :active.sync="isLoading"></loading> 
       <section class="product">
         <div class="product-bg">
         </div>
@@ -30,7 +29,7 @@
                 <!-- products -->
                 <div class="col-sm-9">
                     <div class="row">
-                        <div class="card-item col-md-4 mb-5 pb-5 col-sm-6" v-for="item in products" :key="item.id">
+                        <div class="card-item col-md-4 mb-5 pb-5 col-sm-6" v-for="item in products" :key="item.id" @click="turnproduct(item.id)">
                             <div class="card_detail-cart">
                                 <div class="detail" @click="turnproduct(item.id)">
                                     <h2 class="card-detail">‧‧‧</h2>
@@ -76,8 +75,6 @@ export default {
             allproducts: [],
             displaypage: false,
             products: [],  
-            isLoading: false, 
-            // product: {},
             pagination: {},
             status: {
                 loading: {},
@@ -88,9 +85,9 @@ export default {
         frontpagination,
     },
     methods: {
-        getproducts(page) { 
-            const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`;
+        getproducts(page) {
             const vm = this;  
+            const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`;
             this.$http.get(url).then((response) => {
                 vm.allproducts = response.data.products;
                 vm.products = vm.allproducts;
@@ -99,8 +96,8 @@ export default {
             });
         },
         selectmask() {
-            const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
             const vm = this;
+            const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
             this.$http.get(url).then((response) => {
                 vm.allproducts = response.data.products;
                 vm.products = vm.allproducts.filter(function(item) {
@@ -110,8 +107,8 @@ export default {
             });
         },
         selectMedical() {
-            const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
             const vm = this;
+            const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
             this.$http.get(url).then((response) => {
                 vm.allproducts = response.data.products;
                 vm.products = vm.allproducts.filter(function(item) {
@@ -121,8 +118,8 @@ export default {
             });
         },
         selectgazmask() {
-            const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
             const vm = this;
+            const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
             this.$http.get(url).then((response) => {
                 vm.allproducts = response.data.products;
                 vm.products = vm.allproducts.filter(function(item) {
@@ -140,8 +137,8 @@ export default {
             });
         },
         addtoCar(id, qty = 1) {
-            const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-            const vm = this;  
+            const vm = this;
+            const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`; 
             vm.status.loading = id;
             const car = {
                 product_id: id,

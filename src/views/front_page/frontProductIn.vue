@@ -6,9 +6,9 @@
             </div>
             <div class="productinfo mt-5 pl-5 pr-5">
                 <div class="row">
-                    <div class="col-md-7">
-                        <div class="product-img p-sm-0 pb-sm-3">
-                            <img :src="product.imageUrl" alt="" class="img-fluid d-block" style="width: 100%; height: 100%; background-size: cover;
+                    <div class="col-md-7 pb-3">
+                        <div class="product-img p-sm-0">
+                            <img :src="product.imageUrl" alt="" class="img-fluid d-block ml-5" style="width: 80%; height: 80%; background-size: cover;
                                background-position: center;">
                         </div>
                     </div>
@@ -148,7 +148,7 @@ export default {
   }
   .product-img {
       width: 100%;
-      padding-left: 25%;
+      /* padding-left: 25%; */
   }
   .product_content {
       padding-left: 10%;

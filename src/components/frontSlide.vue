@@ -105,7 +105,7 @@ export default {
                     576: {
                         slidesPerView: 2,
                     },
-                    360: {
+                    420: {
                         slidesPerView: 1,
                     },
                 },
