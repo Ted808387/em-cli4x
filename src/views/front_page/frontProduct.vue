@@ -29,7 +29,7 @@
                 <!-- products -->
                 <div class="col-sm-9">
                     <div class="row">
-                        <div class="card-item col-md-4 mb-5 pb-5 col-sm-6" v-for="item in products" :key="item.id" @click="turnproduct(item.id)">
+                        <div class="card-item col-md-4 mb-5 pb-5 col-sm-6" v-for="item in products" :key="item.id">
                             <div class="card_detail-cart">
                                 <div class="detail" @click="turnproduct(item.id)">
                                     <h2 class="card-detail">‧‧‧</h2>
@@ -39,7 +39,7 @@
                                     <i class="fas fa-shopping-cart fa-2x" v-if="status.loading !== item.id"></i>
                                 </div>
                             </div>
-                            <div class="card-img">
+                            <div class="card-img" @click.stop="turnproduct(item.id)">
                                 <div class="product-img" :style="{backgroundImage: `url(${item.imageUrl})`}"></div>
                             </div>
                             <div class="card-cotnet">
