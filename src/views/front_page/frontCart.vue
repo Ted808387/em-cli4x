@@ -1,6 +1,5 @@
 <template>
     <div>
-        <loading :active.sync="isLoading"></loading> 
         <section class="Cart">
             <div class="cart-bg">
             </div>
@@ -90,11 +89,13 @@
                 </div>    
             </div>
         </section>
+        <recommend></recommend>
     </div>
 </template>
 
 <script>
 import $ from 'jquery';
+import recommend from '../../components/recommend.vue';
 
 export default {
     data() {
@@ -102,7 +103,6 @@ export default {
             status: {
                 loading: {},
             },
-            isLoading: false, 
             Cart: {},
             couponcode: '',
             form: {
@@ -119,14 +119,15 @@ export default {
             },
         };
     },
+    components: {
+        recommend,
+    },
     methods: {
         gettoCar() {   //把購物車資料在取回，不然頁面不會變動
             const vm = this;
             const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-            vm.isLoading = true;
             this.$http.get(url).then((response) => {
                 vm.Cart = response.data.data;
-                vm.isLoading = false;
             });
         },
         deleteCar(id) {  //將選擇的物品id傳過來
@@ -151,9 +152,9 @@ export default {
                         this.$bus.$emit('changecart');
                     });
                 });
-                    if(response) {
-                        this.$bus.$emit('message:push', '清空購物車','danger');
-                    }
+                if(response) {
+                    this.$bus.$emit('message:push', '清空購物車','danger');
+                }
             });
         },
         addCouponCode() {
@@ -230,5 +231,4 @@ export default {
             display: none;
         }
     }
-
 </style>

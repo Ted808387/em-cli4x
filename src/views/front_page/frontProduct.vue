@@ -24,6 +24,10 @@
                                         <div>防毒面具</div>
                                 </li>
                         </ul>
+                        <div class="form-group has-search">
+                            <input type="text" class="form-control search_box" placeholder="Search" v-model="search" @keyup.13="searchprodust">
+                            <span class="fa fa-search search_icon omouse" @click="searchprodust"></span>
+                        </div>
                     </div>
                 </div>
                 <!-- products -->
@@ -79,6 +83,7 @@ export default {
             status: {
                 loading: {},
             },
+            search: '',
         };
     },
     components: {
@@ -150,6 +155,33 @@ export default {
                 this.$bus.$emit('changecart');
             });
         },
+        searchprodust() {
+            const vm = this;
+            if(this.search) {
+                const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
+                this.$http.get(url).then((response) => {
+                    vm.allproducts = response.data.products;
+                    var find = vm.allproducts.every((item) => {
+                        return String(item.title).indexOf(vm.search) === -1 && String(item.category).indexOf(vm.search) === -1;
+                    });
+                    if(!find) {
+                        vm.products = vm.allproducts.filter(function(item) {
+                            return String(item.title).indexOf(vm.search) > -1 || String(item.category).indexOf(vm.search) > -1;
+                        });
+                    } else if(find) {
+                        this.$bus.$emit('message:push', '未搜尋到物品，請重新搜尋','danger');
+                    }
+                });
+            vm.displaypage = false;
+            }else {
+                const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${1}`;
+                this.$http.get(url).then((response) => {
+                    vm.products = response.data.products;
+                    vm.displaypage = true;
+                    vm.pagination = response.data.pagination;
+                });
+            }
+        }
     },
     created() {
         const vm = this;
@@ -217,6 +249,18 @@ export default {
       border-bottom: 3px #306136 solid;
       color: #306136;
       transition: all 0.2s;
+  }
+  .has-search {
+      position: relative;
+  }
+  .search_box {
+      padding-left: 25px;
+  }
+  .search_icon {
+      position: absolute;
+      top: 50%;
+      left: 5px;
+      transform: translateY(-50%);
   }
   /* Card */
   .card-item {
@@ -309,5 +353,7 @@ export default {
       background-size: cover;
       background-position: center;
   }
-
+  .omouse {
+      cursor: pointer;
+  }
 </style>
