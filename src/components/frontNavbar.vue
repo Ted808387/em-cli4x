@@ -216,7 +216,6 @@ export default {
       right: 20px;
       color: #6eb577;
       z-index: 1000;
-      text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
       transition: all 0.3s;
   }
   .header{
