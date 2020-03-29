@@ -88,7 +88,7 @@
             <!-- discount -->
             <div class="discountCode">
                 <div class="couponImg">
-                    <h1 class="discount-title-text text-white font-weight-bold text-lg">80% OFF</h1>
+                    <h1 class="discount-title-text text-white font-weight-bold text-lg">20% OFF</h1>
                     <h3 class="discount-sale-text text-white text-sm">HOT SALE</h3>
                     <router-link to="/front-home/frontcoupon">
                         <button class="discount-btn btn btn-success btn-lg">Coupon Code</button>
