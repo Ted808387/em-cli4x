@@ -44,7 +44,7 @@
                                     <td class="align-middle">
                                         {{ item.product.title }}
                                         <div class="text-success font-weight-bold" v-if="item.coupon">
-                                            Offer applied
+                                            Discounted
                                         </div>
                                     </td>
                                     <td class="text-center align-middle">
@@ -61,13 +61,13 @@
                                     <!-- 這邊計算都用後端運算 -->
                                     <td class="productimg"></td>
                                     <td colspan="4" class="text-right">Total</td>
-                                    <td class="text-right">{{ Cart.total }}</td>
+                                    <td class="text-right">{{ Cart.total | currency}}</td>
                                 </tr>
                                 <!-- 如果final_total與total相同，就不出現優惠價格-->
                                 <tr class="text-primary" v-if="Cart.final_total !== Cart.total">
                                     <td class="productimg"></td>
-                                    <td colspan="4" class="text-right">折扣價</td>
-                                    <td class="text-right">{{ Cart.final_total }}</td>
+                                    <td colspan="4" class="text-right">Discounted price</td>
+                                    <td class="text-right">{{ Cart.final_total | currency}}</td>
                                 </tr>
                             </tfoot>
                         </table>
