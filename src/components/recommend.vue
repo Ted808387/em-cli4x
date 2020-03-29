@@ -95,7 +95,7 @@ export default {
             vm.status.loading = id;
             const car = {
                 product_id: id,
-                qty  //可直接用一個變數代替，直接將值帶進來
+                qty
             };
             this.$http.post(url, { data:car }).then((response) => {
                 this.$bus.$emit('message:push', response.data.message,'info');
