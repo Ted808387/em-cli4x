@@ -26,7 +26,8 @@
                         </ul>
                         <div class="form-group has-search">
                             <input type="text" class="form-control search_box" placeholder="Search" v-model="search" @keyup.13="searchprodust">
-                            <span class="fa fa-search search_icon omouse" @click="searchprodust"></span>
+                            <span class="fa fa-search search_icon omouse" @click="searchprodust" v-if="!status.display"></span>
+                            <span class="fas fa-spinner fa-spin wait_icon" v-if="status.display"></span>
                         </div>
                     </div>
                 </div>
@@ -82,6 +83,7 @@ export default {
             pagination: {},
             status: {
                 loading: {},
+                display: false,
             },
             search: '',
         };
@@ -157,6 +159,7 @@ export default {
         },
         searchprodust() {
             const vm = this;
+            vm.status.display = true;
             if(this.search) {
                 const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
                 this.$http.get(url).then((response) => {
@@ -171,14 +174,16 @@ export default {
                     } else if(find) {
                         this.$bus.$emit('message:push', '未搜尋到物品，請重新搜尋','danger');
                     }
+                    vm.status.display = false;
                 });
-            vm.displaypage = false;
+                vm.displaypage = false;
             }else {
                 const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${1}`;
                 this.$http.get(url).then((response) => {
                     vm.products = response.data.products;
                     vm.displaypage = true;
                     vm.pagination = response.data.pagination;
+                    vm.status.display = false;
                 });
             }
         }
@@ -261,6 +266,12 @@ export default {
       top: 50%;
       left: 5px;
       transform: translateY(-50%);
+  }
+  .wait_icon {
+      position: absolute;
+      top: 30%;
+      left: 5px;
+      transform: translateY(-50%);  
   }
   /* Card */
   .card-item {
