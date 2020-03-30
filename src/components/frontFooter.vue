@@ -15,10 +15,10 @@
                         <p>
                             <router-link class="omouse footer-text-color" to="/front-home">Home</router-link>
                         </p>
-                        <p class="omouse footer-text-color">
+                        <p>
                             <router-link class="omouse footer-text-color" to="/front-home/frontcoupon">News</router-link>
                         </p>
-                        <p class="omouse footer-text-color">
+                        <p>
                             <router-link class="omouse footer-text-color" to="/front-home/frontproduct">Products</router-link>
                         </p>
                     </div>

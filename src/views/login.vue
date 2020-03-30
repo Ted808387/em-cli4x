@@ -1,29 +1,30 @@
 <template>
   <div>
+  <div class="login-bg"></div>
   <form class="form-signin" @submit.prevent="signin">
-  <div class="text-center mb-4">
-    <h1 class="h3 mb-3 font-weight-normal">登入</h1>
-    <a href="https://caniuse.com/#feat=css-placeholder-shown"></a>
-  </div>
+    <div class="form-login">
+      <div class="text-center mb-4">
+        <h1 class="h3 mb-3 font-weight-normal font-weight-bold">Login</h1>
+        <a href="https://caniuse.com/#feat=css-placeholder-shown"></a>
+      </div>
 
-  <div class="form-label-group">
-    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus v-model="user.username">
-    <label for="inputEmail">Email address</label>
-  </div>
+      <div class="form-label-group">
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus v-model="user.username">
+        <label for="inputEmail">Email address</label>
+      </div>
 
-  <div class="form-label-group">
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required v-model="user.password">
-    <label for="inputPassword">Password</label>
-  </div>
+      <div class="form-label-group">
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required v-model="user.password">
+        <label for="inputPassword">Password</label>
+      </div>
 
-  <div class="checkbox mb-3">
-    <label>
-      <input type="checkbox" value="remember-me"> Remember me
-    </label>
-  </div>
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-  <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2019</p>
-</form>
+      <div class="checkbox mb-3">
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <p class="text-center mt-5 mb-0 text-muted">僅做為個人學習使用，非商業用途。</p>
+      <p class="mb-3 text-muted text-center">&copy; 2017-2020</p>
+    </div>
+  </form>
   </div>
 </template>
 
@@ -66,11 +67,25 @@ body {
   padding-bottom: 40px;
   background-color: #f5f5f5;
 }
+.login-bg {
+  background-image: url('https://images.unsplash.com/photo-1584334639045-e1bbea88b960?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=300');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 1200px;
+  position: fixed;
+  top: 0;
+  z-index: -100;
+}
 .form-signin {
   width: 100%;
   max-width: 420px;
   padding: 15px;
   margin: auto;
+  height: 800px;
+  display: flex;
+  align-items: center;
 }
 .form-label-group {
   position: relative;
@@ -140,5 +155,8 @@ body {
   .form-label-group input:-ms-input-placeholder {
     color: #777;
   }
+}
+.form-login {
+  width: 100%;
 }
 </style>
