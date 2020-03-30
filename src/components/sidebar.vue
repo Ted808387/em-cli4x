@@ -37,18 +37,18 @@
                 <li class="nav-item">
                     <router-link class="nav-link" to="/Dashboard/customer_order">
                         <i class="far fa-keyboard"></i>
-                             模擬訂單
+                             測試模擬
                     </router-link>
                 </li>
                 <li class="nav-item">
                     <router-link class="nav-link" to="/Dashboard/Cart">
-                        <i class="far fa-keyboard"></i>
+                        <i class="fas fa-truck"></i>
                              購物車
                     </router-link>
                 </li>
                 <li class="nav-item">
                     <router-link class="nav-link" to="/front-home">
-                        <i class="far fa-keyboard"></i>
+                        <i class="fab fa-font-awesome-flag"></i>
                              前台產品
                     </router-link>
                 </li>

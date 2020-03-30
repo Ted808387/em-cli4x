@@ -49,7 +49,7 @@
                             </div>
                             <div class="card-cotnet">
                                 <div class="card-category mt-3">
-                                    <h5 class="mb-0">{{ item.category }}</h5>
+                                    <h5 class="mb-0 card-category_item">{{ item.category }}</h5>
                                 </div>
                                 <div class="card-title mt-1">
                                     <h4 class="font-weight-bold">{{ item.title }}</h4>
@@ -341,6 +341,7 @@ export default {
     }
   }
   .card-category {
+      color: rgb(138, 138, 138);
       text-align: center;
   }
   .card-title {
