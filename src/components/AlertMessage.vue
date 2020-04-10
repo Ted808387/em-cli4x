@@ -29,7 +29,7 @@ export default {
       });
       this.removeMessageWithTiming(timestamp);
     },
-    removeMessage(num) {  //這裡也可以點擊關閉
+    removeMessage(num) {
       this.messages.splice(num, 1);
     },
     removeMessageWithTiming(timestamp) {

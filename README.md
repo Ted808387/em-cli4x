@@ -1,19 +1,15 @@
-# vue-cli4-em
+# Mask E-commerce
 
-## Project setup
-```
-npm install
-```
+### Description
+-電商demo作品
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### References
+[Unsplash](https://unsplash.com/)
+[3M](https://www.3m.com.tw/3M/zh_TW/company-tw/)
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Demonstration
+![image](https://github.com/Ted808387/em-cli4x/blob/master/E-commerce(demo).gif)
+
+

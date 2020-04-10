@@ -1,60 +1,57 @@
 <template>
   <div>
-  <div class="login-bg"></div>
-  <form class="form-signin" @submit.prevent="signin">
-    <div class="form-login">
-      <div class="text-center mb-4">
-        <h1 class="h3 mb-3 font-weight-normal font-weight-bold">Login</h1>
-        <a href="https://caniuse.com/#feat=css-placeholder-shown"></a>
-      </div>
+    <div class="login-bg"></div>
+    <form class="form-signin" @submit.prevent="signin">
+      <div class="form-login">
+        <div class="text-center mb-4">
+          <h1 class="h3 mb-3 font-weight-normal font-weight-bold">Login</h1>
+          <a href="https://caniuse.com/#feat=css-placeholder-shown"></a>
+        </div>
 
-      <div class="form-label-group">
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus v-model="user.username">
-        <label for="inputEmail">Email address</label>
+        <div class="form-label-group">
+          <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus v-model="user.username"/>
+          <label for="inputEmail">Email address</label>
+        </div>
+        <div class="form-label-group">
+          <input type="password" id="inputPassword" class="form-control" placeholder="Password" required v-model="user.password"/>
+          <label for="inputPassword">Password</label>
+        </div>
+        <div class="checkbox mb-3"></div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <p class="text-center mt-5 mb-0 text-muted">僅做為個人學習使用，非商業用途。</p>
+        <p class="mb-3 text-muted text-center">&copy; 2017-2020</p>
       </div>
-
-      <div class="form-label-group">
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required v-model="user.password">
-        <label for="inputPassword">Password</label>
-      </div>
-
-      <div class="checkbox mb-3">
-      </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      <p class="text-center mt-5 mb-0 text-muted">僅做為個人學習使用，非商業用途。</p>
-      <p class="mb-3 text-muted text-center">&copy; 2017-2020</p>
-    </div>
-  </form>
+    </form>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Login',
-  data () {
+  name: "Login",
+  data() {
     return {
       user: {
-        username: '',
-        password: '',
-      },
+        username: "",
+        password: ""
+      }
     };
   },
   methods: {
     signin() {
-      const api = `${process.env.VUE_APP_API_PATH}/admin/signin`;   //登入頁面只需要加上signin
-      const vm = this;   //這裡的this指向user
-        vm.$http.post(api, vm.user).then((response) => {
-          if(response.data.success){
-            vm.$router.push('/Dashboard/Products');  //登入成功就將頁面轉向HelloWorld頁面
-          }
+      const vm = this;
+      const api = `${process.env.VUE_APP_API_PATH}/admin/signin`;
+      vm.$http.post(api, vm.user).then(response => {
+        if (response.data.success) {
+          vm.$router.push("/Dashboard/Products");
+        }
       });
-    },
-  },
-}
+    }
+  }
+};
 </script>
 
 <style scoped>
-  html,
+html,
 body {
   height: 100%;
 }
@@ -68,7 +65,7 @@ body {
   background-color: #f5f5f5;
 }
 .login-bg {
-  background-image: url('https://images.unsplash.com/photo-1584334639045-e1bbea88b960?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=300');
+  background-image: url("https://images.unsplash.com/photo-1584334639045-e1bbea88b960?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=300");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -94,7 +91,7 @@ body {
 .form-label-group > input,
 .form-label-group > label {
   height: 3.125rem;
-  padding: .75rem;
+  padding: 0.75rem;
 }
 .form-label-group > label {
   position: absolute;
@@ -108,8 +105,8 @@ body {
   pointer-events: none;
   cursor: text; /* Match the input under the label */
   border: 1px solid transparent;
-  border-radius: .25rem;
-  transition: all .1s ease-in-out;
+  border-radius: 0.25rem;
+  transition: all 0.1s ease-in-out;
 }
 .form-label-group input::-webkit-input-placeholder {
   color: transparent;
@@ -128,11 +125,11 @@ body {
 }
 .form-label-group input:not(:placeholder-shown) {
   padding-top: 1.25rem;
-  padding-bottom: .25rem;
+  padding-bottom: 0.25rem;
 }
 .form-label-group input:not(:placeholder-shown) ~ label {
-  padding-top: .25rem;
-  padding-bottom: .25rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
   font-size: 12px;
   color: #777;
 }

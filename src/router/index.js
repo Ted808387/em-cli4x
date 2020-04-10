@@ -6,42 +6,42 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '*',
-    redirect: '/front-home',
+    redirect: '/',
   },
   {
     name: 'Login',
     path: '/login',
-    component: () => import('../views/login.vue'),
+    component: () => import('../views/back_page/login.vue'),
   },
   {
     name: 'HelloWorld',
-    path: '/front-home',
+    path: '/',
     component: () => import('../views/front_page/HelloWorld.vue'),
     children: [
       {
         name: 'frontHome',
-        path: '/front-home',
-        component: () => import('../views/front_page/frontHome.vue'),
+        path: '',
+        component: () => import('../views/front_page/FrontHome.vue'),
       },
       {
         name: 'frontCoupon',
         path: 'frontcoupon',
-        component: () => import('../views/front_page/frontCoupon.vue'),
+        component: () => import('../views/front_page/FrontCoupon.vue'),
       },
       {
         name: 'frontProduct',
         path: 'frontproduct',
-        component: () => import('../views/front_page/frontProduct.vue'),
+        component: () => import('../views/front_page/FrontProduct.vue'),
       },
       {
         name: 'frontProductIn',
         path: 'frontproductIn',
-        component: () => import('../views/front_page/frontProductIn.vue'),
+        component: () => import('../views/front_page/FrontProductIn.vue'),
       },
       {
         name: 'frontCart',
         path: 'frontcart',
-        component: () => import('../views/front_page/frontCart.vue'),
+        component: () => import('../views/front_page/FrontCart.vue'),
       },
       {
         name: 'OrderCheck',
@@ -63,12 +63,12 @@ const routes = [
   {
     name: 'Dashboard',
     path: '/Dashboard',
-    component: () => import('../views/Dashboard.vue'),
+    component: () => import('../views/back_page/Dashboard.vue'),
     children: [
       {
         name: 'Products',
         path: 'Products',
-        component: () => import('../views/Products.vue'),
+        component: () => import('../views/back_page/Products.vue'),
         meta: {
             requiresAuth: true,
         },
@@ -76,7 +76,7 @@ const routes = [
       {
         name: 'Order',
         path: 'Order',
-        component: () => import('../views/Order.vue'),
+        component: () => import('../views/back_page/Order.vue'),
         meta: {
             requiresAuth: true,
         },
@@ -84,7 +84,7 @@ const routes = [
       {
         name: 'Couponcode',
         path: 'Couponcode',
-        component: () => import('../views/Couponcode.vue'),
+        component: () => import('../views/back_page/Couponcode.vue'),
         meta: {
             requiresAuth: true,
         },
@@ -92,25 +92,23 @@ const routes = [
       {
         name: 'CustomerOrder',
         path: 'customer_order',
-        component: () => import('../views/CustomerOrder.vue'),
+        component: () => import('../views/back_page/CustomerOrder.vue'),
       },
       {
         name: 'CustomerCheckout',
         path: 'Customer_checkout/:orderId',
-        component: () => import('../views/CustomerCheckout.vue'),
+        component: () => import('../views/back_page/CustomerCheckout.vue'),
       },
       {
         name: 'Cart',
         path: 'Cart',
-        component: () => import('../views/Cart.vue'),
+        component: () => import('../views/back_page/Cart.vue'),
       },
     ]
   },
 ]
 
 const router = new VueRouter({
-  // mode: 'hash',
-  // base: '/em-cli4x',
   routes
 })
 
