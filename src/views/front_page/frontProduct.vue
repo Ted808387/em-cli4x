@@ -38,7 +38,7 @@
                   <div class="detail" @click.stop="turnproduct(item.id)">
                     <h2 class="card-detail">‧‧‧</h2>
                   </div>
-                  <div class="card-add-cart" @click.stop="addtoCar(item.id,1)">
+                  <div class="card-add-cart" @click.stop="addtoCar(item.id,1,item.title)">
                     <i class="fas fa-spinner fa-spin fa-2x" v-if="status.loading === item.id"></i>
                     <i class="fas fa-shopping-cart fa-2x" v-if="status.loading !== item.id"></i>
                   </div>
@@ -85,7 +85,8 @@ export default {
         display: false
       },
       search: "",
-      displayitem: ""
+      displayitem: "",
+      Cart: []
     };
   },
   components: {
@@ -123,18 +124,32 @@ export default {
         }
       });
     },
-    addtoCar(id, qty = 1) {
+    addtoCar(id, qty, title) {
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       vm.status.loading = id;
-      const car = {
-        product_id: id,
-        qty //可直接用一個變數代替，直接將值帶進來
-      };
-      vm.$http.post(url, { data: car }).then(response => {
-        vm.$bus.$emit("message:push", response.data.message, "info");
-        vm.status.loading = "";
-        vm.$bus.$emit("changecart");
+      vm.$http.get(url).then(response => {
+        vm.Cart = response.data.data;
+        let itemId = vm.Cart.carts.find(item => {
+          return item.product.title === title
+        });
+        let itemqty = 0;
+        if(itemId) {
+          const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${itemId.id}`;
+            vm.$http.delete(url).then(response => {
+            vm.$bus.$emit("changecart");
+          });
+          itemqty = itemqty + itemId.qty;
+        }
+        const car = {
+          product_id: id,
+          qty: itemqty + qty
+        };
+        vm.$http.post(url, { data: car }).then(response => {
+          vm.$bus.$emit("message:push", response.data.message, "info");
+          vm.status.loading = "";
+          vm.$bus.$emit("changecart");
+        });       
       });
     },
     searchprodust() {
@@ -156,7 +171,6 @@ export default {
             vm.products = vm.allproducts.filter(function(item) {
               return (String(item.title).indexOf(vm.search) > -1 || String(item.category).indexOf(vm.search) > -1);
             });
-            // vm.displayitem = vm.products.item.category;
           } else if (find) {
             vm.$bus.$emit("message:push", "未搜尋到物品，請重新搜尋", "danger");
           }
@@ -173,7 +187,7 @@ export default {
           vm.displayitem = '全商品';
         });
       }
-    }
+    },
   },
   created() {
     const vm = this;

@@ -74,7 +74,7 @@
                 <div class="cart-alert text-center mt-2 mb-3" v-if="Cart.total === 0">－&nbsp;購物車無商品，請選購&nbsp;－</div>
                 <p class="mb-0 text-center" v-if="Cart.total !== 0">你的購物車</p>
                 <table class="table mt-1 mx-auto" v-if="Cart.total !== 0">
-                  <tbody>
+                  <tbody class="modal-cart_item">
                     <tr v-for="item in Cart.carts" :key="item.id">
                       <td>
                         <button class="btn btn-outline-danger btn-sm" @click="deleteCar(item.id)">
@@ -171,10 +171,10 @@ export default {
     window.addEventListener('scroll', () => {
       let scrollTop = document.documentElement.scrollTop ||
       document.body.scrollTop;
-      if (scrollTop > 100) {
+      if (scrollTop > 60) {
         vm.headerchange = true;
       } 
-      else if (scrollTop < 100) {
+      else if (scrollTop < 60) {
         vm.headerchange = false;
       }
       if (scrollTop > 500) {

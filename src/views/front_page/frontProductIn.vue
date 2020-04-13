@@ -14,7 +14,7 @@
               </div>
             </div>
             <div class="col-md-4">
-              <div class="product_content p-sm-0">
+              <div class="product_content">
                 <h5 class="category">{{ product.category }}</h5>
                 <h3 class="font-weight-bold mb-3">{{ product.title }}</h3>
                 <del class="d-inline-block">{{ product.origin_price | currency }}</del>
@@ -34,13 +34,11 @@
                 <p class="text-danger">快拆式濾罐與呼吸閥須定時清理更換，避免影響吸入之空氣品質</p>
                 <div class="buyproduct mt-3">
                   <div class="select-quantity">
+                    <input class="select-up select-outline bg-white" type="button" value="+" @click="selectup"/>
                     <input type="number" class="quantity select-outline" placeholder="0" min="0" max="100" v-model.number="num" :key="num"/>
-                    <div class="up-down">
-                      <input class="select-up select-outline bg-white" type="button" value="+" @click="selectup"/>
-                      <input class="select-down select-outline bg-white" type="button" value="-" @click="selectdown"/>
-                    </div>
+                    <input class="select-down select-outline bg-white" type="button" value="-" @click="selectdown"/>
                   </div>
-                  <button type="button" class="btn btn-primary addcart font-weight-bold" @click="addtoCar(product.id, num)">加到購物車</button>
+                  <button type="button" class="btn btn-primary addcart font-weight-bold" @click="addtoCar(product.id, num, product.title)">加到購物車</button>
                   <div class="product-price">
                     <div class="total-price text-muted text-nowrap mt-3">
                       <strong class="text-">NT {{ product.price*num | currency }}</strong> 元
@@ -67,7 +65,8 @@ export default {
       product: {},
       status: {
         loading: {}
-      }
+      },
+      Cart: [],
     };
   },
   methods: {
@@ -91,23 +90,41 @@ export default {
         vm.isLoading = false;
       });
     },
-    addtoCar(id, qty) {
+    addtoCar(id, qty, title) {
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       vm.status.loading = id;
-      const car = {
-        product_id: id,
-        qty //可直接用一個變數代替，直接將值帶進來
-      };
-      if (qty !== 0) {
-        vm.$http.post(url, { data: car }).then(response => {
-          vm.$bus.$emit("message:push", response.data.message, "info");
-          vm.status.loading = "";
-          vm.$bus.$emit("changecart");
+      // const car = {
+      //   product_id: id,
+      //   qty //可直接用一個變數代替，直接將值帶進來
+      // };
+      vm.$http.get(url).then(response => {
+        vm.Cart = response.data.data;
+        let itemId = vm.Cart.carts.find(item => {
+          return item.product.title === title
         });
-      } else {
-        vm.$bus.$emit("message:push", "請輸入數量", "danger");
-      }
+        let itemqty = 0;
+        if (qty !== 0) {
+          if(itemId) { //重覆
+            const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${itemId.id}`;
+            vm.$http.delete(url).then(response => {
+              vm.$bus.$emit("changecart");
+            });
+            itemqty = itemqty + itemId.qty;
+          }
+          const car = {
+            product_id: id,
+            qty: itemqty + qty
+          };
+          vm.$http.post(url, { data: car }).then(response => {
+            vm.$bus.$emit("message:push", response.data.message, "info");
+            vm.status.loading = "";
+            vm.$bus.$emit("changecart");
+          });
+        } else {
+          vm.$bus.$emit("message:push", "請輸入數量", "danger");
+        }
+      });
     }
   },
   created() {
@@ -159,9 +176,6 @@ export default {
   background-size: cover;
   background-position: center;
 }
-.product_content {
-  padding-left: 10%;
-}
 .bottom-line {
   border-bottom: solid #8bcc8c 1px;
 }
@@ -184,35 +198,29 @@ export default {
   width: 62px;
   height: 49px;
   border: 1px solid gray;
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
   display: inline-block;
   text-align: center;
   font-size: 20px;
 }
-.up-down {
-  display: inline-block;
-  height: 48px;
-  position: absolute;
-  font-size: 14px;
-}
 .select-up {
-  display: block;
+  display: inline-block;
   border: 1px solid gray;
-  font-size: 14px;
-  width: 24px;
-  border-top-right-radius: 3px;
-  border-collapse: collapse;
-  margin-left: -1px;
+  font-size: 20px;
+  width: 40px;
+  height: 49px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  margin: 1px  -1px 0 0;
 }
 .select-down {
-  display: block;
+  display: inline-block;
   border: 1px solid gray;
-  font-size: 14px;
-  width: 24px;
+  font-size: 20px;
+  width: 40px;
+  height: 49px;
+  border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
-  margin-top: -1px;
-  margin-left: -1px;
+  margin: 1px  0 0 -1px;
 }
 .total-price {
   font-size: 24px;

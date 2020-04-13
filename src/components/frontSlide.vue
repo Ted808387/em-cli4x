@@ -143,38 +143,35 @@ export default {
 }
 .product-show {
   position: absolute;
-  top: 90%;
-  width: 65%;
-  height: 35%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 35%;
+  height: 20%;
   display: flex;
   justify-content: center;
-  color: #fff;
+  color: rgb(10, 10, 10);
   padding: 3%;
-  background-color: #343a40;
+  background-color: #fff;
   transition: all 0.4s;
   z-index: 10;
-  opacity: 0;
-}
-.image:hover .product-show {
-  position: absolute;
-  top: 40%;
   opacity: 1;
+}
+.product-show:hover {
   text-decoration: none;
   color: #fff;
+  background-color: #094D2B;
 }
 .swiper-text {
   display: flex;
+  font-weight: 700;
   align-self: center;
-  font-size: 40px;
+  font-size: 2vw;
+  margin-bottom: 0;
 }
-@media (min-width: 1200px) {
+@media (max-width: 575px) {
   .swiper-text {
-    font-size: 60px;
-  }
-}
-@media (max-width: 576px) {
-  .swiper-text {
-    font-size: calc(1.2rem * 100vw);
+    font-size: 8vw;
   }
 }
 </style>

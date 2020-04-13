@@ -52,12 +52,10 @@
               </tbody>
               <tfoot class="font-weight-bold">
                 <tr>
-                  <!-- 這邊計算都用後端運算 -->
                   <td class="productimg"></td>
                   <td colspan="4" class="text-right">Total</td>
                   <td class="text-right">{{ Cart.total | currency }}</td>
                 </tr>
-                <!-- 如果final_total與total相同，就不出現優惠價格-->
                 <tr class="text-primary" v-if="Cart.final_total !== Cart.total">
                   <td class="productimg"></td>
                   <td colspan="4" class="text-right">Discounted price</td>
@@ -100,6 +98,7 @@ export default {
         loading: {}
       },
       Cart: {},
+      Cartitem: [],
       couponcode: "",
       form: {
         user: {
@@ -120,7 +119,6 @@ export default {
   },
   methods: {
     gettoCar() {
-      //把購物車資料在取回，不然頁面不會變動
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       vm.$http.get(url).then(response => {
@@ -128,14 +126,13 @@ export default {
       });
     },
     deleteCar(id) {
-      //將選擇的物品id傳過來
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
       vm.status.loading = true;
       vm.$http.delete(url).then(response => {
         vm.status.loading = false;
         vm.$bus.$emit("message:push", response.data.message, "danger");
-        vm.gettoCar(); //還要在取回一次資料，不然頁面不會變動
+        vm.gettoCar(); 
         vm.$bus.$emit("changecart");
       });
     },
