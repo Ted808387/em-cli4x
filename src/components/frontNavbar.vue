@@ -61,9 +61,15 @@
                 LOGIN
             </router-link>
             <ul class="navbar-nav float-right">
+              <li>
+                <div class="like nav-link">
+                  <i class="fas fa-heart fa-2x text-white omouse nav-text-color" :class="{ fontcolor : headerchange }" @click.stop="favorite = !favorite, cart = false"></i>
+                  <div class="favorite-quantity bg-primary" v-if="Favorite.length !== 0">{{ Favorite.length }}</div>
+                </div>
+              </li>
               <li class="nav-item">
                 <div class="shopping-cart nav-link">
-                  <i class="fas fa-shopping-basket fa-2x text-white nav-text-color omouse" :class="{ fontcolor : headerchange }" @click.stop="cart = !cart"></i>
+                  <i class="fas fa-shopping-basket fa-2x text-white nav-text-color omouse" :class="{ fontcolor : headerchange }" @click.stop="cart = !cart, favorite = false"></i>
                   <div class="product-quantity bg-primary" v-if="Cart.carts !== undefined && Cart.carts.length > 0">{{ Cart.carts.length}}</div>
                 </div>
               </li>
@@ -71,36 +77,39 @@
             <!-- cart -->
             <div calss="productModal">
               <div class="modal-cart" :class="{'opacity-cart' : cart}" @click.stop="cart = true">
-                <div class="cart-alert text-center mt-2 mb-3" v-if="Cart.total === 0">－&nbsp;購物車無商品，請選購&nbsp;－</div>
-                <p class="mb-0 text-center" v-if="Cart.total !== 0">你的購物車</p>
+                <div class="cart-alert text-center mt-2 mb-3 font-weight-bold" v-if="Cart.total === 0">－&nbsp;購物車無商品，請選購&nbsp;－</div>
+                <p class="mb-0 text-center font-weight-bold" v-if="Cart.total !== 0">你的購物車</p>
                 <table class="table mt-1 mx-auto" v-if="Cart.total !== 0">
                   <tbody class="modal-cart_item">
                     <tr v-for="item in Cart.carts" :key="item.id">
-                      <td>
+                      <td class="align-middle">
                         <button class="btn btn-outline-danger btn-sm" @click="deleteCar(item.id)">
                           <i class="fas fa-spinner fa-spin" v-if="status.loading == item.id"></i>
-                          <i class="far fa-trash-alt" v-if="status.loading !== item.id"></i>
+                          <i class="fas fa-times" v-if="status.loading !== item.id"></i>
                         </button>
                       </td>
                       <td>
+                        <div  class="product-img" :style="{backgroundImage: `url(${ item.product.imageUrl })`}"></div>
+                      </td>
+                      <td class="align-middle">
                         {{ item.product.title }}
                         <div class="text-success" v-if="item.coupon">
                           已套用優惠卷
                         </div>
                       </td>
-                      <td width="80">{{ item.qty }}/{{ item.product.unit }}</td>
-                      <td class="text-right">
+                      <td width="80" class="align-middle">{{ item.qty }}/{{ item.product.unit }}</td>
+                      <td class="text-right align-middle">
                         {{ item.final_total | currency }}
                       </td>
                     </tr>
                   </tbody>
                   <tfoot>
                     <tr>
-                      <td colspan="3" class="text-right">總計</td>
+                      <td colspan="4" class="text-right">總計</td>
                       <td class="text-right">{{ Cart.total }}</td>
                     </tr>
                     <tr class="text-primary" v-if="Cart.final_total !== Cart.total">
-                      <td colspan="3" class="text-right">折扣價</td>
+                      <td colspan="4" class="text-right">折扣價</td>
                       <td class="text-right">{{ Cart.final_total }}</td>
                     </tr>
                   </tfoot>
@@ -115,6 +124,32 @@
                     shop now
                   </button>
                 </router-link>
+              </div>
+              <div class="modal-favorite" :class="{'opacity-favorite' : favorite}" @click.stop="favorite = true">
+                <div class="cart-alert text-center mt-2 mb-3 font-weight-bold" v-if="Favorite.length === 0">－&nbsp;還沒有收藏的商品喔&nbsp;－</div>
+                <div class="cart-alert text-center mt-2 mb-3 font-weight-bold" v-if="Favorite.length > 0">－&nbsp;收藏的商品&nbsp;－</div>
+                <table class="table mt-1 mx-auto">
+                  <tbody class="modal-favorites">
+                    <tr v-for="item in Favorite" :key="item.id">
+                      <td class="align-middle">
+                        <button class="btn btn-outline-danger btn-sm" @click="deleteFavorite(item.id)">
+                          <i class="fas fa-times"></i>
+                        </button>
+                      </td>
+                      <td class="align-middle">
+                        <div  class="product-img" :style="{backgroundImage: `url(${ item.imageUrl })`}"></div>
+                      </td>
+                      <td class="align-middle">
+                        {{ item.title }}
+                      </td>
+                      <td class="align-middle">
+                        <button class="btn btn-outline-danger btn-sm" @click="addtocar(item.id, 1, item.title)">
+                          <i class="fas fa-shopping-cart"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
         </header>
@@ -133,8 +168,10 @@ export default {
       menu: false,
       headerchange: false,
       cart: false,
+      favorite: false,
       displaymenu: false,
       Cart: {},
+      Favorite: [],
       status: {
           loading: {},
       },
@@ -143,28 +180,49 @@ export default {
   },
   methods: {
     gettoCart() {
+      const vm = this;  
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-        const vm = this;  
-        this.$http.get(url).then((response) => {
+        vm.$http.get(url).then((response) => {
             vm.Cart = response.data.data;
         });
     },
     deleteCar(id) { 
+      const vm = this; 
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
-      const vm = this;  
       vm.status.loading = id;
-      this.$http.delete(url).then((response) => {
+      vm.$http.delete(url).then((response) => {
       vm.status.loading = '';
-      this.$bus.$emit('message:push', '已刪除訂單','danger');
-      this.$bus.$emit('changecart');
-      this.gettoCart(); 
+      vm.$bus.$emit('message:push', '已刪除訂單','danger');
+      vm.$bus.$emit('changecart');
+      vm.gettoCart(); 
       });
     },
-    scrollTop() {
-        $('html,body').animate({
-            scrollTop: 0
-        }, 800);
+    addtocar(id, qty, title) {
+      const vm = this; 
+      vm.$bus.$emit("addtocart",id, qty, title);
     },
+    scrollTop() {
+      $('html,body').animate({
+          scrollTop: 0
+      }, 800);
+    },
+    gettoFavorite() {
+      const vm = this; 
+      vm.Favorite = JSON.parse(localStorage.getItem('Favorites')) || [];
+    },
+    deleteFavorite(id) {
+      const vm = this;
+      let deleteIndex = '';
+      vm.Favorite.forEach((item, index) => {
+        if(item.id === id) {
+          deleteIndex = index;
+        }
+      });
+      vm.Favorite.splice(deleteIndex, 1);
+      localStorage.setItem('Favorites', JSON.stringify(vm.Favorite));
+      vm.gettoFavorite();
+      vm.$bus.$emit("deletefavorites");
+    }
   },
   created() {
     const vm = this;
@@ -194,6 +252,7 @@ export default {
     document.addEventListener('click',(e) => {
         if(e.target.className !== 'model-cart') {
           vm.cart = false;
+          vm.favorite = false;
         }
         if(e.target.className !== 'popup-overlay') {
           vm.menu = false;
@@ -201,6 +260,8 @@ export default {
     });
     vm.isLoading = false;
     vm.gettoCart();
+    vm.gettoFavorite();
+    vm.$bus.$on("changeFavorites", vm.gettoFavorite);
     vm.$bus.$on('changecart',vm.gettoCart);
   },
 };
@@ -359,11 +420,30 @@ export default {
     right: 50px;
     padding: 10px;
     background-color: #fff;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 6px 6px 5px rgba(0, 0, 0, 0.2);
     visibility: hidden;
   }
   .opacity-cart {
+    visibility: visible;
+  }
+  .modal-favorite {
+    position: absolute;
+    top: 70px;
+    right: 100px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 6px 6px 5px rgba(0, 0, 0, 0.2);
+    visibility: hidden;
+  }
+  .product-img {
+    width: 50px;
+    height: 50px;
+    background-position: center;
+    background-size: cover;
+  }
+  .opacity-favorite {
     visibility: visible;
   }
   .product-quantity {
@@ -373,6 +453,15 @@ export default {
     padding: 1px;
     color: #fff;
     border-radius: 7.5px;
-    transform: translate(5px,10%);
+    transform: translate(3px, -5px);
+  }
+  .favorite-quantity {
+    float: right;
+    width: 15px;
+    text-align: center;
+    padding: 1px;
+    color: #fff;
+    border-radius: 7.5px;
+    transform: translate(3px, -5px);
   }
 </style>

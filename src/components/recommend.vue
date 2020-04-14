@@ -6,8 +6,8 @@
       <div class="recommend-products mt-3">
         <swiper :options="swiperOptions" ref="mySwiper">
           <swiper-slide v-for="item in products" :key="item.id">
-            <div class="card-item">
-              <div class="card-add-cart omouse" @click="addtoCar(item.id,1)">
+            <div class="card-item m-3 omouse" @click="turnproduct(item.id, item.category)">
+              <div class="card-add-cart omouse" @click.stop="addtoCar(item.id, 1, item.title)">
                 <i class="fas fa-spinner fa-spin fa-2x" v-if="status.loading === item.id"></i>
                 <i class="fas fa-shopping-cart fa-2x" v-if="status.loading !== item.id"></i>
               </div>
@@ -68,47 +68,74 @@ export default {
         },
         breakpoints: {
           768: {
-            slidesPerView: 4
-          },
-          576: {
             slidesPerView: 3
           },
-          420: {
+          576: {
             slidesPerView: 2
+          },
+          420: {
+            slidesPerView: 1
           }
         }
       }
     };
   },
+  props: ["cardproduct"],
   methods: {
-    Recommend() {
+    turnproduct(id, category) {
+      this.$emit("turn", id, category);
+    },
+    recommend() {
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
       vm.$http.get(url).then(response => {
-        vm.products = response.data.products;
+         vm.products = response.data.products.filter(item => {
+          let findproduct = vm.cardproduct;
+          return findproduct === item.category;
+        })
       });
     },
-    addtoCar(id, qty = 1) {
+    addtoCar(id, qty, title) {
       const vm = this;
-      const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       vm.status.loading = id;
-      const car = {
-        product_id: id,
-        qty
-      };
-      vm.$http.post(url, { data: car }).then(response => {
-        vm.$bus.$emit("message:push", response.data.message, "info");
-        vm.status.loading = "";
-        vm.$bus.$emit("changecart");
-      });
-    }
+      (function() {
+        vm.$emit("addcart", id, qty, title);
+        setTimeout(() => {
+          vm.status.loading = "";
+        }, 1000);
+      })();
+      // setInterval(() => {
+      //   this.status.loading = "";
+      // }, interval);
+      // const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
+      // vm.status.loading = id;
+      // const car = {
+      //   product_id: id,
+      //   qty
+      // };
+      // vm.$http.post(url, { data: car }).then(response => {
+      //   vm.$bus.$emit("message:push", response.data.message, "info");
+      //   vm.status.loading = "";
+      //   vm.$bus.$emit("changecart");
+      // });
+      //  vm.$bus.$emit("addtocart",id, qty, title);
+    },
   },
   created() {
-    this.Recommend();
+    this.recommend();
   }
 };
 </script>
 <style scoped>
+.card-item {
+  box-shadow: 0px 1px 3px black;
+  padding: 10px 10px 0 10px;
+  transition: all 0.3s;
+}
+.card-item:hover {
+  color: #008443;
+  transition: all 0.3s;
+}
 .card-img {
   width: 100%;
   height: 250px;
@@ -121,13 +148,13 @@ export default {
 }
 .card-add-cart {
   position: absolute;
-  top: 200px;
+  top: 360px;
   right: 30px;
-  color: #6eb577;
+  color: #306136;
   transition: all 0.3s;
 }
 .card-add-cart:hover {
-  color: #96eba2;
+  color: #008443;
   transition: all 0.3s;
 }
 .omouse {
@@ -139,7 +166,7 @@ export default {
   top: 100px;
   z-index: 100;
   cursor: pointer;
-  color: #6eb577;
+  color: #306136;
 }
 .fa-angle-left {
   position: absolute;
@@ -147,6 +174,6 @@ export default {
   top: 100px;
   z-index: 100;
   cursor: pointer;
-  color: #6eb577;
+  color: #306136;
 }
 </style>

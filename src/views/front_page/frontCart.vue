@@ -83,13 +83,11 @@
         </div>
       </div>
     </section>
-    <recommend></recommend>
   </div>
 </template>
 
 <script>
 import $ from "jquery";
-import recommend from "../../components/Recommend";
 
 export default {
   data() {
@@ -113,9 +111,6 @@ export default {
         loading: false
       }
     };
-  },
-  components: {
-    recommend
   },
   methods: {
     gettoCar() {

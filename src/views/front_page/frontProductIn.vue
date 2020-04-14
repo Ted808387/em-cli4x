@@ -25,7 +25,8 @@
                   <li class="product-list">經實驗室測試，採軍規過濾技術可以過濾幾乎100％的污染，氣體，細菌和病毒。</li>
                   <li class="product-list">有呼吸道疾病風險、居住在空氣污染環境、工業環境作業者等高風險空氣環境者適用。</li>
                   <li class="product-list">阻隔有害氣體，異味和所有PM污染，PM2.5、PM0.3、花粉、煙霧、過敏原和病原體。</li>
-                  <li class="product-list">採用快拆式濾罐，體積小、易收納，侷限空間作業佳。</li>
+                  <li class="product-list">透氣性佳、呼吸順暢、體積小、易收納，侷限空間作業佳。</li>
+                  <li class="product-list">高密合性：立體剪裁設計，緊密貼合臉部，有效防止污染空氣從邊緣縫隙進入</li>
                   <li class="product-list">NIOSH核可精選呼吸防護具</li>
                 </ul>
                 <h5 class="text-danger">
@@ -34,9 +35,9 @@
                 <p class="text-danger">快拆式濾罐與呼吸閥須定時清理更換，避免影響吸入之空氣品質</p>
                 <div class="buyproduct mt-3">
                   <div class="select-quantity">
-                    <input class="select-up select-outline bg-white" type="button" value="+" @click="selectup"/>
+                    <input class="select-up select-outline bg-white" type="button" value="-" @click="selectdown"/>
                     <input type="number" class="quantity select-outline" placeholder="0" min="0" max="100" v-model.number="num" :key="num"/>
-                    <input class="select-down select-outline bg-white" type="button" value="-" @click="selectdown"/>
+                    <input class="select-down select-outline bg-white" type="button" value="+" @click="selectup"/>
                   </div>
                   <button type="button" class="btn btn-primary addcart font-weight-bold" @click="addtoCar(product.id, num, product.title)">加到購物車</button>
                   <div class="product-price">
@@ -48,14 +49,59 @@
               </div>
             </div>
           </div>
+          <hr>
+          <div class="question">
+            <h3 class="font-weight-bold">常見問題FAQ</h3>
+            <ul class="list-unstyled pl-2">
+              <li class="product-list">
+                <i class="text-style text-primary font-weight-bold">我已經下標商品了，請問何時出貨呢?</i><br>
+                訂單成立後，現貨商品為3天內出貨，預購商品為追加期1~4週。
+              </li>
+              <li class="product-list">
+                <i class="text-style text-primary font-weight-bold">可以更改取件門市或地址嗎?</i><br>
+                在商品還未寄出之前是可以的，請與我們聯絡，我們會登記幫您做更改。
+              </li>
+              <li class="product-list">
+                <i class="text-style text-primary font-weight-bold">我收到錯的商品或嚴重瑕疵商品如何處理?</i><br>
+                請於收到商品後3天內拍照與我們聯絡，逾期不受理唷! 
+              </li>
+              <li class="product-list">
+                <i class="text-style text-primary font-weight-bold">訂單成立後可以取消訂單嗎?</i><br>
+                訂單成立後就會幫您追加商品囉，故無法取消訂單，若超過追加期間1~4週，您可以聯絡我們先幫您拆單寄出，運費會由我們承擔
+              </li>
+              <li class="product-list">
+                <i class="text-style text-primary font-weight-bold">請問需要付運費嗎?</i><br>
+                現階段為促銷期間，商品通通免運費喔
+              </li>
+              <li class="product-list">
+                <i class="text-style text-primary font-weight-bold">如欲訂購數量較多的產品，可直接向公司訂購嗎？</i><br>
+                需大量訂購時，請您直接與我們連絡。
+              </li>
+              <li class="product-list">
+                <i class="text-style text-primary font-weight-bold">如何計算七天鑑賞期</i><br>
+                根據消費者保護法之規定，您享有商品到貨的七日鑑賞期權益，是由消費者收到商品的隔日開始算起至第7天止，為七日鑑賞期限。<br>
+                如有以下狀況則無法辦理退貨：<br>
+                • 如有化妝請特別小心，商品沾染到粉妝時，請恕無法接受退貨。<br>
+                • 非正常損壞痕跡<br>
+                • 商品配件不全<br>
+                • 超過七天鑑賞期
+              </li>
+            </ul>
+            <h5 class="font-weight-bold"><i class="fas fa-exclamation-circle text-primary"></i>疫情的防護</h5>
+            <p class="pl-2">
+              健康民眾則不需要戴N95口罩，一般外科口罩就有足夠的防護力。防範嚴重特殊傳染性肺炎最有效的方法為勤洗手，可以用肥皂濕洗手或乾洗手，正確的乾洗手使用量只要2至5CC即可，不需要過多。
+            </p>
+          </div>
         </div>
       </div>
     </section>
+    <recommend :cardproduct="itemcategory" @turn="getproduct" @addcart="addtoCar"></recommend>
   </div>
 </template>
 
 <script>
 import $ from "jquery";
+import recommend from '../../components/Recommend'
 
 export default {
   data() {
@@ -63,11 +109,15 @@ export default {
       num: 0,
       isLoading: false,
       product: {},
+      itemcategory: '',
       status: {
         loading: {}
       },
       Cart: [],
     };
+  },
+  components: {
+    recommend
   },
   methods: {
     selectup() {
@@ -80,8 +130,9 @@ export default {
         this.num -= 1;
       }
     },
-    getproduct(id) {
+    getproduct(id, category) {
       const vm = this;
+      vm.itemcategory = category;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`;
       vm.isLoading = true;
       vm.$http.get(url).then(response => {
@@ -94,10 +145,6 @@ export default {
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       vm.status.loading = id;
-      // const car = {
-      //   product_id: id,
-      //   qty //可直接用一個變數代替，直接將值帶進來
-      // };
       vm.$http.get(url).then(response => {
         vm.Cart = response.data.data;
         let itemId = vm.Cart.carts.find(item => {
@@ -105,7 +152,7 @@ export default {
         });
         let itemqty = 0;
         if (qty !== 0) {
-          if(itemId) { //重覆
+          if(itemId) { 
             const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${itemId.id}`;
             vm.$http.delete(url).then(response => {
               vm.$bus.$emit("changecart");
@@ -129,7 +176,7 @@ export default {
   },
   created() {
     const vm = this;
-    vm.getproduct(vm.$route.query.id);
+    vm.getproduct(vm.$route.query.id, vm.$route.query.category);
   }
 };
 </script>
@@ -208,9 +255,10 @@ export default {
   font-size: 20px;
   width: 40px;
   height: 49px;
+  border-right: none;
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
-  margin: 1px  -1px 0 0;
+  margin-top: 1px;
 }
 .select-down {
   display: inline-block;
@@ -218,9 +266,10 @@ export default {
   font-size: 20px;
   width: 40px;
   height: 49px;
+  border-left: none;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
-  margin: 1px  0 0 -1px;
+  margin-top: 1px;
 }
 .total-price {
   font-size: 24px;
@@ -236,5 +285,8 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none !important;
   margin: 0;
+}
+.text-style {
+  font-style: normal;
 }
 </style>

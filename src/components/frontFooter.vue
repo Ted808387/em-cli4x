@@ -36,18 +36,18 @@
                   <i class="fas fa-map-marker-alt">&nbsp;&nbsp;address</i>
                   <p>Sanmin Dist., Kaohsiung City 807, Taiwan (R.O.C.)</p>
                 </div>
-                <div class="col-md-5 footer-icon">
-                  <a href="javascript:void(0)" class="footer-text-color text-color-change">
-                    <i class="fab fa-facebook fa-2x mr-2"></i>
+                <div class="col-md-5 footer-icon text-center">
+                  <a href="javascript:void(0)" class="mr-2 footer-text-color text-color-change d-inline-block d-md-block">
+                    <i class="fab fa-facebook fa-2x"></i>
                     <br />
                     <br />
                   </a>
-                  <a href="https://github.com/Ted808387" target="_blank" class="footer-text-color text-color-change">
-                    <i class="fab fa-github fa-2x mr-2"></i>
+                  <a href="https://github.com/Ted808387" target="_blank" class="mr-2 footer-text-color text-color-change d-inline-block d-md-block">
+                    <i class="fab fa-github fa-2x"></i>
                     <br />
                     <br />
                   </a>
-                  <a href="https://www.linkedin.com/in/youmin-ke-b20024172/" target="_blank" class="footer-text-color text-color-change">
+                  <a href="https://www.linkedin.com/in/youmin-ke-b20024172/" target="_blank" class="mr-2 footer-text-color text-color-change d-inline-block d-md-block">
                     <i class="fab fa-linkedin fa-2x"></i>
                     <br />
                     <br />

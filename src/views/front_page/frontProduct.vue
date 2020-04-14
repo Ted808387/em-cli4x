@@ -33,10 +33,10 @@
           <!-- products -->
           <div class="col-sm-9">
             <div class="row">
-              <div class="card-item col-md-4 mb-5 pb-5 col-sm-6" v-for="item in products" :key="item.id" @click="turnproduct(item.id)">
-                <div class="card_detail-cart">
-                  <div class="detail" @click.stop="turnproduct(item.id)">
-                    <h2 class="card-detail">‧‧‧</h2>
+              <div class="card-item col-md-4 mb-5 pb-5 col-sm-6" v-for="item in products" :key="item.id" @click="turnproduct(item.id, item.category)">
+                <div class="card_favorite-cart">
+                  <div class="favorite" @click.stop="addtoFavorite(item)">
+                    <i class="fas fa-heart fa-2x card-favorite"></i>
                   </div>
                   <div class="card-add-cart" @click.stop="addtoCar(item.id,1,item.title)">
                     <i class="fas fa-spinner fa-spin fa-2x" v-if="status.loading === item.id"></i>
@@ -86,7 +86,8 @@ export default {
       },
       search: "",
       displayitem: "",
-      Cart: []
+      Cart: [],
+      favorites: []
     };
   },
   components: {
@@ -116,11 +117,12 @@ export default {
         vm.displaypage = false;
       });
     },
-    turnproduct(id) {
+    turnproduct(id, category) {
       this.$router.push({
         name: "frontProductIn",
         query: {
-          id: id
+          id: id,
+          category: category
         }
       });
     },
@@ -188,6 +190,27 @@ export default {
         });
       }
     },
+    gettoFavorite() {
+      const vm = this; 
+      vm.favorites = JSON.parse(localStorage.getItem('Favorites')) || [];
+    },
+    addtoFavorite(item) {
+      const vm = this;
+      if(vm.favorites.length > 0) {
+        let currentValue = vm.favorites.find(product => {
+          return item.id === product.id;
+        });
+        if(!currentValue) {
+          vm.favorites.push(item);
+        } else {
+          vm.$bus.$emit("message:push", '此商品已收藏', "warning");
+        }
+      } else {
+        vm.favorites.push(item);
+      }
+      localStorage.setItem('Favorites', JSON.stringify(vm.favorites));
+      vm.$bus.$emit("changeFavorites");
+    }
   },
   created() {
     const vm = this;
@@ -196,6 +219,10 @@ export default {
     } else {
       vm.getproducts();
     }
+    vm.$bus.$on("deletefavorites", vm.gettoFavorite);
+    vm.$bus.$on("addtocart",(id, qty, title) => {
+      vm.addtoCar(id, qty, title);
+    });
   }
 };
 </script>
@@ -302,19 +329,19 @@ ul {
 .card-item:hover .card-img:after{
   background-color: rgba(0,0,0,0.5);
 }
-.card-item:hover .card-detail,
+.card-item:hover .card-favorite,
 .card-item:hover .card-add-cart {
   opacity: 1;
   transition: all 0.4s;
 }
-.card-detail:hover,
+.card-favorite:hover,
 .card-add-cart:hover {
   background-color: #306136;
   color: #fff !important;
   transition: all 0.5s;
   text-decoration: none;
 }
-.card_detail-cart {
+.card_favorite-cart {
   position: absolute;
   top: 20%;
   left: 0;
@@ -322,15 +349,14 @@ ul {
   height: 100px;
   z-index: 100;
 }
-.card-detail {
+.card-favorite {
   position: absolute;
   top: 30px;
   left: 25%;
   width: 25%;
   color: black !important;
   text-align: center;
-  font-size: 200%;
-  padding: 10px 23px;
+  padding: 12px 15px;
   background-color: #6eb577;
   opacity: 0;
   transition: all 0.4s;
@@ -343,8 +369,7 @@ ul {
   width: 25%;
   color: black !important;
   text-align: center;
-  font-size: 100%;
-  padding: 12px 15px;
+  padding: 11px 10px;
   transform: translateX(-50%);
   background-color: #6eb577;
   opacity: 0;
@@ -352,11 +377,11 @@ ul {
   margin-left: 5px;
 }
 @media (max-width: 992px) {
-  .card-detail {
+  .card-favorite {
     font-size: 120%;
   }
   .card-add-cart {
-    font-size: 50%;
+    font-size: 60%;
   }
 }
 .card-category {
