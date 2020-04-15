@@ -3,15 +3,15 @@
     <section class="Order">
       <div class="order-bg"></div>
       <div class="container">
-        <div class="row pt-5 justify-content-around">
+        <div class="row pt-5 justify-content-between order-title">
           <div class="order-process process-now-color col-12 col-md-3">Information</div>
           <div class="order-process process-undone-color col-12 col-md-3">Payment</div>
-          <div class="order-process process-undone-color col-12 col-md-3">Completion</div>
+          <div class="order-process process-undone-color col-12 col-md-3">Successful</div>
         </div>
         <div class="row">
-          <div class="col-sm-7 mt-5">
+          <div class="col-sm-6 mt-5">
             <ValidationObserver class="row justify-content-center" ref="form">
-              <form class="col-md-10">
+              <form class="col-md-12">
                 <ValidationProvider rules="required|email" v-slot="{ failed,errors }" name="email">
                   <div class="form-group">
                     <h4 class="mb-3">Contact information</h4>
@@ -50,7 +50,7 @@
               </form>
             </ValidationObserver>
           </div>
-          <div class="col-sm-5 mt-5" style="border-left: 1px solid #adb5bd;">
+          <div class="col-sm-6 mt-5" style="border-left: 1px solid #adb5bd;">
             <div class="order-card">
               <h4 class="mb-5">YOUR ORDER</h4>
               <table class="table">
@@ -76,30 +76,9 @@
                       <h5 class="text-primary" v-if="Cart.total">Discount&nbsp;&nbsp;&nbsp;{{ Cart.final_total | currency }}</h5>
                     </td>
                   </tr>
-                  <tr>
-                    <td>
-                      <input type="radio" id="credit_card" name="payment-method" v-model="form.payment_method" value="credit_card"/>
-                      <label for="credit_card">信用卡</label>
-                    </td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input type="radio" id="PayPal" name="payment-method" v-model="form.payment_method" value="PayPal"/>
-                      <label for="PayPal">PayPal</label>
-                    </td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input type="radio" id="Pick_up_payment" name="payment-method" v-model="form.payment_method" value="Pick_up_payment"/>
-                      <label for="Pick_up_payment">超商取貨付款</label>
-                    </td>
-                    <td></td>
-                  </tr>
                   <tr class="text-center">
                     <td colspan="2">
-                      <button class="btn btn-dark mt-5" style="width:100%;" @click.prevent="createdOrder">Submit orders</button>
+                      <button class="btn btn-dark mt-3" style="width:100%;" @click.prevent="createdOrder">Submit orders</button>
                     </td>
                   </tr>
                 </tfoot>
@@ -151,11 +130,9 @@ export default {
       vm.$refs.form.validate().then(success => {
         if (success) {
           vm.$http.post(url, { data: order }).then(response => {
-            //將form傳到api
             vm.$bus.$emit("message:push", "已建立訂單", "success");
             vm.isLoading = false;
             if (response.data.success) {
-              // vm.$router.push(`/HelloWorld/OrderPayment/${response.data.orderId}`); //成功後轉到結帳頁面
               vm.$router.push({
                 name: "OrderPayment",
                 query: {
@@ -170,6 +147,7 @@ export default {
       });
     }
   },
+  computed: {},
   created() {
     this.gettoCar();
   }
@@ -210,11 +188,14 @@ export default {
   text-align: center;
   font-weight: 900;
 }
+.order-title {
+  padding: 15px;
+}
 .process-now-color {
-  background-color: #83d4a5;
+  background-color: #008443;
 }
 .process-undone-color {
-  background-color: #65a37f;
+  background-color: #306136;
 }
 .order-card {
   height: 500px;

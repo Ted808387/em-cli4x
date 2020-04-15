@@ -141,14 +141,16 @@ export default {
             vm.$http.delete(url).then(response => {
             vm.$bus.$emit("changecart");
           });
-          itemqty = itemqty + itemId.qty;
+          itemqty =+ itemId.qty;
         }
         const car = {
           product_id: id,
           qty: itemqty + qty
         };
         vm.$http.post(url, { data: car }).then(response => {
-          vm.$bus.$emit("message:push", response.data.message, "info");
+          if(qty === 1) {
+            vm.$bus.$emit("message:push", response.data.message, "info");
+          }
           vm.status.loading = "";
           vm.$bus.$emit("changecart");
         });       
@@ -210,7 +212,7 @@ export default {
       }
       localStorage.setItem('Favorites', JSON.stringify(vm.favorites));
       vm.$bus.$emit("changeFavorites");
-    }
+    },
   },
   created() {
     const vm = this;
@@ -219,6 +221,7 @@ export default {
     } else {
       vm.getproducts();
     }
+    vm.$bus.$off("addtocart");
     vm.$bus.$on("deletefavorites", vm.gettoFavorite);
     vm.$bus.$on("addtocart",(id, qty, title) => {
       vm.addtoCar(id, qty, title);

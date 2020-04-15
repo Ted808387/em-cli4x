@@ -46,7 +46,13 @@
                     <div class="text-success font-weight-bold" v-if="item.coupon">Discounted</div>
                   </td>
                   <td class="text-center align-middle">{{ item.product.price | currency }}</td>
-                  <td class="align-middle text-center">{{ item.qty }}/{{ item.product.unit }}</td>
+                  <td class="text-center align-middle">
+                    <div class="select-quantity">
+                      <input class="select-up select-outline bg-white" type="button" value="-" @click="select(item.product.id, -1, item.product.title)">
+                      <input type="number" class="quantity select-outline" placeholder="1" min="1" max="100" v-model.number="item.qty" @keyup.13="change(item.product.id, item.qty, item.product.title)">
+                      <input class="select-down select-outline bg-white" type="button" value="+" @click="select(item.product.id, 1, item.product.title)">
+                    </div>
+                  </td>
                   <td class="text-right align-middle">{{ item.total | currency }}</td>
                 </tr>
               </tbody>
@@ -96,17 +102,7 @@ export default {
         loading: {}
       },
       Cart: {},
-      Cartitem: [],
       couponcode: "",
-      form: {
-        user: {
-          name: "",
-          email: "",
-          tel: "",
-          address: ""
-        },
-        message: ""
-      },
       status: {
         loading: false
       }
@@ -118,6 +114,17 @@ export default {
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       vm.$http.get(url).then(response => {
         vm.Cart = response.data.data;
+        vm.Cart.carts.sort(function (a, b) {
+          return a.product.price - b.product.price;
+        });
+        vm.Cart.carts.forEach(item => {
+          if(item.qty < 1) {
+            const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item.id}`;
+            vm.$http.delete(url).then(response => {
+              vm.gettoCar(); 
+            });
+          }
+        })
       });
     },
     deleteCar(id) {
@@ -162,6 +169,22 @@ export default {
           vm.$bus.$emit("message:push", response.data.message, "danger");
         }
         vm.status.loading = false;
+      });
+    },
+    select(id, qty, title) {
+      const vm = this;
+      vm.$bus.$emit("addtocart",id, qty, title);
+    },
+    change(id, qty, title) {
+      const vm = this;
+      const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
+      console.log(qty);
+      vm.$http.get(url).then(response => {
+        let currentproduct = response.data.data.carts.filter(product => {
+          return title === product.product.title;
+        });
+        let currentValue = qty - currentproduct[0].qty;
+        vm.$bus.$emit("addtocart",id, currentValue, title);
       });
     },
     toOrdercheck() {
@@ -220,5 +243,42 @@ export default {
   .productimg {
     display: none;
   }
+}
+.quantity {
+  text-align: center;
+  border: 1px solid #a9a9a9;
+}
+.select-up {
+  display: inline-block;
+  border: 1px solid gray;
+  font-size: 16px;
+  width: 30px;
+  height: 28px;
+  border-right: none;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  margin-top: 1px;
+}
+.select-down {
+  display: inline-block;
+  border: 1px solid gray;
+  font-size: 16px;
+  width: 30px;
+  height: 28px;
+  border-left: none;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  margin-top: 1px;
+}
+.select-outline:focus {
+  outline-color: #8bcc8c;
+  box-shadow: 0px 0px 5px #8bcc8c;
+  transition: all 0.2s;
+  border: 1px solid #8bcc8c;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0;
 }
 </style>

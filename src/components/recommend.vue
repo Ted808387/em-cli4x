@@ -29,8 +29,8 @@
               </div>
             </div>
           </swiper-slide>
-          <div class="fas fa-angle-left fa-3x" slot="button-next"></div>
-          <div class="fas fa-angle-right fa-3x" slot="button-prev"></div>
+          <div class="fas fa-angle-left fa-3x" v-if="slidenone" slot="button-next"></div>
+          <div class="fas fa-angle-right fa-3x" v-if="slidenone" slot="button-prev"></div>
         </swiper>
       </div>
     </div>
@@ -39,6 +39,7 @@
 
 <script>
 import { swiper, swiperSlide } from "vue-awesome-swiper";
+import $ from 'jquery';
 
 export default {
   data() {
@@ -47,6 +48,7 @@ export default {
       status: {
         loading: ""
       },
+      slidenone: true,
       swiperOptions: {
         notNextTick: true,
         direction: "horizontal",
@@ -58,7 +60,7 @@ export default {
         paginationClickable: true,
         mousewheelControl: true,
         observeParents: true,
-        loop: true,
+        observer: true,
         debugger: true,
         touchMoveStopPropagation: true,
         spaceBetween: 20,
@@ -84,6 +86,9 @@ export default {
   methods: {
     turnproduct(id, category) {
       this.$emit("turn", id, category);
+      $('html,body').animate({
+          scrollTop: 0
+      },0);
     },
     recommend() {
       const vm = this;
@@ -104,25 +109,18 @@ export default {
           vm.status.loading = "";
         }, 1000);
       })();
-      // setInterval(() => {
-      //   this.status.loading = "";
-      // }, interval);
-      // const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      // vm.status.loading = id;
-      // const car = {
-      //   product_id: id,
-      //   qty
-      // };
-      // vm.$http.post(url, { data: car }).then(response => {
-      //   vm.$bus.$emit("message:push", response.data.message, "info");
-      //   vm.status.loading = "";
-      //   vm.$bus.$emit("changecart");
-      // });
-      //  vm.$bus.$emit("addtocart",id, qty, title);
     },
   },
   created() {
     this.recommend();
+    $('html,body').animate({
+        scrollTop: 0
+    },0);
+    setTimeout(() => {
+      if(this.products.length <= 3) {
+        this.slidenone = false;
+      }
+    }, 1000);
   }
 };
 </script>
@@ -163,7 +161,7 @@ export default {
 .fa-angle-right {
   position: absolute;
   right: 5px;
-  top: 100px;
+  top: 150px;
   z-index: 100;
   cursor: pointer;
   color: #306136;
@@ -171,7 +169,7 @@ export default {
 .fa-angle-left {
   position: absolute;
   left: 5px;
-  top: 100px;
+  top: 150px;
   z-index: 100;
   cursor: pointer;
   color: #306136;

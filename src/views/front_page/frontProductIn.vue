@@ -157,7 +157,7 @@ export default {
             vm.$http.delete(url).then(response => {
               vm.$bus.$emit("changecart");
             });
-            itemqty = itemqty + itemId.qty;
+            itemqty =+ itemId.qty;
           }
           const car = {
             product_id: id,
