@@ -4,7 +4,7 @@
       <div class="cart-bg"></div>
       <!-- Cart -->
       <div class="container">
-        <h2 class="text-center mt-3 mb-5 font-weight-bold">Shopping Cart</h2>
+        <h2 class="text-center mt-3 mb-5 font-weight-bold">購物車</h2>
         <div class="Nothing text-center" v-if="Cart.total === 0">
           <h3 class="font-weight-bold mb-5">－&nbsp;購物車無物品&nbsp;－</h3>
           <router-link to="/frontproduct">
@@ -22,10 +22,10 @@
                     </button>
                   </th>
                   <th class="productimg" width="150"></th>
-                  <th class="align-middle">Product</th>
-                  <th width="150" class="text-center align-middle">Price</th>
-                  <th width="200" class="text-center align-middle">Quantity</th>
-                  <th width="100" class="align-middle">Total</th>
+                  <th class="align-middle">產品名稱</th>
+                  <th width="150" class="text-center align-middle">單價</th>
+                  <th width="200" class="text-center align-middle">數量</th>
+                  <th width="100" class="align-middle">價格</th>
                 </tr>
               </thead>
               <tbody>
@@ -59,7 +59,7 @@
               <tfoot class="font-weight-bold">
                 <tr>
                   <td class="productimg"></td>
-                  <td colspan="4" class="text-right">Total</td>
+                  <td colspan="4" class="text-right">總價</td>
                   <td class="text-right">{{ Cart.total | currency }}</td>
                 </tr>
                 <tr class="text-primary" v-if="Cart.final_total !== Cart.total">
@@ -201,84 +201,3 @@ export default {
 };
 </script>
 
-<style scoped>
-.cart-bg {
-  width: 100%;
-  height: 100px;
-  background-image: url("../../assets/frontbgimg/porductinfor.jpg");
-  background-position: center;
-  background-size: cover;
-  z-index: -10;
-}
-.cart-bg:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100px;
-  background: linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-  background: -moz-linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-  background: -webkit-linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-  background: -o-linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-  opacity: 0.6;
-}
-.cart-img {
-  width: 50px;
-}
-.coupon-code {
-  transition: all 0.3s;
-}
-.coupon-code:focus {
-  height: 50px;
-  transition: all 0.3s;
-}
-.coupon {
-  width: 300px;
-}
-@media (max-width: 768px) {
-  .coupon {
-    width: 100%;
-  }
-  .productimg {
-    display: none;
-  }
-}
-.quantity {
-  text-align: center;
-  border: 1px solid #a9a9a9;
-}
-.select-up {
-  display: inline-block;
-  border: 1px solid gray;
-  font-size: 16px;
-  width: 30px;
-  height: 28px;
-  border-right: none;
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
-  margin-top: 1px;
-}
-.select-down {
-  display: inline-block;
-  border: 1px solid gray;
-  font-size: 16px;
-  width: 30px;
-  height: 28px;
-  border-left: none;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-  margin-top: 1px;
-}
-.select-outline:focus {
-  outline-color: #8bcc8c;
-  box-shadow: 0px 0px 5px #8bcc8c;
-  transition: all 0.2s;
-  border: 1px solid #8bcc8c;
-}
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none !important;
-  margin: 0;
-}
-</style>

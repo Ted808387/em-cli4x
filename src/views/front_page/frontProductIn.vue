@@ -1,8 +1,8 @@
 <template>
   <div>
     <loading :active.sync="isLoading"></loading>
-    <section class="product">
-      <div class="product-bg"></div>
+    <section class="productIn">
+      <div class="productIn-bg"></div>
       <div class="productinfo mt-5">
         <div class="container">
           <div class="row">
@@ -15,7 +15,7 @@
             </div>
             <div class="col-md-4">
               <div class="product_content">
-                <h5 class="category">{{ product.category }}</h5>
+                <h5 class="card-category">{{ product.category }}</h5>
                 <h3 class="font-weight-bold mb-3">{{ product.title }}</h3>
                 <del class="d-inline-block">{{ product.origin_price | currency }}</del>
                 <h3 class="font-weight-bold d-inline-block text-primary">{{ product.price | currency }}</h3>
@@ -182,27 +182,6 @@ export default {
 </script>
 
 <style scoped>
-.product-bg {
-  width: 100%;
-  height: 100px;
-  background-image: url("../../assets/frontbgimg/porductinfor.jpg");
-  background-position: center;
-  background-size: cover;
-  z-index: -10;
-}
-.product-bg:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100px;
-  background: linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-  background: -moz-linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-  background: -webkit-linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-  background: -o-linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-  opacity: 0.6;
-}
 .product-img-box {
   width: 100%;
   height: 100%;
@@ -222,15 +201,6 @@ export default {
   height: 100%;
   background-size: cover;
   background-position: center;
-}
-.bottom-line {
-  border-bottom: solid #8bcc8c 1px;
-}
-.product-list {
-  margin-bottom: 10px;
-}
-.category {
-  color: rgb(135, 138, 135);
 }
 .select-quantity {
   display: inline-block;
@@ -280,13 +250,5 @@ export default {
   margin-left: 30px;
   height: 49px;
   width: 140px;
-}
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none !important;
-  margin: 0;
-}
-.text-style {
-  font-style: normal;
 }
 </style>

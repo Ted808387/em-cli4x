@@ -1,0 +1,33 @@
+.footer {
+    width: 100%;
+    margin-top: 60px;
+    background-color: #8bcc8c;
+    padding: 15px 15px 0 15px;
+  }
+  .footer-card {
+    height: 100%;
+  }
+  .footer-text-color {
+    color: #e7e7e7;
+  }
+  .footer-head {
+    display: block;
+    line-height: 30px;
+    width: 80%;
+  }
+  .footer-title {
+    height: 40px;
+    color: #094D2B;
+  }
+  .footer-text-color {
+    color: #094D2B !important;
+    transition: color 0.4s;
+  }
+  .footer-text-color.text-color-change:hover {
+    color: #0F573F !important;
+    text-decoration: none;
+    transition: color 0.4s;
+  }
+  .footer-bottom {
+    font-size: 12px;
+  }

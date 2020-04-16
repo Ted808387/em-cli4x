@@ -1,0 +1,20 @@
+@import '~bootstrap/scss/functions';   //匯入bootstrap內的一些樣式
+@import './helpers/_variables.scss';     //匯入helpers內的_variables.scss自訂義變數樣式
+@import '~bootstrap/scss/bootstrap';  //匯入bootstrap內的一些樣式
+// pages
+@import './pages/dashboard.scss';
+@import './pages/home.scss';
+@import './pages/cart.scss';
+@import './pages/coupon.scss';
+@import './pages/products.scss';
+@import './pages/productin.scss';
+@import './pages/order.scss';
+
+
+//component
+@import './component/other.scss';
+@import './component/slide.scss';
+@import './component/frontnavbar.scss';
+@import './component/frontfooter.scss';
+@import './component/customer.scss';
+@import './component/recommend.scss';

@@ -5,25 +5,25 @@
         <div class="container">
             <div class="row">
             <div class="col-sm-3 footer-card">
-              <h4 class="footer-text-color font-weight-bold footer-title">About Us</h4>
+              <h4 class="footer-text-color font-weight-bold footer-title">關於我們</h4>
               <p class="footer-head footer-text-color">將來世界各地的人們都更容易受到細菌和病毒的侵害，我們必須運用科技來改善人們的生活。</p>
             </div>
             <div class="col-sm-2 footer-card offset-sm-1">
-              <h4 class="footer-text-color font-weight-bold footer-title">Quick Links</h4>
+              <h4 class="footer-text-color font-weight-bold footer-title">快速連結</h4>
               <div class="footer-middle footer-text-color">
                 <p>
-                  <router-link class="omouse footer-text-color text-color-change" to="/">Home</router-link>
+                  <router-link class="omouse footer-text-color text-color-change" to="/">首頁</router-link>
                 </p>
                 <p>
-                  <router-link class="omouse footer-text-color text-color-change" to="/frontcoupon">News</router-link>
+                  <router-link class="omouse footer-text-color text-color-change" to="/frontcoupon">最新資訊</router-link>
                 </p>
                 <p>
-                  <router-link class="omouse footer-text-color text-color-change" to="/frontproduct">Products</router-link>
+                  <router-link class="omouse footer-text-color text-color-change" to="/frontproduct">產品列表</router-link>
                 </p>
               </div>
             </div>
             <div class="col-sm-5 footer-card offset-sm-1 footer-text-color">
-              <h4 class="font-weight-bold footer-title">Contact Us</h4>
+              <h4 class="font-weight-bold footer-title">連絡我們</h4>
               <div class="row">
                 <div class="col-md-7">
                   <i class="fas fa-phone-alt">&nbsp;&nbsp;Phone</i>
@@ -65,39 +65,3 @@
     </footer>
   </div>
 </template>
-
-<style>
-.footer {
-  width: 100%;
-  margin-top: 60px;
-  background-color: #8bcc8c;
-  padding: 15px 15px 0 15px;
-}
-.footer-card {
-  height: 100%;
-}
-.footer-text-color {
-  color: #e7e7e7;
-}
-.footer-head {
-  display: block;
-  line-height: 30px;
-  width: 80%;
-}
-.footer-title {
-  height: 40px;
-  color: #094D2B;
-}
-.footer-text-color {
-  color: #094D2B !important;
-  transition: color 0.4s;
-}
-.footer-text-color.text-color-change:hover {
-  color: #0F573F !important;
-  text-decoration: none;
-  transition: color 0.4s;
-}
-.footer-bottom {
-  font-size: 12px;
-}
-</style>

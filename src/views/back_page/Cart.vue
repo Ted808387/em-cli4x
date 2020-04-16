@@ -186,9 +186,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.form_textarea {
-  resize: none;
-}
-</style>

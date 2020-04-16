@@ -33,30 +33,32 @@
           <!-- products -->
           <div class="col-sm-9">
             <div class="row">
-              <div class="card-item col-md-4 mb-5 pb-5 col-sm-6" v-for="item in products" :key="item.id" @click="turnproduct(item.id, item.category)">
-                <div class="card_favorite-cart">
-                  <div class="favorite" @click.stop="addtoFavorite(item)">
-                    <i class="fas fa-heart fa-2x card-favorite"></i>
-                  </div>
-                  <div class="card-add-cart" @click.stop="addtoCar(item.id,1,item.title)">
-                    <i class="fas fa-spinner fa-spin fa-2x" v-if="status.loading === item.id"></i>
-                    <i class="fas fa-shopping-cart fa-2x" v-if="status.loading !== item.id"></i>
-                  </div>
-                </div>
-                <div class="card-img">
-                  <div class="product-img" :style="{backgroundImage: `url(${ item.imageUrl })`}"></div>
-                </div>
-                <div class="card-cotnet">
-                  <div class="card-category mt-3">
-                    <h5 class="mb-0 card-category_item">{{ item.category }}</h5>
-                  </div>
-                  <div class="card-title mt-1">
-                    <h4 class="font-weight-bold">{{ item.title }}</h4>
-                  </div>
-                  <div class="card-price">
-                    <div class="card-origin-price" v-if="!item.price">{{ item.origin_price | currency }}</div>
-                    <del class="card-origin-price" v-if="item.price">{{ item.origin_price | currency }}</del>
-                    <div>{{ item.price | currency }}</div>
+              <div class="mb-3 pb-5 col-xl-4 col-md-6" v-for="item in products" :key="item.id" @click="turnproduct(item.id, item.category)">
+                <div class="card-item">
+                  <div class="card_favorite-cart">
+                    <div class="favorite" @click.stop="addtoFavorite(item)">
+                      <i class="fas fa-heart fa-2x card-favorite"></i>
+                    </div>
+                    <div class="card-add-cart" @click.stop="addtoCar(item.id,1,item.title)">
+                      <i class="fas fa-spinner fa-spin fa-2x" v-if="status.loading === item.id"></i>
+                      <i class="fas fa-shopping-cart fa-2x" v-if="status.loading !== item.id"></i>
+                    </div>
+                    </div>
+                    <div class="card-img">
+                      <div class="product-img" :style="{backgroundImage: `url(${ item.imageUrl })`}"></div>
+                    </div>
+                    <div class="card-cotnet">
+                    <div class="card-category mt-3 text-center">
+                      <h5 class="mb-0 card-category_item">{{ item.category }}</h5>
+                    </div>
+                    <div class="card-title mt-1 text-center">
+                      <h4 class="font-weight-bold">{{ item.title }}</h4>
+                    </div>
+                    <div class="card-price text-center">
+                      <div class="card-origin-price" v-if="!item.price">{{ item.origin_price | currency }}</div>
+                      <del class="card-origin-price" v-if="item.price">{{ item.origin_price | currency }}</del>
+                      <div>{{ item.price | currency }}</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -103,6 +105,7 @@ export default {
         vm.displaypage = true;
         vm.pagination = response.data.pagination;
         vm.displayitem = '全商品';
+        vm.scrollTop();
       });
     },
     selectmask(id) {
@@ -115,6 +118,7 @@ export default {
           return item.category ===  id;
         });
         vm.displaypage = false;
+        vm.scrollTop();
       });
     },
     turnproduct(id, category) {
@@ -213,6 +217,11 @@ export default {
       localStorage.setItem('Favorites', JSON.stringify(vm.favorites));
       vm.$bus.$emit("changeFavorites");
     },
+    scrollTop() {
+      $('html,body').animate({
+            scrollTop: 0
+      }, 0);
+    }
   },
   created() {
     const vm = this;
@@ -231,127 +240,26 @@ export default {
 </script>
 
 <style scoped>
-.product-bg {
-  width: 100%;
-  height: 400px;
-  background-image: url("../../assets/frontbgimg/productbg.jpg");
-  background-position: center;
-  background-size: cover;
-  z-index: -10;
-}
-.product-bg:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 400px;
-  background: linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-  background: -moz-linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-  background: -webkit-linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-  background: -o-linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-  opacity: 0.3;
-}
-.itemlist {
-  position: sticky;
-  top: 10%;
-  left: 0;
-}
-.itemtitle {
-  font-size: 24px;
-  padding: 8px 24px;
-  border: solid #008443 3px;
-  color: #306136;
-}
-@media (max-width: 972px) {
-  .itemtitle {
-    font-size: 16px;
+  .card-item:hover .card-favorite,
+  .card-item:hover .card-add-cart {
+    opacity: 1;
+    transition: all 0.4s;
   }
-}
-.allproducts {
-  margin: 0 10%;
-}
-ul {
-  list-style: none;
-}
-.list-text:hover {
-  text-decoration: none;
-}
-.list-li {
-  padding: 12px 0;
-  padding-left: 1.5em;
-  cursor: pointer;
-  color: #008443;
-  border-bottom: 1px #008443 solid;
-  transition: all 0.2s;
-}
-.list-li:hover {
-  border-bottom: 3px #306136 solid;
-  color: #306136;
-  transition: all 0.2s;
-}
-.list-li-focus {
-  border-bottom: 3px #306136 solid;
-  color: #306136;
-  transition: all 0.2s;
-}
-.has-search {
-  position: relative;
-}
-.search_box {
-  width: 100%;
-  padding: 10px;
-  padding-left: 30px;
-  border: 1px solid #9e9e9e;
-}
-.search_box:focus {
-  outline-color: #306136;
-  border-color: #fff;
-  box-shadow: 0 0 3px #ccc;
-}
-.search_icon {
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
-}
-.wait_icon {
-  position: absolute;
-  top: 30%;
-  left: 5px;
-  transform: translateY(-50%);
-}
-/* Card */
-.card-item {
-  position: relative;
-  padding: 10px;
-  border: 3px #fff solid;
-  transition: all 0.6s;
-  cursor: pointer;
-}
-.card-item:hover .card-img:after{
-  background-color: rgba(0,0,0,0.5);
-}
-.card-item:hover .card-favorite,
-.card-item:hover .card-add-cart {
-  opacity: 1;
-  transition: all 0.4s;
-}
-.card-favorite:hover,
-.card-add-cart:hover {
-  background-color: #306136;
-  color: #fff !important;
-  transition: all 0.5s;
-  text-decoration: none;
-}
-.card_favorite-cart {
-  position: absolute;
-  top: 20%;
-  left: 0;
-  width: 100%;
-  height: 100px;
-  z-index: 100;
-}
+  .card-favorite:hover,
+  .card-add-cart:hover {
+    background-color: #306136;
+    color: #fff !important;
+    transition: all 0.5s;
+    text-decoration: none;
+  }
+  .card_favorite-cart {
+    position: absolute;
+    top: 20%;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    z-index: 100;
+  }
 .card-favorite {
   position: absolute;
   top: 30px;
@@ -386,44 +294,5 @@ ul {
   .card-add-cart {
     font-size: 60%;
   }
-}
-.card-category {
-  color: rgb(138, 138, 138);
-  text-align: center;
-}
-.card-title {
-  text-align: center;
-}
-.card-price {
-  text-align: center;
-  font-size: 18px;
-  font-weight: 700;
-}
-.card-origin-price {
-  font-size: 14px;
-}
-.card-img {
-  position: relative;
-  width: 100%;
-  height: 250px;
-}
-.card-img:after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0);
-  transition: all 0.6s;
-}
-.product-img {
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-}
-.omouse {
-  cursor: pointer;
 }
 </style>

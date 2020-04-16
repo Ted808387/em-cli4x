@@ -1,12 +1,12 @@
 <template>
   <div>
     <section class="Payment">
-      <div class="payment-bg"></div>
+      <div class="productIn-bg"></div>
       <div class="Payment_content container">
         <div class="row pt-5 justify-content-between order-title">
-          <div class="order-process process-undone-color col-12 col-md-3">Information</div>
-          <div class="order-process process-now-color col-12 col-md-3">Payment</div>
-          <div class="order-process process-undone-color col-12 col-md-3">Successful</div>
+          <div class="order-process process-undone-color col-12 col-md-3">訂購資料</div>
+          <div class="order-process process-now-color col-12 col-md-3">訂單付款</div>
+          <div class="order-process process-undone-color col-12 col-md-3">付款成功</div>
         </div>
         <div class="my-5">
           <form class="form" @submit.prevent="payOrder(orderId)">
@@ -128,50 +128,9 @@ export default {
   }
 };
 </script>
-
-
-
 <style scoped>
-.payment-bg {
-  width: 100%;
-  height: 100px;
-  background-image: url("../../assets/frontbgimg/porductinfor.jpg");
-  background-position: center;
-  background-size: cover;
-  z-index: -10;
-}
-.payment-bg:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100px;
-  background: linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-  background: -moz-linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-  background: -webkit-linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-  background: -o-linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-  opacity: 0.6;
-}
-.order-process {
-  border-radius: 10px;
-  width: 30%;
-  padding: 5px;
-  margin: 5px 0;
-  color: #fff;
-  font-size: 24px;
-  line-height: 45px;
-  text-align: center;
-  font-weight: 900;
-}
-.order-title {
-  padding: 15px;
-}
-.process-now-color {
-  background-color: #008443;
-}
-.process-undone-color {
-  background-color: #306136;
+.Payment {
+  margin-bottom: 300px;
 }
 .table {
   border: 1px solid #dee2e6;

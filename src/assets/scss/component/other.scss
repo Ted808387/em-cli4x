@@ -1,0 +1,32 @@
+  /* Font-size */
+  .text-lg {
+    font-size: 80px;
+  }
+  .text-md {
+    font-size: 56px;
+  }
+  .text-sm {
+    font-size: 48px;
+  }
+  /* Font-style */
+  .text-style {
+    font-style: normal;
+  }
+  /* Mouse */
+  .omouse {
+    cursor: pointer;
+  }
+  /* Textarea */
+  .form_textarea {
+    resize: none;
+  }
+  /* Input-number */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0;
+}
+  /* Page */
+.page-expand {
+  margin-bottom: 180px;
+}

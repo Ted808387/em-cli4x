@@ -1,12 +1,12 @@
 <template>
   <div>
-    <section class="Order">
-      <div class="order-bg"></div>
+    <section class="ordercheck page-expand">
+      <div class="productIn-bg"></div>
       <div class="container">
         <div class="row pt-5 justify-content-between order-title">
-          <div class="order-process process-now-color col-12 col-md-3">Information</div>
-          <div class="order-process process-undone-color col-12 col-md-3">Payment</div>
-          <div class="order-process process-undone-color col-12 col-md-3">Successful</div>
+          <div class="order-process process-now-color col-12 col-md-3">訂購資料</div>
+          <div class="order-process process-undone-color col-12 col-md-3">訂單付款</div>
+          <div class="order-process process-undone-color col-12 col-md-3">付款成功</div>
         </div>
         <div class="row">
           <div class="col-sm-6 mt-5">
@@ -14,7 +14,7 @@
               <form class="col-md-12">
                 <ValidationProvider rules="required|email" v-slot="{ failed,errors }" name="email">
                   <div class="form-group">
-                    <h4 class="mb-3">Contact information</h4>
+                    <h4 class="mb-3 font-weight-bold">連繫資訊</h4>
                     <label for="useremail">Email</label>
                     <!-- 如果無內容送出表單的話，可以在input內加上required去阻擋，Chrome會自動跳出錯誤訊息 -->
                     <input type="email" class="form-control" id="useremail" name="email" v-model="form.user.email" placeholder="請輸入 Email" :class="{'is-invalid' : failed}" required/>
@@ -23,14 +23,14 @@
                 </ValidationProvider>
                 <ValidationProvider rules="required" v-slot="{ failed }" name="name">
                   <div class="form-group">
-                    <label for="username">Name</label>
+                    <label for="username">姓名</label>
                     <input type="text" class="form-control" name="name" id="username" v-model="form.user.name" placeholder="輸入姓名" :class="{ 'is-invalid' : failed }" required/>
                     <span class="text-danger" v-if="failed">姓名錯誤</span>
                   </div>
                 </ValidationProvider>
                 <ValidationProvider rules="required" v-slot="{ failed }" name="tel">
                   <div class="form-group">
-                    <label for="usertel">Phone</label>
+                    <label for="usertel">電話</label>
                     <input type="tel" class="form-control" id="usertel" v-model="form.user.tel" placeholder="請輸入電話" name="tel" :class="{ 'is-invalid' : failed }" required/>
                     <span v-if="failed" class="text-danger">電話錯誤</span>
                   </div>
@@ -38,13 +38,13 @@
 
                 <ValidationProvider rules="required" v-slot="{ failed }" name="address">
                   <div class="form-group">
-                    <label for="useraddress">Address</label>
+                    <label for="useraddress">地址</label>
                     <input type="text" class="form-control" name="address" id="useraddress" v-model="form.user.address" placeholder="請輸入地址" :class="{ 'is-invalid' : failed }" required/>
                     <span class="text-danger" v-if="failed">地址欄位不得留空</span>
                   </div>
                 </ValidationProvider>
                 <div class="form-group">
-                  <label for="comment">Other</label>
+                  <label for="comment">其他</label>
                   <textarea name="" id="comment" class="form-control" cols="30" rows="10" v-model="form.message" placeholder="留言其他建議" style="resize:none;"></textarea>
                 </div>
               </form>
@@ -52,12 +52,12 @@
           </div>
           <div class="col-sm-6 mt-5" style="border-left: 1px solid #adb5bd;">
             <div class="order-card">
-              <h4 class="mb-5">YOUR ORDER</h4>
+              <h4 class="mb-5 font-weight-bold">你的訂單</h4>
               <table class="table">
                 <thead>
                   <tr>
-                    <th width="85%">Products</th>
-                    <th>Subtotal</th>
+                    <th width="85%">產品名稱</th>
+                    <th>價格</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -69,16 +69,16 @@
                 <tfoot>
                   <tr>
                     <td class="font-weight-bold align-middle">
-                      <h5>Total</h5>
+                      <h5 class="font-weight-bold">總價</h5>
                     </td>
                     <td class="text-right">
                       <h5 v-if="Cart.total === Cart.final_total">{{ Cart.total | currency }}</h5>
-                      <h5 class="text-primary" v-if="Cart.total">Discount&nbsp;&nbsp;&nbsp;{{ Cart.final_total | currency }}</h5>
+                      <h5 class="text-primary font-weight-bold" v-if="Cart.total">折扣&nbsp;&nbsp;&nbsp;{{ Cart.final_total | currency }}</h5>
                     </td>
                   </tr>
                   <tr class="text-center">
                     <td colspan="2">
-                      <button class="btn btn-dark mt-3" style="width:100%;" @click.prevent="createdOrder">Submit orders</button>
+                      <button class="btn btn-dark mt-3" style="width:100%;" @click.prevent="createdOrder">送出訂單</button>
                     </td>
                   </tr>
                 </tfoot>
@@ -156,47 +156,6 @@ export default {
 
 
 <style scoped>
-.order-bg {
-  width: 100%;
-  height: 100px;
-  background-image: url("../../assets/frontbgimg/porductinfor.jpg");
-  background-position: center;
-  background-size: cover;
-  z-index: -10;
-}
-.order-bg:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100px;
-  background: linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-  background: -moz-linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-  background: -webkit-linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-  background: -o-linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-  opacity: 0.6;
-}
-.order-process {
-  border-radius: 10px;
-  width: 30%;
-  padding: 5px;
-  margin: 5px 0;
-  color: #fff;
-  font-size: 24px;
-  line-height: 45px;
-  text-align: center;
-  font-weight: 900;
-}
-.order-title {
-  padding: 15px;
-}
-.process-now-color {
-  background-color: #008443;
-}
-.process-undone-color {
-  background-color: #306136;
-}
 .order-card {
   height: 500px;
 }

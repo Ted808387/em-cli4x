@@ -2,7 +2,7 @@
   <div>
     <div class="recommend container mt-5">
       <hr />
-      <h3>Recommend</h3>
+      <h3 class="font-weight-bold">相關產品</h3>
       <div class="recommend-products mt-3">
         <swiper :options="swiperOptions" ref="mySwiper">
           <swiper-slide v-for="item in products" :key="item.id">
@@ -124,54 +124,14 @@ export default {
   }
 };
 </script>
+
 <style scoped>
-.card-item {
-  box-shadow: 0px 1px 3px black;
-  padding: 10px 10px 0 10px;
-  transition: all 0.3s;
-}
-.card-item:hover {
-  color: #008443;
-  transition: all 0.3s;
-}
-.card-img {
-  width: 100%;
-  height: 250px;
-}
-.product-img {
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-}
-.card-add-cart {
-  position: absolute;
-  top: 360px;
-  right: 30px;
-  color: #306136;
-  transition: all 0.3s;
-}
-.card-add-cart:hover {
-  color: #008443;
-  transition: all 0.3s;
-}
-.omouse {
-  cursor: pointer;
-}
-.fa-angle-right {
-  position: absolute;
-  right: 5px;
-  top: 150px;
-  z-index: 100;
-  cursor: pointer;
-  color: #306136;
-}
-.fa-angle-left {
-  position: absolute;
-  left: 5px;
-  top: 150px;
-  z-index: 100;
-  cursor: pointer;
-  color: #306136;
-}
+  .card-add-cart:hover {
+    color: #008443;
+    transition: all 0.3s;
+  }
+  .card-item:hover {
+    color: #008443;
+    transition: all 0.3s;
+  }
 </style>

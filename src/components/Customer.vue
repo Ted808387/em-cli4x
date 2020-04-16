@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="text-center mb-5 font-weight-bold">Customer Reviews</h2>
+    <h2 class="text-center mb-5 font-weight-bold">顧客回饋</h2>
     <div class="row no-gutters">
       <div class="col-md-3 col-6">
         <div class="customerimgbox">
@@ -160,65 +160,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.customer {
-  margin-right: 5%;
-  margin-left: 5%;
-}
-.customerimg {
-  width: 100%;
-}
-.customerimgbox {
-  width: 100%;
-  overflow: hidden;
-}
-.customerimgbox-inner {
-  width: 100%;
-  padding-top: 90%;
-  position: relative;
-}
-.customerimgbox-inner .customerimg {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  transition: all 0.4s;
-}
-.customerimgbox-inner .customerimg:hover {
-  width: 120%;
-  height: 120%;
-  z-index: 300;
-}
-.customerimgbox-inner .customerimg:hover .customer_comment {
-  height: 100%;
-  opacity: 1;
-  transition: all 0.4s;
-  background-color: rgba(0, 0, 0, 0.6);
-}
-.customer_comment {
-  height: 100%;
-  padding: 35% 20% 0;
-  opacity: 0;
-  transition: all 0.4s;
-  background-color: rgba(0, 0, 0, 0);
-}
-.customer_comment_text {
-  display: block;
-  height: 50px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-}
-@media (max-width: 320px) {
-  .customer_comment {
-    font-size: 0.8rem;
-  }
-}
-</style>

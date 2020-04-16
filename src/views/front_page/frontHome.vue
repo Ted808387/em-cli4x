@@ -4,9 +4,9 @@
       <div class="bg mb-3"></div>
       <div class="header-text text-center text-white">
         <div class="text-center text-lg font-weight-bold">MASK</div>
-        <h5>High-efficiency filtration, antibacterial virus filtration can reach up to 99.9%</h5>
+        <h5 class="font-weight-bold">Wear mask過濾系統結合了顆粒過濾層和軍用級碳，符合N99微粒過濾標準，高效過濾抗菌，病毒過濾可達99.9％</h5>
         <router-link to="/frontproduct">
-          <button class="btn btn-lg btn-dark mt-5">Show now</button>
+          <button class="btn btn-lg btn-dark mt-md-5 mt-3 font-weight-bold">購物去</button>
         </router-link>
         <div class="scrolldown omouse" @click.stop="scrolldown">
           <i class="fas fa-chevron-circle-down"></i>
@@ -19,7 +19,7 @@
       <!-- Pollution Solution -->
       <div id="item1" class="Pollutionsolution">
         <div class="container">
-          <h2 class="text-center mb-5 font-weight-bold">Pollution Solution</h2>
+          <h2 class="text-center mb-5 font-weight-bold">設計方案</h2>
           <div class="container-fluid">
             <div class="row pb-4">
               <div class="col-md-6">
@@ -89,10 +89,10 @@
       <div class="discountCode">
         <div class="couponImg">
           <div class="container text-center text-shadow">
-            <h1 class="text-white font-weight-bold text-lg">20% OFF</h1>
-            <h3 class="text-white text-sm">HOT SALE</h3>
+            <h1 class="text-white font-weight-bold text-lg">20% 折扣</h1>
+            <h3 class="text-white font-weight-bold text-sm">熱賣中</h3>
             <router-link to="/frontcoupon">
-              <button class="discount-btn btn btn-success btn-lg">Coupon Code</button>
+              <button class="discount-btn btn btn-success btn-lg font-weight-bold">優惠碼</button>
             </router-link>
           </div>
         </div>
@@ -124,161 +124,12 @@ export default {
         600
       );
     }
+  },
+  created() {
+    $('html,body').animate({
+          scrollTop: 0
+    }, 0);
   }
 };
 </script>
 
-<style>
-.bg {
-  width: 100%;
-  padding-top: 600px;
-  background-image: url("../../assets/frontbgimg/homebg.jpg");
-  background-position: center;
-  background-size: cover;
-  z-index: -10;
-}
-.bg:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding-top: 600px;
-  background: linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-  background: -moz-linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-  background: -webkit-linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-  background: -o-linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-  opacity: 0.5;
-}
-.Pollutionsolution {
-  margin-top: 5%;
-  padding-top: 5%;
-  padding: 10px 0;
-  background-color: #fff;
-}
-.header-text {
-  position: absolute;
-  top: 220px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 100;
-}
-/* Font-size */
-.text-lg {
-  font-size: 80px;
-}
-.text-md {
-  font-size: 56px;
-}
-.text-sm {
-  font-size: 48px;
-}
-/* Mouse */
-.omouse {
-  cursor: pointer;
-}
-.scrolldown {
-  width: 36px;
-  position: absolute;
-  top: 315px;
-  left: 50%;
-  transform: translateX(-50%);
-  /* margin: 5vh auto; */
-  font-size: 32px;
-  color: #fff;
-  opacity: 0.6;
-  transition: all 0.3s;
-  animation-name: scroll;
-  animation-iteration-count: infinite;
-  animation-duration: 4s;
-}
-.scrolldown:hover {
-  top: 305px;
-  opacity: 1;
-  transition: all 0.3s;
-  animation-name: stopcolor;
-}
-@keyframes stopcolor {
-  0% {
-    opacity: 1;
-  }
-}
-@keyframes scroll {
-  0% {
-    opacity: 1;
-  }
-  25% {
-    opacity: 0.2;
-  }
-  50% {
-    opacity: 0.6;
-  }
-  75% {
-    opacity: 0.8;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-/* Image */
-.image1 {
-  width: 100%;
-  display: block;
-}
-.imgbox {
-  width: 100%;
-  overflow: hidden;
-}
-.imgbox__inner {
-  width: 100%;
-  padding-top: 100%;
-  position: relative;
-}
-.imgbox__inner.imgbox__inner-4-3 {
-  padding-top: 75%;
-}
-.imgbox__inner.imgbox__inner-1-2 {
-  padding-top: 50%;
-}
-.imgbox__inner .image1 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-}
-.text-shadow {
-  text-shadow: black 0.1em 0.1em 0.2em;
-}
-.text-p {
-  font-family: "Noto Sans TC", "Roboto", "Arial", sans-serif;
-  line-height: 30px;
-}
-.discountCode {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  margin-top: 5%;
-  margin-bottom: 5%;
-}
-.couponImg {
-  width: 100%;
-  padding: 30px 50px;
-  background-image: url("../../assets/frontimg/discountImage.jpg");
-  background-position: center;
-  background-size: cover;
-  display: block;
-}
-@media (max-width: 576px) {
-  .discount-title-text {
-    font-size: 48px;
-  }
-}
-.discount-btn {
-  width: 200px;
-  border-radius: 30px;
-  margin-top: 10px;
-}
-</style>
