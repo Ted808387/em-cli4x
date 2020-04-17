@@ -10,6 +10,6 @@
 
 
 ### Demonstration
-![image](https://github.com/Ted808387/em-cli4x/blob/master/E-commerce(demo).gif)
+![image](https://github.com/Ted808387/em-cli4x/blob/master/src/assets/frontimg/E-commerce(demo).gif)
 
 
