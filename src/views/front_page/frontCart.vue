@@ -38,7 +38,11 @@
                   </td>
                   <td class="productimg">
                     <div class="cart-img">
-                      <img :src="item.product.imageUrl" alt class="img-fluid d-block" style="width: 100%; height: 100%; background-size: cover;background-position: center;"/>
+                      <img :src="item.product.imageUrl"
+                       alt class="img-fluid d-block"
+                        style="width: 100%; height: 100%;
+                         background-size: cover;
+                         background-position: center;"/>
                     </div>
                   </td>
                   <td class="align-middle">
@@ -48,9 +52,17 @@
                   <td class="text-center align-middle">{{ item.product.price | currency }}</td>
                   <td class="text-center align-middle">
                     <div class="select-quantity">
-                      <input class="select-up select-outline bg-white" type="button" value="-" @click="select(item.product.id, -1, item.product.title)">
-                      <input type="number" class="quantity select-outline" placeholder="1" min="1" max="100" v-model.number="item.qty" @keyup.13="change(item.product.id, item.qty, item.product.title)">
-                      <input class="select-down select-outline bg-white" type="button" value="+" @click="select(item.product.id, 1, item.product.title)">
+                      <input class="select-up select-outline bg-white"
+                       type="button" value="-"
+                       @click="select(item.product.id, -1, item.product.title)">
+                      <input type="number"
+                       class="quantity select-outline"
+                       placeholder="1" min="1" max="100"
+                       v-model.number="item.qty"
+                       @keyup.13="change(item.product.id, item.qty, item.product.title)">
+                      <input class="select-down select-outline bg-white"
+                       type="button" value="+"
+                       @click="select(item.product.id, 1, item.product.title)">
                     </div>
                   </td>
                   <td class="text-right align-middle">{{ item.total | currency }}</td>
@@ -73,15 +85,21 @@
           <div class="col-sm-12">
             <table class="coupon table float-md-right mx-sm-auto" v-if="Cart.total !== 0">
               <div class="input-group mb-3 input-group-md">
-                <input type="text" class="coupon-code form-control" placeholder="請輸入優惠碼" aria-describedby="basic-addon2" v-model="couponcode">
+                <input type="text" class="coupon-code form-control"
+                 placeholder="請輸入優惠碼"
+                 aria-describedby="basic-addon2"
+                 v-model="couponcode">
                 <div class="input-group-append">
-                  <button class="input-group-text btn btn-outline-primary font-weight-bold" id="basic-addon2" @click="addCouponCode">
+                  <button class="input-group-text btn btn-outline-primary font-weight-bold"
+                   id="basic-addon2" @click="addCouponCode">
                     <i class="fa fa-spinner fa-spin mr-1" v-if="status.loading === true"></i>
                     加入優惠卷
                   </button>
                 </div>
               </div>
-              <button class="btn btn-outline-success font-weight-bold float-right" @click="toOrdercheck" style="width: 100%;">
+              <button class="btn btn-outline-success font-weight-bold float-right"
+               @click="toOrdercheck"
+               style="width: 100%;">
                 購物車結算
               </button>
             </table>
@@ -93,64 +111,57 @@
 </template>
 
 <script>
-import $ from "jquery";
-
 export default {
   data() {
     return {
-      status: {
-        loading: {}
-      },
       Cart: {},
-      couponcode: "",
+      couponcode: '',
       status: {
-        loading: false
-      }
+        loading: false,
+      },
     };
   },
   methods: {
     gettoCar() {
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.$http.get(url).then(response => {
+      vm.$http.get(url).then((response) => {
         vm.Cart = response.data.data;
-        vm.Cart.carts.sort(function (a, b) {
-          return a.product.price - b.product.price;
-        });
-        vm.Cart.carts.forEach(item => {
-          if(item.qty < 1) {
-            const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item.id}`;
-            vm.$http.delete(url).then(response => {
-              vm.gettoCar(); 
+        vm.Cart.carts.sort((a, b) => a.product.price - b.product.price);
+        vm.Cart.carts.forEach((item) => {
+          if (item.qty < 1) {
+            const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item.id}`;
+            vm.$http.delete(api).then(() => {
+              vm.gettoCar();
             });
           }
-        })
+        });
       });
     },
     deleteCar(id) {
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
       vm.status.loading = true;
-      vm.$http.delete(url).then(response => {
+      vm.$http.delete(url).then((response) => {
         vm.status.loading = false;
-        vm.$bus.$emit("message:push", response.data.message, "danger");
-        vm.gettoCar(); 
-        vm.$bus.$emit("changecart");
+        vm.$bus.$emit('message:push', response.data.message, 'danger');
+        vm.gettoCar();
+        vm.$bus.$emit('changecart');
       });
     },
     deleteall() {
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.$http.get(url).then(response => {
-        response.data.data.carts.forEach(item => {
+      vm.$http.get(url).then((response) => {
+        response.data.data.carts.forEach((item) => {
           const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item.id}`;
-          vm.$http.delete(api).then(response => {
+          vm.$http.delete(api).then(() => {
             vm.gettoCar();
-            vm.$bus.$emit("changecart");
+            vm.$bus.$emit('changecart');
           });
         });
         if (response) {
-          vm.$bus.$emit("message:push", "清空購物車", "danger");
+          vm.$bus.$emit('message:push', '清空購物車', 'danger');
         }
       });
     },
@@ -158,46 +169,43 @@ export default {
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`;
       const coupon = {
-        code: vm.couponcode
+        code: vm.couponcode,
       };
       vm.status.loading = true;
-      vm.$http.post(url, { data: coupon }).then(response => {
+      vm.$http.post(url, { data: coupon }).then((response) => {
         if (response.data.success) {
-          vm.$bus.$emit("message:push", response.data.message, "success");
+          vm.$bus.$emit('message:push', response.data.message, 'success');
           vm.gettoCar();
         } else {
-          vm.$bus.$emit("message:push", response.data.message, "danger");
+          vm.$bus.$emit('message:push', response.data.message, 'danger');
         }
         vm.status.loading = false;
       });
     },
     select(id, qty, title) {
       const vm = this;
-      vm.$bus.$emit("addtocart",id, qty, title);
+      vm.$bus.$emit('addtocart', id, qty, title);
     },
     change(id, qty, title) {
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       console.log(qty);
-      vm.$http.get(url).then(response => {
-        let currentproduct = response.data.data.carts.filter(product => {
-          return title === product.product.title;
-        });
-        let currentValue = qty - currentproduct[0].qty;
-        vm.$bus.$emit("addtocart",id, currentValue, title);
+      vm.$http.get(url).then((response) => {
+        const currentproduct = response.data.data.carts.filter((product) => title === product.product.title);
+        const currentValue = qty - currentproduct[0].qty;
+        vm.$bus.$emit('addtocart', id, currentValue, title);
       });
     },
     toOrdercheck() {
       this.$router.push({
-        name: "OrderCheck"
+        name: 'OrderCheck',
       });
-    }
+    },
   },
   created() {
     const vm = this;
     vm.gettoCar();
-    vm.$bus.$on("changecart", vm.gettoCar);
-  }
+    vm.$bus.$on('changecart', vm.gettoCar);
+  },
 };
 </script>
-

@@ -42,23 +42,23 @@ export default {
   data() {
     return {
       order: {
-        user: {}
+        user: {},
       },
-    }
+    };
   },
   methods: {
     getOrder(id) {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${id}`;
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         vm.order = response.data.order;
       });
-    }
+    },
   },
   created() {
     this.getOrder(this.$route.query.id);
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
@@ -75,5 +75,5 @@ li {
 p {
   display: inline-block;
   margin-bottom: 0;
-} 
+}
 </style>

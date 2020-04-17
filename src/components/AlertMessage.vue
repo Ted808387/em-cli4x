@@ -4,7 +4,7 @@
       :class="'alert-' + item.status"
       v-for="(item, i) in messages" :key="i">
       {{ item.message }}
-      <button type="button" class="close" @click="removeMessage(i)" aria-label="Close"> 
+      <button type="button" class="close" @click="removeMessage(i)" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -45,7 +45,7 @@ export default {
   },
   created() {
     const vm = this;
-    vm.$bus.$on('message:push', (message, status = 'warning') => {  
+    vm.$bus.$on('message:push', (message, status = 'warning') => {
       vm.updateMessage(message, status);
     });
   },

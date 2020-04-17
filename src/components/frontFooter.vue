@@ -12,13 +12,22 @@
               <h4 class="footer-text-color font-weight-bold footer-title">快速連結</h4>
               <div class="footer-middle footer-text-color">
                 <p>
-                  <router-link class="omouse footer-text-color text-color-change" to="/">首頁</router-link>
+                  <router-link class="omouse footer-text-color text-color-change"
+                   to="/">
+                    首頁
+                  </router-link>
                 </p>
                 <p>
-                  <router-link class="omouse footer-text-color text-color-change" to="/frontcoupon">最新資訊</router-link>
+                  <router-link class="omouse footer-text-color text-color-change"
+                   to="/frontcoupon">
+                    最新資訊
+                  </router-link>
                 </p>
                 <p>
-                  <router-link class="omouse footer-text-color text-color-change" to="/frontproduct">產品列表</router-link>
+                  <router-link class="omouse footer-text-color text-color-change"
+                   to="/frontproduct">
+                    產品列表
+                  </router-link>
                 </p>
               </div>
             </div>
@@ -37,17 +46,20 @@
                   <p>Sanmin Dist., Kaohsiung City 807, Taiwan (R.O.C.)</p>
                 </div>
                 <div class="col-md-5 footer-icon text-center">
-                  <a href="javascript:void(0)" class="mr-2 footer-text-color text-color-change d-inline-block d-md-block">
+                  <a href="javascript:void(0)"
+                   class="mr-2 footer-text-color text-color-change d-inline-block d-md-block">
                     <i class="fab fa-facebook fa-2x"></i>
                     <br />
                     <br />
                   </a>
-                  <a href="https://github.com/Ted808387" target="_blank" class="mr-2 footer-text-color text-color-change d-inline-block d-md-block">
+                  <a href="https://github.com/Ted808387" target="_blank"
+                   class="mr-2 footer-text-color text-color-change d-inline-block d-md-block">
                     <i class="fab fa-github fa-2x"></i>
                     <br />
                     <br />
                   </a>
-                  <a href="https://www.linkedin.com/in/youmin-ke-b20024172/" target="_blank" class="mr-2 footer-text-color text-color-change d-inline-block d-md-block">
+                  <a href="https://www.linkedin.com/in/youmin-ke-b20024172/" target="_blank"
+                   class="mr-2 footer-text-color text-color-change d-inline-block d-md-block">
                     <i class="fab fa-linkedin fa-2x"></i>
                     <br />
                     <br />

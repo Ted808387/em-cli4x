@@ -11,17 +11,17 @@
 
 <script>
 export default {
-  name: "Navbar",
+  name: 'Navbar',
   methods: {
     signout() {
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/logout`;
-      vm.$http.post(url).then(response => {
+      vm.$http.post(url).then((response) => {
         if (response.data.success) {
-          vm.$router.push("/login");
+          vm.$router.push('/login');
         }
       });
-    }
-  }
+    },
+  },
 };
 </script>

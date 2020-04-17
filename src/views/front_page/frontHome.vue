@@ -106,30 +106,29 @@
 </template>
 
 <script>
-import Slide from "../../components/FrontSlide";
-import Customer from "../../components/Customer";
-import $ from "jquery";
+import $ from 'jquery';
+import Slide from '../../components/FrontSlide.vue';
+import Customer from '../../components/Customer.vue';
 
 export default {
   components: {
     Slide,
-    Customer
+    Customer,
   },
   methods: {
     scrolldown() {
-      $("html,body").animate(
+      $('html,body').animate(
         {
-          scrollTop: $("#item1").offset().top - 100
+          scrollTop: $('#item1').offset().top - 100,
         },
-        600
+        600,
       );
-    }
+    },
   },
   created() {
     $('html,body').animate({
-      scrollTop: 0
+      scrollTop: 0,
     }, 0);
-  }
+  },
 };
 </script>
-

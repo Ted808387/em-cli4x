@@ -73,8 +73,8 @@
 </template>
 
 <script>
-import $ from "jquery";
-import frontpagination from "../../components/Pagination";
+import $ from 'jquery';
+import frontpagination from '../../components/Pagination.vue';
 
 export default {
   data() {
@@ -85,22 +85,22 @@ export default {
       pagination: {},
       status: {
         loading: {},
-        display: false
+        display: false,
       },
-      search: "",
-      displayitem: "",
+      search: '',
+      displayitem: '',
       Cart: [],
       favorites: [],
     };
   },
   components: {
-    frontpagination
+    frontpagination,
   },
   methods: {
     getproducts(page = 1) {
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`;
-      vm.$http.get(url).then(response => {
+      vm.$http.get(url).then((response) => {
         vm.allproducts = response.data.products;
         vm.products = vm.allproducts;
         vm.displaypage = true;
@@ -112,11 +112,11 @@ export default {
     selectmask(id) {
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
-      vm.$http.get(url).then(response => {
+      vm.$http.get(url).then((response) => {
         vm.allproducts = response.data.products;
-        vm.products = vm.allproducts.filter(function(item) {
+        vm.products = vm.allproducts.filter((item) => {
           vm.displayitem = id;
-          return item.category ===  id;
+          return item.category === id;
         });
         vm.displaypage = false;
         vm.scrollTop();
@@ -124,41 +124,39 @@ export default {
     },
     turnproduct(id, category) {
       this.$router.push({
-        name: "frontProductIn",
+        name: 'frontProductIn',
         query: {
-          id: id,
-          category: category
-        }
+          id,
+          category,
+        },
       });
     },
     addtoCar(id, qty, title) {
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       vm.status.loading = id;
-      vm.$http.get(url).then(response => {
+      vm.$http.get(url).then((response) => {
         vm.Cart = response.data.data;
-        let itemId = vm.Cart.carts.find(item => {
-          return item.product.title === title
-        });
+        const itemId = vm.Cart.carts.find((item) => item.product.title === title);
         let itemqty = 0;
-        if(itemId) {
-          const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${itemId.id}`;
-            vm.$http.delete(url).then(response => {
-            vm.$bus.$emit("changecart");
+        if (itemId) {
+          const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${itemId.id}`;
+          vm.$http.delete(api).then(() => {
+            vm.$bus.$emit('changecart');
           });
-          itemqty =+ itemId.qty;
+          itemqty = +itemId.qty;
         }
         const car = {
           product_id: id,
-          qty: itemqty + qty
+          qty: itemqty + qty,
         };
-        vm.$http.post(url, { data: car }).then(response => {
-          if(qty === 1) {
-            vm.$bus.$emit("message:push", response.data.message, "info");
+        vm.$http.post(url, { data: car }).then((data) => {
+          if (qty === 1) {
+            vm.$bus.$emit('message:push', data.data.message, 'info');
           }
-          vm.status.loading = "";
-          vm.$bus.$emit("changecart");
-        });       
+          vm.status.loading = '';
+          vm.$bus.$emit('changecart');
+        });
       });
     },
     searchprodust() {
@@ -168,27 +166,20 @@ export default {
       if (vm.search) {
         vm.displayitem = vm.search;
         const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
-        vm.$http.get(url).then(response => {
+        vm.$http.get(url).then((response) => {
           vm.allproducts = response.data.products;
-          var find = vm.allproducts.every(item => {
-            return (
-              String(item.title).indexOf(vm.search) === -1 &&
-              String(item.category).indexOf(vm.search) === -1
-            );
-          });
+          const find = vm.allproducts.every((item) => String(item.title).indexOf(vm.search) === -1 && String(item.category).indexOf(vm.search) === -1);
           if (!find) {
-            vm.products = vm.allproducts.filter(function(item) {
-              return (String(item.title).indexOf(vm.search) > -1 || String(item.category).indexOf(vm.search) > -1);
-            });
+            vm.products = vm.allproducts.filter((item) => String(item.title).indexOf(vm.search) > -1 || String(item.category).indexOf(vm.search) > -1);
           } else if (find) {
-            vm.$bus.$emit("message:push", "未搜尋到物品，請重新搜尋", "danger");
+            vm.$bus.$emit('message:push', '未搜尋到物品，請重新搜尋', 'danger');
           }
           vm.status.display = false;
         });
         vm.displaypage = false;
       } else {
         const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${1}`;
-        vm.$http.get(url).then(response => {
+        vm.$http.get(url).then((response) => {
           vm.products = response.data.products;
           vm.displaypage = true;
           vm.pagination = response.data.pagination;
@@ -198,36 +189,32 @@ export default {
       }
     },
     gettoFavorite() {
-      const vm = this; 
+      const vm = this;
       vm.favorites = JSON.parse(localStorage.getItem('Favorites')) || [];
     },
     addtoFavorite(item) {
       const vm = this;
-      if(vm.favorites.length > 0) {
-        let currentValue = vm.favorites.find(product => {
-          return item.id === product.id;
-        });
-        if(!currentValue) {
+      if (vm.favorites.length > 0) {
+        const currentValue = vm.favorites.find((product) => item.id === product.id);
+        if (!currentValue) {
           vm.favorites.push(item);
         } else {
-          vm.$bus.$emit("message:push", '此商品已收藏', "warning");
+          vm.$bus.$emit('message:push', '此商品已收藏', 'warning');
         }
       } else {
         vm.favorites.push(item);
       }
       localStorage.setItem('Favorites', JSON.stringify(vm.favorites));
-      vm.$bus.$emit("changeFavorites");
+      vm.$bus.$emit('changeFavorites');
     },
     scrollTop() {
       $('html,body').animate({
-            scrollTop: 0
+        scrollTop: 0,
       }, 0);
     },
     markfavorite(item) {
-      return this.favorites.some(product => {
-        return item.id === product.id
-      })
-    }
+      return this.favorites.some((product) => item.id === product.id);
+    },
   },
   created() {
     const vm = this;
@@ -237,12 +224,12 @@ export default {
       vm.getproducts();
     }
     vm.gettoFavorite();
-    vm.$bus.$off("addtocart");
-    vm.$bus.$on("deletefavorites", vm.gettoFavorite);
-    vm.$bus.$on("addtocart",(id, qty, title) => {
+    vm.$bus.$off('addtocart');
+    vm.$bus.$on('deletefavorites', vm.gettoFavorite);
+    vm.$bus.$on('addtocart', (id, qty, title) => {
       vm.addtoCar(id, qty, title);
     });
-  }
+  },
 };
 </script>
 

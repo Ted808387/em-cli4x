@@ -3,7 +3,8 @@
   <nav aria-label="FrontPage" class="FrontPage">
     <ul class="pagination front-font-size">
       <li class="page-item" :class="{ 'disabled' : !getpagination.has_pre }">
-        <a class="page-link" href="#" aria-label="Previous" @click.prevent="updatapage(getpagination.current_page - 1)">
+        <a class="page-link" href="#" aria-label="Previous"
+         @click.prevent="updatapage(getpagination.current_page - 1)">
           <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
@@ -16,7 +17,8 @@
         <a class="page-link" href="#" @click.prevent="updatapage(page)">{{ page }}</a>
       </li>
       <li class="page-item" :class="{ 'disabled' : !getpagination.has_next }">
-        <a class="page-link" href="#"  aria-label="Next"  @click.prevent="updatapage(getpagination.current_page + 1)">
+        <a class="page-link" href="#"  aria-label="Next"
+         @click.prevent="updatapage(getpagination.current_page + 1)">
           <span aria-hidden="true">&raquo;</span>
         </a>
       </li>
@@ -26,12 +28,12 @@
 
 <script>
 export default {
-  props: ["getpagination"],
+  props: ['getpagination'],
   methods: {
     updatapage(page) {
-      this.$emit("userpage", page);
-    }
-  }
+      this.$emit('userpage', page);
+    },
+  },
 };
 </script>
 

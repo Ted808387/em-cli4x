@@ -21,11 +21,12 @@
 
 <script>
 import $ from 'jquery';
+
 export default {
-    created() {
-      $('html,body').animate({
-            scrollTop: 0
-      }, 0);
-  }
-}
+  created() {
+    $('html,body').animate({
+      scrollTop: 0,
+    }, 0);
+  },
+};
 </script>

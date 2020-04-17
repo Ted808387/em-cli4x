@@ -92,33 +92,29 @@
 </template>
 
 <script>
-import $ from "jquery";
-
 export default {
   data() {
     return {
       form: {
-        //購物車訂購
         user: {
-          name: "",
-          email: "",
-          tel: "",
-          address: ""
+          name: '',
+          email: '',
+          tel: '',
+          address: '',
         },
-        message: "",
-        payment_method: ""
+        message: '',
+        payment_method: '',
       },
       Cart: {},
-      isLoading: false
+      isLoading: false,
     };
   },
   methods: {
     gettoCar() {
-      //把購物車資料在取回，不然頁面不會變動
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       vm.isLoading = true;
-      vm.$http.get(url).then(response => {
+      vm.$http.get(url).then((response) => {
         vm.Cart = response.data.data;
         vm.isLoading = false;
       });
@@ -127,30 +123,30 @@ export default {
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`;
       const order = vm.form;
-      vm.$refs.form.validate().then(success => {
+      vm.$refs.form.validate().then((success) => {
         if (success) {
-          vm.$http.post(url, { data: order }).then(response => {
-            vm.$bus.$emit("message:push", "已建立訂單", "success");
+          vm.$http.post(url, { data: order }).then((response) => {
+            vm.$bus.$emit('message:push', '已建立訂單', 'success');
             vm.isLoading = false;
             if (response.data.success) {
               vm.$router.push({
-                name: "OrderPayment",
+                name: 'OrderPayment',
                 query: {
-                  id: response.data.orderId
-                }
+                  id: response.data.orderId,
+                },
               });
             }
           });
         } else {
-          vm.$bus.$emit("message:push", "欄位不完整", "danger");
+          vm.$bus.$emit('message:push', '欄位不完整', 'danger');
         }
       });
-    }
+    },
   },
   computed: {},
   created() {
     this.gettoCar();
-  }
+  },
 };
 </script>
 

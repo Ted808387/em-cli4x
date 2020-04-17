@@ -94,10 +94,10 @@
 export default {
   data() {
     return {
-      orderId: "",
+      orderId: '',
       order: {
-        user: {}
-      }
+        user: {},
+      },
     };
   },
   methods: {
@@ -105,27 +105,27 @@ export default {
       const vm = this;
       vm.orderId = id;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${id}`;
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         vm.order = response.data.order;
       });
     },
     payOrder(id) {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${id}`;
-      vm.$http.post(api).then(response => {
+      vm.$http.post(api).then(() => {
         vm.$router.push({
           name: 'PaymentSuccessful',
           query: {
-            id: id
-          }
+            id,
+          },
         });
       });
-      vm.$bus.$emit("changecart");
-    }
+      vm.$bus.$emit('changecart');
+    },
   },
   created() {
     this.getOrder(this.$route.query.id);
-  }
+  },
 };
 </script>
 <style scoped>

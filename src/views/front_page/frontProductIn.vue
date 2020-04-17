@@ -63,7 +63,7 @@
               </li>
               <li class="product-list">
                 <i class="text-style text-primary font-weight-bold">我收到錯的商品或嚴重瑕疵商品如何處理?</i><br>
-                請於收到商品後3天內拍照與我們聯絡，逾期不受理唷! 
+                請於收到商品後3天內拍照與我們聯絡，逾期不受理唷!
               </li>
               <li class="product-list">
                 <i class="text-style text-primary font-weight-bold">訂單成立後可以取消訂單嗎?</i><br>
@@ -100,8 +100,7 @@
 </template>
 
 <script>
-import $ from "jquery";
-import recommend from '../../components/Recommend'
+import recommend from '../../components/Recommend.vue';
 
 export default {
   data() {
@@ -111,13 +110,13 @@ export default {
       product: {},
       itemcategory: '',
       status: {
-        loading: {}
+        loading: {},
       },
       Cart: [],
     };
   },
   components: {
-    recommend
+    recommend,
   },
   methods: {
     selectup() {
@@ -135,7 +134,7 @@ export default {
       vm.itemcategory = category;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`;
       vm.isLoading = true;
-      vm.$http.get(url).then(response => {
+      vm.$http.get(url).then((response) => {
         vm.product = response.data.product;
         vm.product.num = 0;
         vm.isLoading = false;
@@ -145,39 +144,37 @@ export default {
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       vm.status.loading = id;
-      vm.$http.get(url).then(response => {
+      vm.$http.get(url).then((response) => {
         vm.Cart = response.data.data;
-        let itemId = vm.Cart.carts.find(item => {
-          return item.product.title === title
-        });
+        const itemId = vm.Cart.carts.find((item) => item.product.title === title);
         let itemqty = 0;
         if (qty !== 0) {
-          if(itemId) { 
-            const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${itemId.id}`;
-            vm.$http.delete(url).then(response => {
-              vm.$bus.$emit("changecart");
+          if (itemId) {
+            const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${itemId.id}`;
+            vm.$http.delete(api).then(() => {
+              vm.$bus.$emit('changecart');
             });
-            itemqty =+ itemId.qty;
+            itemqty = +itemId.qty;
           }
           const car = {
             product_id: id,
-            qty: itemqty + qty
+            qty: itemqty + qty,
           };
-          vm.$http.post(url, { data: car }).then(response => {
-            vm.$bus.$emit("message:push", response.data.message, "info");
-            vm.status.loading = "";
-            vm.$bus.$emit("changecart");
+          vm.$http.post(url, { data: car }).then((data) => {
+            vm.$bus.$emit('message:push', data.data.message, 'info');
+            vm.status.loading = '';
+            vm.$bus.$emit('changecart');
           });
         } else {
-          vm.$bus.$emit("message:push", "請輸入數量", "danger");
+          vm.$bus.$emit('message:push', '請輸入數量', 'danger');
         }
       });
-    }
+    },
   },
   created() {
     const vm = this;
     vm.getproduct(vm.$route.query.id, vm.$route.query.category);
-  }
+  },
 };
 </script>
 

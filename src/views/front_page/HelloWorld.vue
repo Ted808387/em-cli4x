@@ -9,15 +9,15 @@
 
 
 <script>
-import frontNavbar from "../../components/FrontNavbar";
-import frontFooter from "../../components/FrontFooter";
-import Alert from "../../components/AlertMessage";
+import frontNavbar from '../../components/FrontNavbar.vue';
+import frontFooter from '../../components/FrontFooter.vue';
+import Alert from '../../components/AlertMessage.vue';
 
 export default {
   components: {
     frontNavbar,
     frontFooter,
-    Alert
-  }
+    Alert,
+  },
 };
 </script>

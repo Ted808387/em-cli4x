@@ -38,7 +38,8 @@
         <div class="imgbox">
           <div class="imgbox__inner imgbox__inner-4-3">
             <div class="image" :style="{ backgroundImage:'url(https://www.manuremanager.com/wp-content/uploads/2019/09/a0ad274371d8c5d818f6646bbedbce84-1024x683.jpg)' }">
-              <router-link class="product-show" :to="{ name: 'frontProduct', params: { id:'防毒面具' } }">
+              <router-link class="product-show"
+               :to="{ name: 'frontProduct', params: { id:'防毒面具' } }">
                 <h2 class="swiper-text">面具</h2>
               </router-link>
             </div>
@@ -52,24 +53,24 @@
 </template>
 
 <script>
-import { swiper, swiperSlide } from "vue-awesome-swiper";
-import "swiper/css/swiper.css";
+// import { swiper, swiperSlide } from "vue-awesome-swiper";
+import 'swiper/css/swiper.css';
 
 export default {
-  name: "carrousel",
+  name: 'carrousel',
   data() {
     return {
       swiperOptions: {
         notNextTick: true,
         autoplay: {
-          delay: 3000
+          delay: 3000,
         },
-        direction: "horizontal",
+        direction: 'horizontal',
         grabCursor: true,
         setWrapperSize: true,
         autoHeight: true,
         initialSlide: -1,
-        pagination: ".swiper-pagination",
+        pagination: '.swiper-pagination',
         paginationClickable: true,
         mousewheelControl: true,
         observeParents: true,
@@ -79,16 +80,16 @@ export default {
         spaceBetween: 20,
         breakpoints: {
           768: {
-            slidesPerView: 3
+            slidesPerView: 3,
           },
           576: {
-            slidesPerView: 2
+            slidesPerView: 2,
           },
           420: {
-            slidesPerView: 1
-          }
-        }
-      }
+            slidesPerView: 1,
+          },
+        },
+      },
     };
   },
 };
