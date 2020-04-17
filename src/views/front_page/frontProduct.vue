@@ -37,7 +37,8 @@
                 <div class="card-item">
                   <div class="card_favorite-cart">
                     <div class="favorite" @click.stop="addtoFavorite(item)">
-                      <i class="fas fa-heart fa-2x card-favorite"></i>
+                      <i class="fas fa-heart fa-2x card-favorite mark" v-if="markfavorite(item)"></i>
+                      <i class="fas fa-heart fa-2x card-favorite" v-else></i>
                     </div>
                     <div class="card-add-cart" @click.stop="addtoCar(item.id,1,item.title)">
                       <i class="fas fa-spinner fa-spin fa-2x" v-if="status.loading === item.id"></i>
@@ -89,7 +90,7 @@ export default {
       search: "",
       displayitem: "",
       Cart: [],
-      favorites: []
+      favorites: [],
     };
   },
   components: {
@@ -221,6 +222,11 @@ export default {
       $('html,body').animate({
             scrollTop: 0
       }, 0);
+    },
+    markfavorite(item) {
+      return this.favorites.some(product => {
+        return item.id === product.id
+      })
     }
   },
   created() {
@@ -230,6 +236,7 @@ export default {
     } else {
       vm.getproducts();
     }
+    vm.gettoFavorite();
     vm.$bus.$off("addtocart");
     vm.$bus.$on("deletefavorites", vm.gettoFavorite);
     vm.$bus.$on("addtocart",(id, qty, title) => {
@@ -246,7 +253,8 @@ export default {
     transition: all 0.4s;
   }
   .card-favorite:hover,
-  .card-add-cart:hover {
+  .card-add-cart:hover,
+  .card-favorite.mark {
     background-color: #306136;
     color: #fff !important;
     transition: all 0.5s;

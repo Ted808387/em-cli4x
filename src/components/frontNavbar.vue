@@ -91,7 +91,7 @@
                         </button>
                       </td>
                       <td>
-                        <div  class="product-img" :style="{backgroundImage: `url(${ item.product.imageUrl })`}"></div>
+                        <div  class="productimg" :style="{backgroundImage: `url(${ item.product.imageUrl })`}"></div>
                       </td>
                       <td class="align-middle">
                         {{ item.product.title }}
@@ -139,7 +139,7 @@
                         </button>
                       </td>
                       <td class="align-middle">
-                        <div  class="product-img" :style="{backgroundImage: `url(${ item.imageUrl })`}"></div>
+                        <div  class="productimg" :style="{backgroundImage: `url(${ item.imageUrl })`}"></div>
                       </td>
                       <td class="align-middle">
                         {{ item.title }}
