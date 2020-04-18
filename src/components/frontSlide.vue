@@ -4,10 +4,11 @@
       <swiper-slide>
         <div class="imgbox">
           <div class="imgbox__inner imgbox__inner-4-3">
-            <div class="image" :style="{ backgroundImage:'url(https://images.unsplash.com/photo-1584020961222-f72484ed4d9a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80)' }">
-              <router-link to="/frontproduct" class="product-show">
+            <div class="image"
+             :style="{ backgroundImage:'url(https://images.unsplash.com/photo-1584020961222-f72484ed4d9a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80)' }">
+              <div class="product-show omouse">
                 <h2 class="swiper-text">全商品</h2>
-              </router-link>
+              </div>
             </div>
           </div>
         </div>
@@ -15,10 +16,11 @@
       <swiper-slide>
         <div class="imgbox">
           <div class="imgbox__inner imgbox__inner-4-3">
-            <div class="image" :style="{ backgroundImage:'url(https://images.unsplash.com/photo-1580281780460-82d277b0e3f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80)' }">
-              <router-link class="product-show" :to="{ name: 'frontProduct', params: { id:'口罩' } }">
+            <div class="image"
+             :style="{ backgroundImage:'url(https://images.unsplash.com/photo-1580281780460-82d277b0e3f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80)' }">
+              <div class="product-show omouse">
                 <h2 class="swiper-text">口罩</h2>
-              </router-link>
+              </div>
             </div>
           </div>
         </div>
@@ -26,10 +28,11 @@
       <swiper-slide>
         <div class="imgbox">
           <div class="imgbox__inner imgbox__inner-4-3">
-            <div class="image" :style="{ backgroundImage:'url(https://priestsheetmetal.co.nz/wp-content/uploads/2019/05/priest_sheetmetal-welding-sheetmetal-christchurch_new_zealand-3840.jpg)' }">
-              <router-link class="product-show" :to="{ name: 'frontProduct', params: { id:'面罩' } }">
+            <div class="image"
+             :style="{ backgroundImage:'url(https://priestsheetmetal.co.nz/wp-content/uploads/2019/05/priest_sheetmetal-welding-sheetmetal-christchurch_new_zealand-3840.jpg)' }">
+              <div class="product-show omouse">
                 <h2 class="swiper-text">面罩</h2>
-              </router-link>
+              </div>
             </div>
           </div>
         </div>
@@ -37,11 +40,11 @@
       <swiper-slide>
         <div class="imgbox">
           <div class="imgbox__inner imgbox__inner-4-3">
-            <div class="image" :style="{ backgroundImage:'url(https://www.manuremanager.com/wp-content/uploads/2019/09/a0ad274371d8c5d818f6646bbedbce84-1024x683.jpg)' }">
-              <router-link class="product-show"
-               :to="{ name: 'frontProduct', params: { id:'防毒面具' } }">
+            <div class="image"
+             :style="{ backgroundImage:'url(https://www.manuremanager.com/wp-content/uploads/2019/09/a0ad274371d8c5d818f6646bbedbce84-1024x683.jpg)' }">
+              <div class="product-show omouse">
                 <h2 class="swiper-text">面具</h2>
-              </router-link>
+              </div>
             </div>
           </div>
         </div>
@@ -53,8 +56,9 @@
 </template>
 
 <script>
-// import { swiper, swiperSlide } from "vue-awesome-swiper";
 import 'swiper/css/swiper.css';
+
+let vm = null; // 給swiperOptions.on裡面的click使用，去觸發methods裡的toproducts
 
 export default {
   name: 'carrousel',
@@ -65,16 +69,23 @@ export default {
         autoplay: {
           delay: 3000,
         },
+        preventClicksPropagation: false,
         direction: 'horizontal',
         grabCursor: true,
         setWrapperSize: true,
         autoHeight: true,
         initialSlide: -1,
+        observer: true,
         pagination: '.swiper-pagination',
         paginationClickable: true,
         mousewheelControl: true,
         observeParents: true,
         loop: true,
+        on: {
+          click(e) {
+            vm.toproducts(e.target.textContent);
+          },
+        },
         debugger: true,
         touchMoveStopPropagation: true,
         spaceBetween: 20,
@@ -91,6 +102,26 @@ export default {
         },
       },
     };
+  },
+  methods: {
+    toproducts(kind) {
+      if (kind === '全商品') {
+        this.$router.push({ path: 'frontproduct' });
+      } else if (kind === '面具') {
+        this.$router.push({
+          name: 'frontProduct',
+          params: { id: '防毒面具' },
+        });
+      } else {
+        this.$router.push({
+          name: 'frontProduct',
+          params: { id: kind },
+        });
+      }
+    },
+  },
+  created() {
+    vm = this;
   },
 };
 </script>

@@ -1,5 +1,6 @@
 @import '~bootstrap/scss/functions';   //匯入bootstrap內的一些樣式
 @import './helpers/_variables.scss';     //匯入helpers內的_variables.scss自訂義變數樣式
+@import './helpers/_other.scss';
 @import '~bootstrap/scss/bootstrap';  //匯入bootstrap內的一些樣式
 // pages
 @import './pages/dashboard.scss';
@@ -12,7 +13,6 @@
 
 
 //component
-@import './component/other.scss';
 @import './component/slide.scss';
 @import './component/frontnavbar.scss';
 @import './component/frontfooter.scss';

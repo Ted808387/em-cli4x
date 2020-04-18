@@ -5,6 +5,17 @@
       <div class="productIn-bg"></div>
       <div class="productinfo mt-5">
         <div class="container">
+          <div class="productIn-position mb-3">
+            <h5 class="font-weight-bold">
+              <router-link to="/frontproduct" class="text-decoration-none">
+                商品
+              </router-link>&nbsp;/&nbsp;
+              <router-link class="text-decoration-none" :to="{ name: 'frontProduct', params: { id:product.category } }">
+                {{ product.category }}
+              </router-link>&nbsp;/&nbsp;
+              <i class="current-color text-style">{{ product.title }}</i>
+            </h5>
+          </div>
           <div class="row">
             <div class="col-md-8 pb-3">
               <div class="product-img-box">

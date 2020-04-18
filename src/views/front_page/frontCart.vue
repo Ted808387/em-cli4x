@@ -1,5 +1,6 @@
 <template>
   <div>
+    <loading :active.sync="isLoading"></loading>
     <section class="Cart">
       <div class="cart-bg"></div>
       <!-- Cart -->
@@ -76,7 +77,7 @@
                 </tr>
                 <tr class="text-primary" v-if="Cart.final_total !== Cart.total">
                   <td class="productimg"></td>
-                  <td colspan="4" class="text-right">Discounted price</td>
+                  <td colspan="4" class="text-right">折扣價</td>
                   <td class="text-right">{{ Cart.final_total | currency }}</td>
                 </tr>
               </tfoot>
@@ -116,6 +117,7 @@ export default {
     return {
       Cart: {},
       couponcode: '',
+      isLoading: false,
       status: {
         loading: false,
       },
@@ -136,6 +138,7 @@ export default {
             });
           }
         });
+        vm.isLoading = false;
       });
     },
     deleteCar(id) {
@@ -204,6 +207,7 @@ export default {
   },
   created() {
     const vm = this;
+    vm.isLoading = true;
     vm.gettoCar();
     vm.$bus.$on('changecart', vm.gettoCar);
   },

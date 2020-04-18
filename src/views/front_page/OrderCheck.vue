@@ -15,7 +15,7 @@
                 <ValidationProvider rules="required|email" v-slot="{ failed,errors }" name="email">
                   <div class="form-group">
                     <h4 class="mb-3 font-weight-bold">連繫資訊</h4>
-                    <label for="useremail">Email</label>
+                    <label for="useremail">Email&nbsp;<span class="text-danger font-weight-bold">*</span></label>
                     <!-- 如果無內容送出表單的話，可以在input內加上required去阻擋，Chrome會自動跳出錯誤訊息 -->
                     <input type="email" class="form-control" id="useremail" name="email" v-model="form.user.email" placeholder="請輸入 Email" :class="{'is-invalid' : failed}" required/>
                     <span class="text-danger" v-if="failed">{{ errors[0] }}</span>
@@ -23,29 +23,41 @@
                 </ValidationProvider>
                 <ValidationProvider rules="required" v-slot="{ failed }" name="name">
                   <div class="form-group">
-                    <label for="username">姓名</label>
+                    <label for="username">姓名&nbsp;<span class="text-danger font-weight-bold">*</span></label>
                     <input type="text" class="form-control" name="name" id="username" v-model="form.user.name" placeholder="輸入姓名" :class="{ 'is-invalid' : failed }" required/>
-                    <span class="text-danger" v-if="failed">姓名錯誤</span>
+                    <span class="text-danger" v-if="failed">姓名為必填</span>
                   </div>
                 </ValidationProvider>
                 <ValidationProvider rules="required" v-slot="{ failed }" name="tel">
                   <div class="form-group">
-                    <label for="usertel">電話</label>
+                    <label for="usertel">電話&nbsp;<span class="text-danger font-weight-bold">*</span></label>
                     <input type="tel" class="form-control" id="usertel" v-model="form.user.tel" placeholder="請輸入電話" name="tel" :class="{ 'is-invalid' : failed }" required/>
-                    <span v-if="failed" class="text-danger">電話錯誤</span>
+                    <span class="text-danger" v-if="failed">電話為必填</span>
                   </div>
                 </ValidationProvider>
 
                 <ValidationProvider rules="required" v-slot="{ failed }" name="address">
                   <div class="form-group">
-                    <label for="useraddress">地址</label>
+                    <label for="useraddress">地址&nbsp;<span class="text-danger font-weight-bold">*</span></label>
                     <input type="text" class="form-control" name="address" id="useraddress" v-model="form.user.address" placeholder="請輸入地址" :class="{ 'is-invalid' : failed }" required/>
                     <span class="text-danger" v-if="failed">地址欄位不得留空</span>
                   </div>
                 </ValidationProvider>
+                <ValidationProvider rules="required" v-slot="{ failed }" name="method">
+                  <div class="form-group">
+                    <label for="payment">付款方式&nbsp;<span class="text-danger font-weight-bold">*</span></label>
+                    <select id="payment" class="form-control" name="payment" v-model="form.user.method" :class="{ 'is-invalid' : failed }" required>
+                      <option selected disabled hidden>{{ form.user.method }}</option>
+                      <option>貨到付款</option>
+                      <option>超商取貨付款</option>
+                      <option>ATM轉帳</option>
+                      <option>超商代碼繳費</option>
+                    </select>
+                  </div>
+                </ValidationProvider>
                 <div class="form-group">
                   <label for="comment">其他</label>
-                  <textarea name="" id="comment" class="form-control" cols="30" rows="10" v-model="form.message" placeholder="留言其他建議" style="resize:none;"></textarea>
+                  <textarea name="" id="comment" class="form-control" cols="30" rows="10" v-model="form.user.message" placeholder="留言其他建議" style="resize:none;"></textarea>
                 </div>
               </form>
             </ValidationObserver>
@@ -73,7 +85,7 @@
                     </td>
                     <td class="text-right">
                       <h5 v-if="Cart.total === Cart.final_total">{{ Cart.total | currency }}</h5>
-                      <h5 class="text-primary font-weight-bold" v-if="Cart.total">折扣&nbsp;&nbsp;&nbsp;{{ Cart.final_total | currency }}</h5>
+                      <h5 class="text-primary font-weight-bold" v-if="Cart.total !== Cart.final_total">折扣&nbsp;&nbsp;&nbsp;{{ Cart.final_total | currency }}</h5>
                     </td>
                   </tr>
                   <tr class="text-center">
@@ -101,9 +113,9 @@ export default {
           email: '',
           tel: '',
           address: '',
+          message: '',
+          method: '選擇付款方式',
         },
-        message: '',
-        payment_method: '',
       },
       Cart: {},
       isLoading: false,

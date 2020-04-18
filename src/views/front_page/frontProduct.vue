@@ -1,5 +1,6 @@
 <template>
   <div>
+    <loading :active.sync="isLoading"></loading>
     <section class="product">
       <div class="product-bg"></div>
       <div class="allproducts mt-5">
@@ -83,6 +84,7 @@ export default {
       displaypage: false,
       products: [],
       pagination: {},
+      isLoading: false,
       status: {
         loading: {},
         display: false,
@@ -106,6 +108,7 @@ export default {
         vm.displaypage = true;
         vm.pagination = response.data.pagination;
         vm.displayitem = '全商品';
+        vm.isLoading = false;
         vm.scrollTop();
       });
     },
@@ -120,6 +123,7 @@ export default {
         });
         vm.displaypage = false;
         vm.scrollTop();
+        vm.isLoading = false;
       });
     },
     turnproduct(id, category) {
@@ -218,6 +222,7 @@ export default {
   },
   created() {
     const vm = this;
+    vm.isLoading = true;
     if (vm.$route.params.id) {
       vm.selectmask(vm.$route.params.id);
     } else {

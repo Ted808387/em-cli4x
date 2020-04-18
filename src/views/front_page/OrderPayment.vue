@@ -37,6 +37,14 @@
                       <th>收件人地址</th>
                       <td>{{ order.user.address }}</td>
                     </tr>
+                    <tr>
+                      <th>付款方式</th>
+                      <td>{{ order.user.method }}</td>
+                    </tr>
+                    <tr v-if="order.user.message">
+                      <th>其他留言</th>
+                      <td>{{ order.user.message }}</td>
+                    </tr>
                     <tr class="th-height">
                       <th>付款狀態</th>
                       <td>
@@ -107,6 +115,7 @@ export default {
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${id}`;
       vm.$http.get(api).then((response) => {
         vm.order = response.data.order;
+        console.log(vm.order);
       });
     },
     payOrder(id) {

@@ -7,9 +7,6 @@
   .footer-card {
     height: 100%;
   }
-  .footer-text-color {
-    color: #e7e7e7;
-  }
   .footer-head {
     display: block;
     line-height: 30px;
@@ -24,7 +21,7 @@
     transition: color 0.4s;
   }
   .footer-text-color.text-color-change:hover {
-    color: #0F573F !important;
+    color: #494949 !important;
     text-decoration: none;
     transition: color 0.4s;
   }
