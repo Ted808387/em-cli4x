@@ -14,14 +14,15 @@
 </template>
 
 <script>
-import sidebar from "../../components/Sidebar";
-import navbar from "../../components/Navbar";
-import Alert from "../../components/AlertMessage";
+import sidebar from '../../components/Sidebar.vue';
+import navbar from '../../components/Navbar.vue';
+import Alert from '../../components/AlertMessage.vue';
+
 export default {
   components: {
     sidebar,
     navbar,
-    Alert
-  }
+    Alert,
+  },
 };
 </script>

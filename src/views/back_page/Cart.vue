@@ -82,7 +82,7 @@
 
         <div class="form-group">
           <label for="comment">留言</label>
-          <textarea name="" id="comment" class="form-control form_textarea" cols="30" rows="10" v-model="form.message"></textarea>
+          <textarea name='' id="comment" class="form-control form_textarea" cols="30" rows="10" v-model="form.message"></textarea>
         </div>
         <div class="text-right">
           <button class="btn btn-danger">送出訂單</button>
@@ -93,26 +93,26 @@
 </template>
 
 <script>
-import $ from "jquery";
+import $ from 'jquery';
 
 export default {
   data() {
     return {
       status: {
-        loading: {}
+        loading: {},
       },
       isLoading: false,
       Cart: {},
-      couponcode: "",
+      couponcode: '',
       form: {
         user: {
-          name: "",
-          email: "",
-          tel: "",
-          address: ""
+          name: '',
+          email: '',
+          tel: '',
+          address: '',
         },
-        message: ""
-      }
+        message: '',
+      },
     };
   },
   methods: {
@@ -122,11 +122,11 @@ export default {
       vm.status.loading = id;
       const car = {
         product_id: id,
-        qty //可直接用一個變數代替，直接將值帶進來
+        qty, // 可直接用一個變數代替，直接將值帶進來
       };
-      vm.$http.post(url, { data: car }).then(response => {
-        vm.status.loading = "";
-        $("#productModal").modal("hide");
+      vm.$http.post(url, { data: car }).then(() => {
+        vm.status.loading = '';
+        $('#productModal').modal('hide');
         vm.gettoCar();
       });
     },
@@ -134,7 +134,7 @@ export default {
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       vm.isLoading = true;
-      vm.$http.get(url).then(response => {
+      vm.$http.get(url).then((response) => {
         vm.Cart = response.data.data;
         vm.isLoading = false;
       });
@@ -143,7 +143,7 @@ export default {
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
       vm.isLoading = true;
-      vm.$http.delete(url).then(response => {
+      vm.$http.delete(url).then(() => {
         vm.isLoading = false;
         vm.gettoCar();
       });
@@ -152,10 +152,10 @@ export default {
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`;
       const coupon = {
-        code: vm.couponcode
+        code: vm.couponcode,
       };
       vm.isLoading = true;
-      vm.$http.post(url, { data: coupon }).then(response => {
+      vm.$http.post(url, { data: coupon }).then(() => {
         vm.isLoading = false;
         vm.gettoCar();
       });
@@ -164,25 +164,25 @@ export default {
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`;
       const order = vm.form;
-      vm.$refs.form.validate().then(success => {
+      vm.$refs.form.validate().then((success) => {
         if (success) {
-          vm.$http.post(url, { data: order }).then(response => {
-            //將form傳到api
-            vm.$bus.$emit("message:push", "訂單建立成功", "success");
+          vm.$http.post(url, { data: order }).then((response) => {
+            // 將form傳到api
+            vm.$bus.$emit('message:push', '訂單建立成功', 'success');
             if (response.data.success) {
               vm.$router.push(
-                `/Dashboard/Customer_checkout/${response.data.orderId}`
-              ); //成功後轉到結帳頁面
+                `/Dashboard/Customer_checkout/${response.data.orderId}`,
+              ); // 成功後轉到結帳頁面
             }
           });
         } else {
-          vm.$bus.$emit("message:push", "欄位不完整", "danger");
+          vm.$bus.$emit('message:push', '欄位不完整', 'danger');
         }
       });
-    }
+    },
   },
   created() {
     this.gettoCar();
-  }
+  },
 };
 </script>

@@ -77,8 +77,8 @@
 
 
 <script>
-import $ from "jquery";
-import pagination from "../../components/Pagination";
+import $ from 'jquery';
+import pagination from '../../components/Pagination.vue';
 
 export default {
   data() {
@@ -88,19 +88,19 @@ export default {
       product: {},
       pagination: {},
       status: {
-        loading: {}
-      }
+        loading: {},
+      },
     };
   },
   components: {
-    pagination
+    pagination,
   },
   methods: {
     getproducts(page) {
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`;
       vm.isLoading = true;
-      vm.$http.get(url).then(response => {
+      vm.$http.get(url).then((response) => {
         vm.products = response.data.products;
         vm.pagination = response.data.pagination;
         vm.isLoading = false;
@@ -110,10 +110,10 @@ export default {
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`;
       vm.status.loading = id;
-      vm.$http.get(url).then(response => {
+      vm.$http.get(url).then((response) => {
         vm.product = response.data.product;
-        $("#productModal").modal("show");
-        vm.status.loading = "";
+        $('#productModal').modal('show');
+        vm.status.loading = '';
         vm.product.num = 0;
       });
     },
@@ -123,11 +123,11 @@ export default {
       vm.status.loading = id;
       const car = {
         product_id: id,
-        qty
+        qty,
       };
-      vm.$http.post(url, { data: car }).then(response => {
-        vm.status.loading = "";
-        $("#productModal").modal("hide");
+      vm.$http.post(url, { data: car }).then(() => {
+        vm.status.loading = '';
+        $('#productModal').modal('hide');
         vm.gettoCar();
       });
     },
@@ -135,14 +135,14 @@ export default {
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       vm.isLoading = true;
-      vm.$http.get(url).then(response => {
+      vm.$http.get(url).then((response) => {
         vm.Cart = response.data.data;
         vm.isLoading = false;
       });
-    }
+    },
   },
   created() {
     this.getproducts();
-  }
+  },
 };
 </script>

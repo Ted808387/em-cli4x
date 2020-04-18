@@ -80,8 +80,8 @@
 
 
 <script>
-import $ from "jquery";
-import pagination from "../../components/Pagination";
+import $ from 'jquery';
+import pagination from '../../components/Pagination.vue';
 
 export default {
   data() {
@@ -89,52 +89,51 @@ export default {
       orders: [],
       pagination: {},
       isLoading: false,
-      updata: {}
+      updata: {},
     };
   },
   components: {
-    pagination
+    pagination,
   },
   methods: {
     getOrder(page = 1) {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/orders?page=${page}`;
       vm.isLoading = true;
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         vm.pagination = response.data.pagination;
         vm.orders = response.data.orders;
         vm.isLoading = false;
       });
     },
     openOrder(item) {
-      this.updata = Object.assign({}, item); //item資料不要傳參考，不然會將資料洗掉，把原本有在的資料替換就好
-      $("#OrderModal").modal("show");
+      this.updata = Object.assign({}, ...item); // item資料不要傳參考，不然會將資料洗掉，把原本有在的資料替換就好
+      $('#OrderModal').modal('show');
     },
     updataOrder() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/order/${vm.orders.id}`;
       vm.isLoading = true;
-      vm.$http.put(api, { data: vm.updata }).then(response => {
+      vm.$http.put(api, { data: vm.updata }).then(() => {
         vm.isLoading = false;
         vm.getOrder();
-        $("#OrderModal").modal("hide");
+        $('#OrderModal').modal('hide');
       });
-    }
+    },
   },
   computed: {
     sortOrder() {
       const vm = this;
-      let neworder = vm.orders.sort((a, b) => {
-        let A = a.is_paid ? 1 : 0;
-        let B = b.is_paid ? 1 : 0;
+      const neworder = vm.orders.sort((a, b) => {
+        const A = a.is_paid ? 1 : 0;
+        const B = b.is_paid ? 1 : 0;
         return A - B;
       });
       return neworder;
-    }
+    },
   },
   created() {
     this.getOrder();
-  }
+  },
 };
 </script>
-

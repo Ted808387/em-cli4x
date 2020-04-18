@@ -56,16 +56,16 @@
       </form>
     </div>
   </div>
-</template>    
+</template>
 
 <script>
 export default {
   data() {
     return {
-      orderId: "",
+      orderId: '',
       order: {
-        user: {}
-      }
+        user: {},
+      },
     };
   },
   methods: {
@@ -73,7 +73,7 @@ export default {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${this.orderId}`;
       vm.isLoading = true;
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         vm.order = response.data.order;
         vm.isLoading = false;
       });
@@ -82,15 +82,15 @@ export default {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${this.orderId}`;
       vm.isLoading = true;
-      vm.$http.post(api).then(response => {
+      vm.$http.post(api).then(() => {
         vm.isLoading = false;
         vm.getOder();
       });
-    }
+    },
   },
   created() {
-    this.orderId = this.$route.params.orderId; //取得網址後段ID
+    this.orderId = this.$route.params.orderId;// 取得網址後段ID
     this.getOder();
-  }
+  },
 };
 </script>

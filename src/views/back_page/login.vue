@@ -27,26 +27,26 @@
 
 <script>
 export default {
-  name: "Login",
+  name: 'Login',
   data() {
     return {
       user: {
-        username: "",
-        password: ""
-      }
+        username: '',
+        password: '',
+      },
     };
   },
   methods: {
     signin() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/admin/signin`;
-      vm.$http.post(api, vm.user).then(response => {
+      vm.$http.post(api, vm.user).then((response) => {
         if (response.data.success) {
-          vm.$router.push("/Dashboard/Products");
+          vm.$router.push('/Dashboard/Products');
         }
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -115,7 +115,6 @@ export default {
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${id}`;
       vm.$http.get(api).then((response) => {
         vm.order = response.data.order;
-        console.log(vm.order);
       });
     },
     payOrder(id) {

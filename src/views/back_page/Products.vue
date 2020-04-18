@@ -145,8 +145,8 @@
 </template>
 
 <script>
-import $ from "jquery";
-import pagination from "../../components/Pagination";
+import $ from 'jquery';
+import pagination from '../../components/Pagination.vue';
 
 export default {
   data() {
@@ -156,20 +156,20 @@ export default {
       isNew: false,
       isLoading: false,
       status: {
-        fileUploading: false
+        fileUploading: false,
       },
-      pagination: {}
+      pagination: {},
     };
   },
   components: {
-    pagination
+    pagination,
   },
   methods: {
     getproducts(page = 1) {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`;
       vm.isLoading = true;
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         vm.products = response.data.products;
         vm.isLoading = false;
         vm.pagination = response.data.pagination;
@@ -180,47 +180,47 @@ export default {
         this.tempProduct = {};
         this.isNew = true;
       } else {
-        this.tempProduct = Object.assign({}, item);
+        this.tempProduct = Object.assign({}, ...item);
         this.isNew = false;
       }
-      $("#productModal").modal("show");
+      $('#productModal').modal('show');
     },
     updataProduct() {
       const vm = this;
       let api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product`;
-      let httpMethod = "post";
+      let httpMethod = 'post';
       if (!vm.isNew) {
         api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
-        httpMethod = "put";
+        httpMethod = 'put';
       }
-      vm.$http[httpMethod](api, { data: vm.tempProduct }).then(response => {
+      vm.$http[httpMethod](api, { data: vm.tempProduct }).then((response) => {
         if (response.data.success) {
-          $("#productModal").modal("hide");
+          $('#productModal').modal('hide');
           vm.getproducts();
-          vm.$bus.$emit("message:push", "新增產品成功");
+          vm.$bus.$emit('message:push', '新增產品成功');
         } else {
-          $("#productModal").modal("hide");
+          $('#productModal').modal('hide');
           vm.getproducts();
-          vm.$bus.$emit("message:push", "新增產品失敗");
+          vm.$bus.$emit('message:push', '新增產品失敗');
         }
       });
     },
     deletModals(item) {
       this.tempProduct = item;
-      $("#delProductModal").modal("show");
+      $('#delProductModal').modal('show');
     },
     deletProduct() {
       const vm = this;
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`; //api指到要刪除的產品id
-      vm.$http.delete(api).then(response => {
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`; // api指到要刪除的產品id
+      vm.$http.delete(api).then((response) => {
         if (response.data.success) {
-          $("#delProductModal").modal("hide");
+          $('#delProductModal').modal('hide');
           vm.getproducts();
-          vm.$bus.$emit("message:push", response.data.message);
+          vm.$bus.$emit('message:push', response.data.message);
         } else {
-          $("#delProductModal").modal("hide");
+          $('#delProductModal').modal('hide');
           vm.getproducts();
-          vm.$bus.$emit("message:push", "刪除失敗");
+          vm.$bus.$emit('message:push', '刪除失敗');
         }
       });
     },
@@ -229,26 +229,26 @@ export default {
       const uploadedFile = vm.$refs.files.files[0];
       vm.status.fileUploading = true;
       const formdata = new FormData();
-      formdata.append("file-to-upload", uploadedFile); //append('要傳入的表單名稱', 傳入的資料)
+      formdata.append('file-to-upload', uploadedFile); // append('要傳入的表單名稱', 傳入的資料)
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/upload`;
       vm.$http
         .post(url, formdata, {
           headers: {
-            "Content-Type": "multipart/form-data"
-          }
+            'Content-Type': 'multipart/form-data',
+          },
         })
-        .then(response => {
+        .then((response) => {
           vm.status.fileUploading = false;
           if (response.data.success) {
-            vm.$set(vm.tempProduct, "imageUrl", response.data.imageUrl); 
+            vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl);
           } else {
-            vm.$bus.$emit("message:push", response.data.message, "danger");
+            vm.$bus.$emit('message:push', response.data.message, 'danger');
           }
         });
-    }
+    },
   },
   created() {
     this.getproducts();
-  }
+  },
 };
 </script>

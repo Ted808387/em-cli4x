@@ -192,7 +192,6 @@ export default {
     change(id, qty, title) {
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      console.log(qty);
       vm.$http.get(url).then((response) => {
         const currentproduct = response.data.data.carts.filter((product) => title === product.product.title);
         const currentValue = qty - currentproduct[0].qty;

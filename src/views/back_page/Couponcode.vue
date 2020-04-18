@@ -84,8 +84,8 @@
 </template>
 
 <script>
-import $ from "jquery";
-import pagination from "../../components/Pagination";
+import $ from 'jquery';
+import pagination from '../../components/Pagination.vue';
 
 export default {
   data() {
@@ -94,18 +94,18 @@ export default {
       addCouponcode: {},
       isNew: false,
       isLoading: false,
-      pagination: {}
+      pagination: {},
     };
   },
   components: {
-    pagination
+    pagination,
   },
   methods: {
     getcoupon(page = 1) {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons?page=${page}`;
       vm.isLoading = true;
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         vm.couponcode = response.data.coupons;
         vm.pagination = response.data.pagination;
         vm.isLoading = false;
@@ -119,24 +119,24 @@ export default {
         this.addCouponcode = Object.assign({}, item);
         this.isNew = false;
       }
-      $("#couponModal").modal("show");
+      $('#couponModal').modal('show');
     },
     createdCoupon() {
       const vm = this;
       let api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon`;
-      let httpMethod = "post";
+      let httpMethod = 'post';
       vm.isLoading = true;
       if (!vm.isNew) {
         api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.addCouponcode.id}`;
-        httpMethod = "put";
+        httpMethod = 'put';
       }
-      vm.$http[httpMethod](api, { data: vm.addCouponcode }).then(response => {
+      vm.$http[httpMethod](api, { data: vm.addCouponcode }).then((response) => {
         vm.isLoading = false;
         if (response.data.success) {
-          $("#couponModal").modal("hide");
+          $('#couponModal').modal('hide');
           vm.getcoupon();
         } else {
-          $("#couponModal").modal("hide");
+          $('#couponModal').modal('hide');
           vm.getcoupon();
         }
       });
@@ -145,15 +145,15 @@ export default {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${id}`;
       vm.isLoading = true;
-      vm.$http.delete(api).then(response => {
+      vm.$http.delete(api).then(() => {
         vm.isLoading = false;
         vm.getcoupon();
-        vm.$bus.$emit("message:push", "刪除優惠卷成功", "success");
+        vm.$bus.$emit('message:push', '刪除優惠卷成功', 'success');
       });
-    }
+    },
   },
   created() {
     this.getcoupon();
-  }
+  },
 };
 </script>
