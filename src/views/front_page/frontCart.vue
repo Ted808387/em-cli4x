@@ -53,7 +53,7 @@
                   <td class="text-center align-middle">{{ item.product.price | currency }}</td>
                   <td class="text-center align-middle">
                     <div class="select-quantity">
-                      <input class="select-up select-outline bg-white"
+                      <input class="select-down select-outline bg-white"
                        type="button" value="-"
                        @click="select(item.product.id, -1, item.product.title)">
                       <input type="number"
@@ -61,7 +61,7 @@
                        placeholder="1" min="1" max="100"
                        v-model.number="item.qty"
                        @keyup.13="change(item.product.id, item.qty, item.product.title)">
-                      <input class="select-down select-outline bg-white"
+                      <input class="select-up select-outline bg-white"
                        type="button" value="+"
                        @click="select(item.product.id, 1, item.product.title)">
                     </div>
@@ -84,7 +84,7 @@
             </table>
           </div>
           <div class="col-sm-12">
-            <table class="coupon table float-md-right mx-sm-auto" v-if="Cart.total !== 0">
+            <table class="coupon table float-md-right mx-auto" v-if="Cart.total !== 0">
               <div class="input-group mb-3 input-group-md">
                 <input type="text" class="coupon-code form-control"
                  placeholder="請輸入優惠碼"

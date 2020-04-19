@@ -53,28 +53,6 @@
     transition: all 0.3s;
     animation-name: stopcolor;
   }
-  @keyframes stopcolor {
-    0% {
-      opacity: 1;
-    }
-  }
-  @keyframes scroll {
-    0% {
-      opacity: 1;
-    }
-    25% {
-      opacity: 0.2;
-    }
-    50% {
-      opacity: 0.6;
-    }
-    75% {
-      opacity: 0.8;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
   /* Image */
   .image1 {
     width: 100%;
@@ -125,11 +103,6 @@
     background-position: center;
     background-size: cover;
     display: block;
-  }
-  @media (max-width: 576px) {
-    .discount-title-text {
-      font-size: 48px;
-    }
   }
   .discount-btn {
     width: 200px;

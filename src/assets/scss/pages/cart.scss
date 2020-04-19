@@ -32,19 +32,11 @@
   .coupon {
     width: 300px;
   }
-  @media (max-width: 768px) {
-    .coupon {
-      width: 100%;
-    }
-    .productimg {
-      display: none;
-    }
-  }
   .quantity {
     text-align: center;
     border: 1px solid #a9a9a9;
   }
-  .select-up {
+  .select-down {
     display: inline-block;
     border: 1px solid gray;
     font-size: 16px;
@@ -55,7 +47,7 @@
     border-bottom-left-radius: 3px;
     margin-top: 1px;
   }
-  .select-down {
+  .select-up {
     display: inline-block;
     border: 1px solid gray;
     font-size: 16px;

@@ -1,0 +1,100 @@
+$large-size: 1200px;
+$medium-size: 992px;
+$small-size: 768px;
+$x-small-size: 576px;
+$xx-small-size: 320px;
+
+@mixin xl() {
+        @media screen and (max-width: $large-size){
+            @content;
+    }
+}
+@mixin lg() {
+    @media screen and (max-width: $medium-size){
+        @content;
+    }
+}
+@mixin md() {
+    @media screen and (max-width: $small-size){
+        @content;
+    }
+}
+@mixin sm() {
+    @media screen and (max-width: $x-small-size){
+        @content;
+    }
+}
+@mixin xs() {
+    @media screen and (max-width: $xx-small-size){
+        @content;
+    }
+}
+
+
+/* Cart */
+@include md() {
+    .coupon {
+      width: 100%;
+    }
+    .productimg {
+      display: none;
+    }
+  }
+@include sm() {
+    .select-quantity {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+    .select-down {
+        display: block !important;
+        width: 40px !important;
+        margin-top: -1px !important;
+        border-right: 1px solid gray !important;
+        border-top: none !important;
+        border-bottom-right-radius: 3px;
+        border-top-left-radius: 0 !important;
+    }
+    .select-up {
+        display: block !important;
+        width: 40px !important;
+        border-left: 1px solid gray !important;
+        border-bottom: none !important;
+        border-bottom-right-radius: 0 !important;
+        border-top-left-radius: 3px !important;
+    }
+    .quantity {
+        width: 40px;
+    }
+}
+/* Coupon */
+@include sm() {
+    .couponcode {
+      font-size: 60px;
+    }
+    .couponcode-title {
+      padding-left: 0;
+      text-align: center;
+    }
+    .Coupon {
+      font-size: 24px;
+    }
+  }
+/* Products */
+@include lg() {
+    .itemtitle {
+      font-size: 16px;
+    }
+  }
+/* Customer */
+@include sm() {
+    .customer_comment {
+      font-size: 1.8vw;
+    }
+  }
+/* Slider */
+@include sm() {
+    .swiper-text {
+      font-size: 6vw !important;
+    }
+  }

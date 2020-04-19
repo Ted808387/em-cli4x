@@ -4,7 +4,7 @@
     <form class="form-signin" @submit.prevent="signin">
       <div class="form-login">
         <div class="text-center mb-4">
-          <h1 class="h3 mb-3 font-weight-normal font-weight-bold">Login</h1>
+          <h1 class="mb-3 font-weight-normal font-weight-bold text-white">Login</h1>
           <a href="https://caniuse.com/#feat=css-placeholder-shown"></a>
         </div>
 

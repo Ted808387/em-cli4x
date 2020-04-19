@@ -10,7 +10,7 @@
               <div class="itemtitle pl-4 font-weight-bold">
                 <div>產品列表</div>
               </div>
-              <ul class="pl-0 font-weight-bold list-ul">
+              <ul class="pl-0 font-weight-bold list-ul list-unstyled">
                 <li class="list-li" @click="getproducts" :class="{ 'list-li-focus':displayitem === '全商品' }">
                   <div>全款商品</div>
                 </li>
