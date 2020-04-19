@@ -1,5 +1,6 @@
 <template>
   <div>
+    <loading :active.sync="isLoading"></loading>
     <section class="conpon page-expand">
       <div class="conpon-bg"></div>
       <div class="coupon-title">
@@ -25,7 +26,19 @@
 import $ from 'jquery';
 
 export default {
+  data() {
+    return {
+      isLoading: false,
+    };
+  },
   created() {
+    const vm = this;
+    vm.isLoading = true;
+    (function () {
+      setTimeout(() => {
+        vm.isLoading = false;
+      }, 800);
+    }());
     $('html,body').animate({
       scrollTop: 0,
     }, 0);

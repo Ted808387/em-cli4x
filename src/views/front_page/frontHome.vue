@@ -1,5 +1,6 @@
 <template>
   <div>
+    <loading :active.sync="isLoading"></loading>
     <section class="home">
       <div class="bg mb-3"></div>
       <div class="header-text text-center text-white">
@@ -111,6 +112,11 @@ import Slide from '../../components/FrontSlide.vue';
 import Customer from '../../components/Customer.vue';
 
 export default {
+  data() {
+    return {
+      isLoading: false,
+    };
+  },
   components: {
     Slide,
     Customer,
@@ -126,6 +132,13 @@ export default {
     },
   },
   created() {
+    const vm = this;
+    vm.isLoading = true;
+    (function () {
+      setTimeout(() => {
+        vm.isLoading = false;
+      }, 900);
+    }());
     $('html,body').animate({
       scrollTop: 0,
     }, 0);

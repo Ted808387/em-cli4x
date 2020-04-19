@@ -151,9 +151,9 @@ transition: all 0.4s;
   transition: color 0.4s;
 }
 .modal-cart {
-  position: fixed;
+  position: absolute;
   top: 70px;
-  right: 250px;
+  right: 70px;
   padding: 10px;
   background-color: #fff;
   border-radius: 5px;
@@ -172,7 +172,7 @@ transition: all 0.4s;
 .modal-favorite {
   position: absolute;
   top: 70px;
-  right: 140px;
+  right: 120px;
   padding: 10px;
   background-color: #fff;
   border-radius: 5px;

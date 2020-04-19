@@ -20,11 +20,14 @@ axios.defaults.withCredentials = false;
 Vue.config.productionTip = false;
 Vue.use(VueAxios, axios);
 Vue.component('Loading', Loading);
+// filter
 Vue.filter('currency', currencyFilter);
 Vue.filter('Date', DateFilter);
+// validate
 Vue.component('ValidationObserver', ValidationObserver);
 Vue.component('ValidationProvider', ValidationProvider);
 localize('zh_TW', TW);
+// swiper
 Vue.use(VueAwesomeSwiper);
 
 
@@ -39,7 +42,7 @@ export default {
 
 new Vue({
   router,
-  render: h => h(App),
+  render: (h) => h(App),
 }).$mount('#app');
 
 router.beforeEach((to, from, next) => {
