@@ -9,9 +9,9 @@
               <div class="customer_comment text-white">
                 <p>
                   <i class="far fa-star"></i>
-                  &nbsp;{{ customer1.rating }}
+                  &nbsp;{{ comment1.rating }}
                 </p>
-                <p class="customer_comment_text">{{ customer1.text }}</p>
+                <p class="customer_comment_text">{{ comment1.text }}</p>
               </div>
             </div>
           </div>
@@ -24,9 +24,9 @@
               <div class="customer_comment text-white">
                 <p>
                   <i class="far fa-star"></i>
-                  &nbsp;{{ customer2.rating }}
+                  &nbsp;{{ comment2.rating }}
                 </p>
-                <p class="customer_comment_text">{{ customer2.text }}</p>
+                <p class="customer_comment_text">{{ comment2.text }}</p>
               </div>
             </div>
           </div>
@@ -39,9 +39,9 @@
               <div class="customer_comment text-white">
                 <p>
                   <i class="far fa-star"></i>
-                  &nbsp;{{ customer3.rating }}
+                  &nbsp;{{ comment3.rating }}
                 </p>
-                <p class="customer_comment_text">{{ customer3.text }}</p>
+                <p class="customer_comment_text">{{ comment3.text }}</p>
               </div>
             </div>
           </div>
@@ -54,9 +54,9 @@
               <div class="customer_comment text-white">
                 <p>
                   <i class="far fa-star"></i>
-                  &nbsp;{{ customer4.rating }}
+                  &nbsp;{{ comment4.rating }}
                 </p>
-                <p class="customer_comment_text">{{ customer4.text }}</p>
+                <p class="customer_comment_text">{{ comment4.text }}</p>
               </div>
             </div>
           </div>
@@ -71,9 +71,9 @@
               <div class="customer_comment text-white">
                 <p>
                   <i class="far fa-star"></i>
-                  &nbsp;{{ customer5.rating }}
+                  &nbsp;{{ comment5.rating }}
                 </p>
-                <p class="customer_comment_text">{{ customer5.text }}</p>
+                <p class="customer_comment_text">{{ comment5.text }}</p>
               </div>
             </div>
           </div>
@@ -86,9 +86,9 @@
               <div class="customer_comment text-white">
                 <p>
                   <i class="far fa-star"></i>
-                  &nbsp;{{ customer2.rating }}
+                  &nbsp;{{ comment2.rating }}
                 </p>
-                <p class="customer_comment_text">{{ customer2.text }}</p>
+                <p class="customer_comment_text">{{ comment2.text }}</p>
               </div>
             </div>
           </div>
@@ -101,9 +101,9 @@
               <div class="customer_comment text-white">
                 <p>
                   <i class="far fa-star"></i>
-                  &nbsp;{{ customer3.rating }}
+                  &nbsp;{{ comment4.rating }}
                 </p>
-                <p class="customer_comment_text">{{ customer3.text }}</p>
+                <p class="customer_comment_text">{{ comment4.text }}</p>
               </div>
             </div>
           </div>
@@ -116,9 +116,9 @@
               <div class="customer_comment text-white">
                 <p>
                   <i class="far fa-star"></i>
-                  &nbsp;{{ customer3.rating }}
+                  &nbsp;{{ comment1.rating }}
                 </p>
-                <p class="customer_comment_text">{{ customer3.text }}</p>
+                <p class="customer_comment_text">{{ comment1.text }}</p>
               </div>
             </div>
           </div>
@@ -129,14 +129,16 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
-      customer1: '',
-      customer2: '',
-      customer3: '',
-      customer4: '',
-      customer5: '',
+      customer: [],
+      comment1: {},
+      comment2: {},
+      comment3: {},
+      comment4: {},
+      comment5: {},
     };
   },
   methods: {
@@ -145,11 +147,10 @@ export default {
       const api = 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJH38xRaIEbjQRDWJcNbVlHi8&language=zh-TW&fields=name,url,rating,reviews&key=AIzaSyAy9wlaxPGkp3yJJGKzWDjwCAEIj56I-gw';
       vm.axios.get(api).then((response) => {
         const client = response.data.result;
-        vm.customer1 = client.reviews[0];
-        vm.customer2 = client.reviews[1];
-        vm.customer3 = client.reviews[2];
-        vm.customer4 = client.reviews[3];
-        vm.customer5 = client.reviews[4];
+        vm.customer = client.reviews;
+        [vm.comment1, vm.comment2, vm.comment3, vm.comment4, vm.comment5] = vm.customer;
+        console.log(vm.comment1);
+        console.log('哈哈');
       });
     },
   },

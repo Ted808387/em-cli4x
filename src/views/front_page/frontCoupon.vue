@@ -4,14 +4,14 @@
     <section class="conpon page-expand">
       <div class="conpon-bg"></div>
       <div class="coupon-title">
-        <h2 class="text-center font-weight-bold mt-5">最新優惠</h2>
+        <h2 class="text-center font-weight-bold mt-5">最新資訊</h2>
         <div class="coupon-code mt-5">
-          <div class="container coupon-shadow">
+          <div class="container">
             <div class="coupon-img d-block text-white p-3 text-center d-flex justify-content-center">
-              <div class="coupon-text align-self-center">
-                <h2 class="Coupon font-weight-bold">因應Covid-19流行</h2>
-                <h3 class="font-weight-bold">折扣碼</h3>
-                <h2 class="couponcode text-withe">health</h2>
+              <div class="coupon-text align-self-center text-shadow">
+                <h1 class="Coupon font-weight-bold">因應Covid-19流行</h1>
+                <h1 class="font-weight-bold">折扣碼</h1>
+                <h1 class="couponcode">health</h1>
                 <h1 class="text-center font-weight-bold">商品全面8折</h1>
               </div>
             </div>
@@ -34,11 +34,9 @@ export default {
   created() {
     const vm = this;
     vm.isLoading = true;
-    (function () {
-      setTimeout(() => {
-        vm.isLoading = false;
-      }, 800);
-    }());
+    setTimeout(() => {
+      vm.isLoading = false;
+    }, 800);
     $('html,body').animate({
       scrollTop: 0,
     }, 0);

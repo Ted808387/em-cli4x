@@ -5,10 +5,10 @@
         <div class="imgbox">
           <div class="imgbox__inner imgbox__inner-4-3">
             <div class="image"
-             :style="{ backgroundImage:'url(https://images.unsplash.com/photo-1584020961222-f72484ed4d9a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80)' }">
-              <div class="product-show omouse">
+             :style="{ backgroundImage:'url(https://images.unsplash.com/photo-1586033591296-bfed1f5f20c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1550&q=80)' }">
+              <button class="product-show btn btn-primary border-none">
                 <h2 class="swiper-text">全商品</h2>
-              </div>
+              </button>
             </div>
           </div>
         </div>
@@ -17,10 +17,10 @@
         <div class="imgbox">
           <div class="imgbox__inner imgbox__inner-4-3">
             <div class="image"
-             :style="{ backgroundImage:'url(https://images.unsplash.com/photo-1580281780460-82d277b0e3f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80)' }">
-              <div class="product-show omouse">
+             :style="{ backgroundImage:'url(https://images.unsplash.com/photo-1586975949231-9374052a0d63?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80)' }">
+              <button class="product-show btn btn-primary border-none">
                 <h2 class="swiper-text">口罩</h2>
-              </div>
+              </button>
             </div>
           </div>
         </div>
@@ -29,10 +29,10 @@
         <div class="imgbox">
           <div class="imgbox__inner imgbox__inner-4-3">
             <div class="image"
-             :style="{ backgroundImage:'url(https://priestsheetmetal.co.nz/wp-content/uploads/2019/05/priest_sheetmetal-welding-sheetmetal-christchurch_new_zealand-3840.jpg)' }">
-              <div class="product-show omouse">
+             :style="{ backgroundImage:'url(https://images.unsplash.com/photo-1485881922961-fbe39329af2a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80)' }">
+              <button class="product-show btn btn-primary border-none">
                 <h2 class="swiper-text">面罩</h2>
-              </div>
+              </button>
             </div>
           </div>
         </div>
@@ -41,10 +41,10 @@
         <div class="imgbox">
           <div class="imgbox__inner imgbox__inner-4-3">
             <div class="image"
-             :style="{ backgroundImage:'url(https://www.manuremanager.com/wp-content/uploads/2019/09/a0ad274371d8c5d818f6646bbedbce84-1024x683.jpg)' }">
-              <div class="product-show omouse">
+             :style="{ backgroundImage:'url(https://images.unsplash.com/photo-1582178538120-06a684adaec5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=624&q=80)' }">
+              <button class="product-show btn btn-primary border-none">
                 <h2 class="swiper-text">面具</h2>
-              </div>
+              </button>
             </div>
           </div>
         </div>

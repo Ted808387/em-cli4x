@@ -1,20 +1,27 @@
-.order-process {
-    border-radius: 10px;
-    width: 30%;
-    padding: 5px;
-    margin: 5px 0;
-    color: #fff;
-    font-size: 24px;
-    line-height: 45px;
-    text-align: center;
-    font-weight: 900;
-  }
   .order-title {
-    padding: 15px;
+    position: relative;
   }
-  .process-now-color {
+  .order-title:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 0 45%;
+    transform: translate(-50%, -50%);
+    height: 5px;
     background-color: #008443;
+    z-index: -5;
   }
-  .process-undone-color {
-    background-color: #306136;
+.order-process {
+    height: 50px;
+    line-height: 45px;
+  }
+  .process {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    border-radius: 50%;
+  }
+  .process-line {
+    height: 5px;
   }

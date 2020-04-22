@@ -3,10 +3,19 @@
     <section class="ordercheck page-expand">
       <div class="productIn-bg"></div>
       <div class="container">
-        <div class="row pt-5 justify-content-between order-title">
-          <div class="order-process process-now-color col-12 col-md-3">訂購資料</div>
-          <div class="order-process process-undone-color col-12 col-md-3">訂單付款</div>
-          <div class="order-process process-undone-color col-12 col-md-3">付款成功</div>
+        <div class="pt-5 pb-5 d-flex justify-content-between order-title">
+          <div class="order-process text-primary text-center">
+            <div class="process border border-primary bg-white text-primary mx-auto">1</div>
+            <h5 class="process-title font-weight-bold mt-2">訂購資料</h5>
+          </div>
+          <div class="order-process text-primary text-center">
+            <div class="process bg-primary text-white mx-auto">2</div>
+            <h5 class="process-title font-weight-bold mt-2">訂單付款</h5>
+          </div>
+          <div class="order-process text-primary text-center">
+            <div class="process bg-primary text-white mx-auto">3</div>
+            <h5 class="process-title font-weight-bold mt-2">付款成功</h5>
+          </div>
         </div>
         <div class="row">
           <div class="col-sm-6 mt-5">
@@ -40,19 +49,20 @@
                   <div class="form-group">
                     <label for="useraddress">地址&nbsp;<span class="text-danger font-weight-bold">*</span></label>
                     <input type="text" class="form-control" name="address" id="useraddress" v-model="form.user.address" placeholder="請輸入地址" :class="{ 'is-invalid' : failed }" required/>
-                    <span class="text-danger" v-if="failed">地址欄位不得留空</span>
+                    <span class="text-danger" v-if="failed">地址欄位為必填</span>
                   </div>
                 </ValidationProvider>
                 <ValidationProvider rules="required" v-slot="{ failed }" name="method">
                   <div class="form-group">
                     <label for="payment">付款方式&nbsp;<span class="text-danger font-weight-bold">*</span></label>
                     <select id="payment" class="form-control" name="payment" v-model="form.user.method" :class="{ 'is-invalid' : failed }" required>
-                      <option selected disabled hidden>{{ form.user.method }}</option>
+                      <option selected disabled hidden>選擇付款方式</option>
                       <option>貨到付款</option>
                       <option>超商取貨付款</option>
                       <option>ATM轉帳</option>
                       <option>超商代碼繳費</option>
                     </select>
+                    <span class="text-danger" v-if="failed">付款方式為必填</span>
                   </div>
                 </ValidationProvider>
                 <div class="form-group">
@@ -90,7 +100,7 @@
                   </tr>
                   <tr class="text-center">
                     <td colspan="2">
-                      <button class="btn btn-dark mt-3" style="width:100%;" @click.prevent="createdOrder">送出訂單</button>
+                      <button class="btn btn-primary mt-3 font-weight-bold" style="width:100%;" @click.prevent="createdOrder">送出訂單</button>
                     </td>
                   </tr>
                 </tfoot>
@@ -114,7 +124,7 @@ export default {
           tel: '',
           address: '',
           message: '',
-          method: '選擇付款方式',
+          method: '',
         },
       },
       Cart: {},
@@ -161,7 +171,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 .order-card {

@@ -3,10 +3,19 @@
     <section class="Paymentsuccess page-expand">
       <div class="productIn-bg"></div>
       <div class="container">
-        <div class="row pt-5 justify-content-between order-title">
-          <div class="order-process process-undone-color col-12 col-md-3">訂購資料</div>
-          <div class="order-process process-undone-color col-12 col-md-3">訂單付款</div>
-          <div class="order-process process-now-color col-12 col-md-3">付款成功</div>
+        <div class="pt-5 pb-5 d-flex justify-content-between order-title">
+          <div class="order-process text-primary text-center">
+            <div class="process bg-primary text-white mx-auto">1</div>
+            <h5 class="process-title font-weight-bold mt-2">訂購資料</h5>
+          </div>
+          <div class="order-process text-primary text-center">
+            <div class="process bg-primary text-white mx-auto">2</div>
+            <h5 class="process-title font-weight-bold mt-2">訂單付款</h5>
+          </div>
+          <div class="order-process text-primary text-center">
+            <div class="process border border-primary bg-white text-primary mx-auto">3</div>
+            <h5 class="process-title font-weight-bold mt-2">付款成功</h5>
+          </div>
         </div>
         <div class="successful justify-content-center">
           <h1 class="successful-title mt-5 text-info text-center"><i class="far fa-check-circle"></i></h1>
@@ -26,9 +35,11 @@
           </div>
           <div class="mt-5 text-center">
             <router-link to="/frontproduct">
-              <i class="fas fa-chevron-left"></i>
-              <i class="fas fa-chevron-left"></i>
-              <h5 class="d-inline-block font-weight-bold">繼續購物</h5>
+              <button class="btn btn-primary">
+                <i class="fas fa-chevron-left"></i>
+                <i class="fas fa-chevron-left"></i>
+                <h5 class="d-inline-block font-weight-bold">繼續購物</h5>
+              </button>
             </router-link>
           </div>
         </div>

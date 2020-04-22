@@ -7,21 +7,21 @@
     <div id="popup-overlay" class="menu-popup"
      :class="{ popupClose : menu }" @click.stop="menu = true">
       <div class="omouse popup-close" @click.stop="menu = !menu">
-        <i class="fas fa-times menu-close"></i>
+        <a class="fas fa-times menu-close text-primary"></a>
       </div>
       <ul class="menu-side pl-0 mt-3">
-        <li class="mb-4">
-          <router-link to="/" class="menu-title">
+        <li class="mb-2">
+          <router-link to="/" class="nav-link text-primary">
             <h4 class="font-weight-bold" @click.stop="menu = !menu">首頁</h4>
           </router-link>
         </li>
-        <li class="mb-4">
-          <router-link to="/frontcoupon" class="menu-title">
+        <li class="mb-2">
+          <router-link to="/frontcoupon" class="nav-link text-primary">
             <h4 class="font-weight-bold" @click.stop="menu = !menu">最新資訊</h4>
           </router-link>
         </li>
-        <li class="mb-4">
-          <router-link to="/frontproduct" class="menu-title">
+        <li class="mb-2">
+          <router-link to="/frontproduct" class="nav-link text-primary">
             <h4 class="font-weight-bold" @click.stop="menu = !menu">商品</h4>
           </router-link>
         </li>
@@ -31,32 +31,35 @@
       <div class="container">
         <header class="navbar navbar-expand navbar-light justify-content-between">
           <div class="omouse menu-toggle" @click.stop="menu = !menu" v-if="displaymenu">
-            <span class="menu-line" :class="{ 'bgcolor' : headerchange }"></span>
-            <span class="menu-line" :class="{ 'bgcolor' : headerchange }"></span>
-            <span class="menu-line" :class="{ 'bgcolor' : headerchange }"></span>
+            <span class="menu-line" :class="{ 'bg-primary' : headerchange }"></span>
+            <span class="menu-line" :class="{ 'bg-primary' : headerchange }"></span>
+            <span class="menu-line" :class="{ 'bg-primary' : headerchange }"></span>
           </div>
           <router-link class="nav-link pt-0 pb-0" to="/">
             <div class="mask-logo" :class="{ 'icon-size' : displaymenu }">
-              <div class="mask-logo_img" :class="{ imgcolor : headerchange }"></div>
-              <h5 class="mask-logo_text" :class="{ 'fontcolor' : headerchange }">Wear Mask</h5>
+              <div class="mask-logo_img" :class="{ 'bg-primary' : headerchange }"></div>
+              <div class="mask-logo_text d-inline-block">
+                <h5 class="text-white mb-0" :class="{ 'text-primary' : headerchange }">WEAR</h5>
+                <p class="text-white mb-0 d-block font-weight-bold" style="font-size: 14px; line-height: 14px; height: 14px;" :class="{ 'text-primary' : headerchange }">mask</p>
+              </div>
             </div>
           </router-link>
           <ul class="navbar-nav mx-auto" v-if="!displaymenu">
             <li class="nav-item">
               <router-link class="nav-link text-white font-weight-bold nav-text-color"
-                to="/" :class="{ 'fontcolor' : headerchange }">
+                to="/" :class="{ 'text-primary' : headerchange }">
               首頁
               </router-link>
             </li>
             <li class="nav-item">
               <router-link class="nav-link text-white font-weight-bold nav-text-color"
-                to="/frontcoupon" :class="{ 'fontcolor' : headerchange }">
+                to="/frontcoupon" :class="{ 'text-primary' : headerchange }">
               最新資訊
               </router-link>
             </li>
             <li class="nav-item">
             <router-link class="nav-link text-white font-weight-bold nav-text-color"
-              to="/frontproduct" :class="{ 'fontcolor' : headerchange }">
+              to="/frontproduct" :class="{ 'text-primary' : headerchange }">
               商品
               </router-link>
             </li>
@@ -64,9 +67,9 @@
           <ul class="navbar-nav">
             <li>
               <div class="like nav-link" :class="{ 'icon-size': displaymenu }">
-                <i class="fas fa-heart fa-2x text-white omouse nav-text-color"
-                  :class="{ 'fontcolor' : headerchange }"
-                  @click.stop="favorite = !favorite, cart = false"></i>
+                <a class="fas fa-heart fa-2x text-white omouse nav-text-color"
+                  :class="{ 'text-primary' : headerchange }"
+                  @click.stop="favorite = !favorite, cart = false"></a>
                 <div class="favorite-quantity bg-primary"
                   v-if="Favorite.length !== 0">
                   {{ Favorite.length }}
@@ -75,9 +78,9 @@
             </li>
             <li class="nav-item">
               <div class="shopping-cart nav-link" :class="{ 'icon-size' : displaymenu }">
-                <i class="fas fa-shopping-basket fa-2x text-white nav-text-color omouse"
-                  :class="{ 'fontcolor' : headerchange }"
-                  @click.stop="cart = !cart, favorite = false"></i>
+                <a class="fas fa-shopping-basket fa-2x text-white nav-text-color omouse"
+                  :class="{ 'text-primary' : headerchange }"
+                  @click.stop="cart = !cart, favorite = false"></a>
                 <div class="product-quantity bg-primary"
                   v-if="Cart.carts !== undefined && Cart.carts.length > 0">
                   {{ Cart.carts.length}}
@@ -85,9 +88,9 @@
               </div>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link text-white" to="/login"
-                :class="{ 'fontcolor' : headerchange, 'icon-size': displaymenu }">
-                  <i class="fas fa-sign-in-alt fa-2x omouse nav-text-color"></i>
+              <router-link class="nav-link text-white nav-text-color" to="/login"
+                :class="{ 'text-primary' : headerchange, 'icon-size': displaymenu }">
+                  <a class="fas fa-sign-in-alt fa-2x omouse"></a>
               </router-link>
             </li>
           </ul>
@@ -193,6 +196,14 @@
                   </tr>
                 </tbody>
               </table>
+              <router-link to="/frontproduct" v-if="Favorite.length === 0">
+                <button type="button"
+                  class="shop-btn btn btn-primary font-weight-bold"
+                  style="width: 100%;"
+                  @click.stop="favorite = !favorite">
+                  購物去
+                </button>
+              </router-link>
             </div>
           </div>
         </header>

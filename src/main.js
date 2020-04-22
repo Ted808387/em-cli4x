@@ -5,15 +5,17 @@ import 'bootstrap';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 
+import {
+  ValidationProvider, ValidationObserver, extend, localize,
+} from 'vee-validate';
+import TW from 'vee-validate/dist/locale/zh_TW.json';
+import { required, email } from 'vee-validate/dist/rules';
+import VueAwesomeSwiper from 'vue-awesome-swiper';
 import App from './App.vue';
 import router from './router';
 import './bus';
 import currencyFilter from './filters/currency';
 import DateFilter from './filters/Date';
-import { ValidationProvider ,ValidationObserver,extend ,localize} from 'vee-validate';
-import TW from 'vee-validate/dist/locale/zh_TW.json';
-import { required, email } from 'vee-validate/dist/rules';
-import VueAwesomeSwiper from 'vue-awesome-swiper';
 import 'swiper/css/swiper.css';
 
 axios.defaults.withCredentials = false;

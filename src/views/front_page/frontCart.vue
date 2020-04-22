@@ -5,7 +5,7 @@
       <div class="cart-bg"></div>
       <!-- Cart -->
       <div class="container">
-        <h2 class="text-center mt-3 mb-5 font-weight-bold">購物車</h2>
+        <h2 class="text-center mt-4 mb-4 font-weight-bold">購物車</h2>
         <div class="Nothing text-center" v-if="Cart.total === 0">
           <h3 class="font-weight-bold mb-5">－&nbsp;購物車無物品&nbsp;－</h3>
           <router-link to="/frontproduct">
@@ -59,7 +59,7 @@
                       <input type="number"
                        class="quantity select-outline"
                        placeholder="1" min="1" max="100"
-                       v-model.number="item.qty"
+                       v-model.number="item.qty" value="1"
                        @keyup.13="change(item.product.id, item.qty, item.product.title)">
                       <input class="select-up select-outline bg-white"
                        type="button" value="+"
@@ -98,7 +98,7 @@
                   </button>
                 </div>
               </div>
-              <button class="btn btn-outline-success font-weight-bold float-right"
+              <button class="btn btn-outline-primary font-weight-bold float-right"
                @click="toOrdercheck"
                style="width: 100%;">
                 購物車結算

@@ -1,8 +1,7 @@
 .footer {
     width: 100%;
     margin-top: 60px;
-    background-color: #8bcc8c;
-    padding: 15px 15px 0 15px;
+    padding: 50px 15px 0 15px;
   }
   .footer-card {
     height: 100%;
@@ -16,12 +15,7 @@
     height: 40px;
     color: #094D2B;
   }
-  .footer-text-color {
-    color: #094D2B !important;
-    transition: color 0.4s;
-  }
-  .footer-text-color.text-color-change:hover {
-    color: #494949 !important;
+  .text-color-change:hover {
     text-decoration: none;
     transition: color 0.4s;
   }

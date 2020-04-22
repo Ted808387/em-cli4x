@@ -7,7 +7,7 @@
         <swiper :options="swiperOptions" ref="mySwiper">
           <swiper-slide v-for="item in products" :key="item.id">
             <div class="card-item m-3 omouse" @click="turnproduct(item.id, item.category)">
-              <div class="card-add-cart omouse" @click.stop="addtoCar(item.id, 1, item.title)">
+              <div class="card-add-cart" @click.stop="addtoCar(item.id, 1, item.title)">
                 <i class="fas fa-spinner fa-spin fa-2x" v-if="status.loading === item.id"></i>
                 <i class="fas fa-shopping-cart fa-2x" v-if="status.loading !== item.id"></i>
               </div>
@@ -108,6 +108,7 @@ export default {
     addtoCar(id, qty, title) {
       const vm = this;
       vm.status.loading = id;
+      // eslint-disable-next-line func-names
       (function () {
         vm.$emit('addcart', id, qty, title);
         setTimeout(() => {
@@ -132,11 +133,12 @@ export default {
 
 <style scoped>
   .card-add-cart:hover {
-    color: #008443;
+    color: #00381c;
     transition: all 0.3s;
   }
-  .card-item:hover {
-    color: #008443;
-    transition: all 0.3s;
+  .card-add-cart {
+    position: absolute;
+    top: 360px;
+    right: 30px;
   }
 </style>

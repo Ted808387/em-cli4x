@@ -13,23 +13,32 @@
     left: 0;
     width: 100%;
     height: 250px;
-    background: linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-    background: -moz-linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-    background: -webkit-linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-    background: -o-linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
     opacity: 0.3;
+    @include bg-gradient();
   }
   .coupon-img {
+    position: relative;
     width: 100%;
     height: 350px;
-    background-image: url("../src/assets/frontimg/discountImage.jpg");
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
+    background-image: url("https://www.thehindubusinessline.com/incoming/a1fpm5/article30775573.ece/ALTERNATES/LANDSCAPE_1200/protective-masksjpg");
     background-position: center;
     background-size: cover;
   }
-  .couponcode {
-    font-size: 120px;
-    text-align: center;
+  .coupon-img:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(360deg, #1c1c1c 69%, #1c1c1c 100%);
+    background: -moz-linear-gradient(360deg, #1c1c1c 69%, #1c1c1c 100%);
+    background: -webkit-linear-gradient(360deg, #1c1c1c 69%, #1c1c1c 100%);
+    background: -o-linear-gradient(360deg, #1c1c1c 69%, #1c1c1c 100%);
+    opacity: 0.5;
+  }
+  .coupon-text {
+    z-index: 100;
   }
   .coupon-shadow {
     text-shadow: black 0.1em 0.1em 0.1em;

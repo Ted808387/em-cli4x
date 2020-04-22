@@ -20,40 +20,27 @@
   transition: all 0.4s;
 }
 .mask-logo {
+  display: flex;
   text-align: center;
 }
 .mask-logo_img {
-    width: 85px;
-    height: 50px;
-    display: inline-block;
+    width: 75px;
+    height: 45px;
+    display: flex;
+    align-self: center;
     background-color: #ffffff;
     -webkit-mask: url('../src/assets/frontimg/mask-log.png') no-repeat;
     mask: url('../src/assets/frontimg/mask-log.png') no-repeat;
     -webkit-mask-size: 100% 100%;
     mask-size: 100% 100%;
 }
-.mask-logo_text {
-  color: #fefefe;
-  margin: -4px 0;
-}
 .icon-size .mask-logo_img{
-  width: 45px;
+  width: 50px;
   height: 30px;
 }
-.icon-size .mask-logo_text{
-  font-size: 16px;
-}
-.imgcolor {
-  background-color: #094D2B;
-}
-.fontcolor {
-  color: #094D2B !important;
-}
-.menu-toggle .bgcolor {
-  background-color: #008443;
-}
-.text-white {
-  transition: color 0.4s;
+.mask-logo_text{
+  display: flex;
+  align-self: center;
 }
 .menu-toggle {
   margin-right: 10px;
@@ -112,9 +99,9 @@ transition: all 0.4s;
   display: none;
   visibility: hidden;
 }
-.popupClose .menu-close:hover {
-  color: #008443;
-}
+// .popupClose .menu-close:hover {
+//   color: #008443;
+// }
 .popupClose .menu-close {
   display: block;
   text-align: center;
@@ -136,15 +123,6 @@ transition: all 0.4s;
   opacity: 1;
   transition: all 0.4s;
   visibility: visible;
-}
-.menu-title {
-  color: #000;
-  transition: all 0.4s;
-}
-.menu-title:hover {
-  color: #008443;
-  text-decoration: none;
-  transition: all 0.4s;
 }
 .nav-text-color:hover {
   color: #008443 !important;

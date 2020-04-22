@@ -116,7 +116,7 @@ export default {
         this.addCouponcode = {};
         this.isNew = true;
       } else {
-        this.addCouponcode = Object.assign({}, item);
+        this.addCouponcode = { ...item };
         this.isNew = false;
       }
       $('#couponModal').modal('show');

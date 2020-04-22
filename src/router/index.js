@@ -1,7 +1,7 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
@@ -70,7 +70,7 @@ const routes = [
         path: 'Products',
         component: () => import('../views/back_page/Products.vue'),
         meta: {
-            requiresAuth: true,
+          requiresAuth: true,
         },
       },
       {
@@ -78,7 +78,7 @@ const routes = [
         path: 'Order',
         component: () => import('../views/back_page/Order.vue'),
         meta: {
-            requiresAuth: true,
+          requiresAuth: true,
         },
       },
       {
@@ -86,7 +86,7 @@ const routes = [
         path: 'Couponcode',
         component: () => import('../views/back_page/Couponcode.vue'),
         meta: {
-            requiresAuth: true,
+          requiresAuth: true,
         },
       },
       {
@@ -104,12 +104,12 @@ const routes = [
         path: 'Cart',
         component: () => import('../views/back_page/Cart.vue'),
       },
-    ]
+    ],
   },
-]
+];
 
 const router = new VueRouter({
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;

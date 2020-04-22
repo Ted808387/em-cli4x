@@ -46,9 +46,9 @@
                 <p class="text-danger">快拆式濾罐與呼吸閥須定時清理更換，避免影響吸入之空氣品質</p>
                 <div class="buyproduct mt-3">
                   <div class="select-quantity">
-                    <input class="select-up select-outline bg-white" type="button" value="-" @click="selectdown"/>
+                    <input class="select-down select-outline bg-white" type="button" value="-" @click="selectdown"/>
                     <input type="number" class="quantity select-outline" placeholder="0" min="0" max="100" v-model.number="num" :key="num"/>
-                    <input class="select-down select-outline bg-white" type="button" value="+" @click="selectup"/>
+                    <input class="select-up select-outline bg-white" type="button" value="+" @click="selectup"/>
                   </div>
                   <button type="button" class="btn btn-primary addcart font-weight-bold" @click="addtoCar(product.id, num, product.title)">加到購物車</button>
                   <div class="product-price">
@@ -227,7 +227,7 @@ export default {
   text-align: center;
   font-size: 20px;
 }
-.select-up {
+.select-down {
   display: inline-block;
   border: 1px solid gray;
   font-size: 20px;
@@ -238,7 +238,7 @@ export default {
   border-bottom-left-radius: 3px;
   margin-top: 1px;
 }
-.select-down {
+.select-up {
   display: inline-block;
   border: 1px solid gray;
   font-size: 20px;

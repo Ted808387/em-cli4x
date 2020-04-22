@@ -7,20 +7,20 @@
         <div class="row">
           <div class="col-sm-3">
             <div class="itemlist">
-              <div class="itemtitle pl-4 font-weight-bold">
+              <div class="text-primary itemtitle pl-4 font-weight-bold">
                 <div>產品列表</div>
               </div>
               <ul class="pl-0 font-weight-bold list-ul list-unstyled">
-                <li class="list-li" @click="getproducts" :class="{ 'list-li-focus':displayitem === '全商品' }">
+                <li class="list-li omouse" @click="getproducts" :class="{ 'list-li-focus':displayitem === '全商品' }">
                   <div>全款商品</div>
                 </li>
-                <li class="list-li" @click="selectmask('面罩')" :class="{ 'list-li-focus':displayitem === '面罩' }">
+                <li class="list-li omouse" @click="selectmask('面罩')" :class="{ 'list-li-focus':displayitem === '面罩' }">
                   <div>面罩</div>
                 </li>
-                <li class="list-li" @click="selectmask('口罩')" :class="{ 'list-li-focus':displayitem === '口罩' }">
+                <li class="list-li omouse" @click="selectmask('口罩')" :class="{ 'list-li-focus':displayitem === '口罩' }">
                   <div>口罩</div>
                 </li>
-                <li class="list-li" @click="selectmask('防毒面具')" :class="{ 'list-li-focus':displayitem === '防毒面具' }">
+                <li class="list-li omouse" @click="selectmask('防毒面具')" :class="{ 'list-li-focus':displayitem === '防毒面具' }">
                   <div>防毒面具</div>
                 </li>
               </ul>
@@ -35,13 +35,13 @@
           <div class="col-sm-9">
             <div class="row">
               <div class="mb-3 pb-5 col-xl-4 col-md-6" v-for="item in products" :key="item.id" @click="turnproduct(item.id, item.category)">
-                <div class="card-item">
-                  <div class="card_favorite-cart">
-                    <div class="favorite" @click.stop="addtoFavorite(item)">
-                      <i class="fas fa-heart fa-2x card-favorite mark" v-if="markfavorite(item)"></i>
-                      <i class="fas fa-heart fa-2x card-favorite" v-else></i>
+                <div class="card-item omouse">
+                  <div class="card-add-item">
+                    <div class="card-add-favorite btn btn-primary" @click.stop="addtoFavorite(item)">
+                      <i class="fas fa-heart fa-2x text-black" v-if="markfavorite(item)"></i>
+                      <i class="fas fa-heart fa-2x" v-else></i>
                     </div>
-                    <div class="card-add-cart" @click.stop="addtoCar(item.id,1,item.title)">
+                    <div class="card-add-cart btn btn-primary" @click.stop="addtoCar(item.id,1,item.title)">
                       <i class="fas fa-spinner fa-spin fa-2x" v-if="status.loading === item.id"></i>
                       <i class="fas fa-shopping-cart fa-2x" v-if="status.loading !== item.id"></i>
                     </div>
@@ -239,20 +239,17 @@ export default {
 </script>
 
 <style scoped>
-  .card-item:hover .card-favorite,
+  .card-item:hover .card-add-favorite,
   .card-item:hover .card-add-cart {
     opacity: 1;
     transition: all 0.4s;
   }
-  .card-favorite:hover,
-  .card-add-cart:hover,
-  .card-favorite.mark {
-    background-color: #306136;
-    color: #fff !important;
+  .card-add-favorite:hover,
+  .card-add-cart:hover {
     transition: all 0.5s;
     text-decoration: none;
   }
-  .card_favorite-cart {
+  .card-add-item {
     position: absolute;
     top: 20%;
     left: 0;
@@ -260,15 +257,13 @@ export default {
     height: 100px;
     z-index: 100;
   }
-.card-favorite {
+.card-add-favorite {
   position: absolute;
   top: 30px;
   left: 25%;
   width: 25%;
-  color: black !important;
   text-align: center;
   padding: 12px 15px;
-  background-color: #6eb577;
   opacity: 0;
   transition: all 0.4s;
   margin-right: 5px;
@@ -278,21 +273,11 @@ export default {
   top: 30px;
   left: 65%;
   width: 25%;
-  color: black !important;
   text-align: center;
-  padding: 11px 10px;
+  padding: 12px 15px;
   transform: translateX(-50%);
-  background-color: #6eb577;
   opacity: 0;
   transition: all 0.4s;
   margin-left: 5px;
-}
-@media (max-width: 992px) {
-  .card-favorite {
-    font-size: 120%;
-  }
-  .card-add-cart {
-    font-size: 60%;
-  }
 }
 </style>
