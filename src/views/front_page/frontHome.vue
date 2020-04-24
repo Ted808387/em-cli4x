@@ -26,7 +26,7 @@
               <div class="col-md-6">
                 <div class="imgbox">
                   <div class="imgbox__inner imgbox__inner-4-3">
-                    <img class="image1" src="../../assets/frontimg/istockphoto-mask.jpg" />
+                    <img class="image1" src="../../assets/img/frontimg/istockphoto-mask.jpg" />
                   </div>
                 </div>
               </div>
@@ -57,7 +57,7 @@
               <div class="col-md-6 order-1 order-md-2">
                 <div class="imgbox">
                   <div class="imgbox__inner imgbox__inner-4-3">
-                    <img class="image1" src="../../assets/frontimg/PollutionSolution.jpg" />
+                    <img class="image1" src="../../assets/img/frontimg/PollutionSolution.jpg" />
                   </div>
                 </div>
               </div>

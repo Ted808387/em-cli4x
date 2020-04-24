@@ -1,7 +1,7 @@
 .cart-bg {
     width: 100%;
     height: 100px;
-    background-image: url("../src/assets/frontbgimg/porductinfor.jpg");
+    background-image: url("../src/assets/img/frontbgimg/porductinfor.jpg");
     background-position: center;
     background-size: cover;
     z-index: -10;
@@ -13,11 +13,8 @@
     left: 0;
     width: 100%;
     height: 100px;
-    background: linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-    background: -moz-linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-    background: -webkit-linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
-    background: -o-linear-gradient(360deg, #70b594 69%, #1c1c1c 100%);
     opacity: 0.6;
+    @include bg-gradient();
   }
   .cart-img {
     width: 50px;

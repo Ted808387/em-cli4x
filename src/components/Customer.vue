@@ -129,7 +129,6 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -143,15 +142,36 @@ export default {
   },
   methods: {
     getid() {
+      // https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJH38xRaIEbjQRDWJcNbVlHi8&language=zh-TW&fields=name,url,rating,reviews&key=AIzaSyAy9wlaxPGkp3yJJGKzWDjwCAEIj56I-gw
       const vm = this;
-      const api = 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJH38xRaIEbjQRDWJcNbVlHi8&language=zh-TW&fields=name,url,rating,reviews&key=AIzaSyAy9wlaxPGkp3yJJGKzWDjwCAEIj56I-gw';
-      vm.axios.get(api).then((response) => {
-        const client = response.data.result;
-        vm.customer = client.reviews;
-        [vm.comment1, vm.comment2, vm.comment3, vm.comment4, vm.comment5] = vm.customer;
-        console.log(vm.comment1);
-        console.log('哈哈');
-      });
+      const client = [
+        {
+          rating: 5,
+          text: '作為奧客的我，也覺得這裏的服務態度太好了',
+        },
+        {
+          rating: 3,
+          text: '有口罩可買嗎？',
+        },
+        {
+          rating: 5,
+          text: '你要的醫療產品盡在這裡哦！',
+        },
+        {
+          rating: 4,
+          text: '門市人員很親切！',
+        },
+        {
+          rating: 5,
+          text: '專業，價格公道，人員細心的解說',
+        },
+        {
+          rating: 5,
+          text: '作為奧客的我，也覺得這裏的服務態度太好了，有問必答：訂貨前問企業員工大約10多條問題他們亦沒有變面，仍然保持優質服務態度，兵貴神速：出貨速度很有效率，下午下單後第二天就可以出貨',
+        },
+      ];
+      vm.customer = client;
+      [vm.comment1, vm.comment2, vm.comment3, vm.comment4, vm.comment5] = vm.customer;
     },
   },
   created() {

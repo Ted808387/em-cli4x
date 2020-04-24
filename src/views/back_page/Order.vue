@@ -107,7 +107,7 @@ export default {
       });
     },
     openOrder(item) {
-      this.updata = Object.assign({}, ...item); // item資料不要傳參考，不然會將資料洗掉，把原本有在的資料替換就好
+      this.updata = { ...item };
       $('#OrderModal').modal('show');
     },
     updataOrder() {

@@ -11,16 +11,16 @@
                 <div>產品列表</div>
               </div>
               <ul class="pl-0 font-weight-bold list-ul list-unstyled">
-                <li class="list-li omouse" @click="getproducts" :class="{ 'list-li-focus':displayitem === '全商品' }">
+                <li class="list-li omouse" :class="{ 'list-li-focus':displayitem === '全商品' }" @click="displayitem = '全商品', getpages()">
                   <div>全款商品</div>
                 </li>
-                <li class="list-li omouse" @click="selectmask('面罩')" :class="{ 'list-li-focus':displayitem === '面罩' }">
+                <li class="list-li omouse" :class="{ 'list-li-focus':displayitem === '面罩' }" @click="changeitem">
                   <div>面罩</div>
                 </li>
-                <li class="list-li omouse" @click="selectmask('口罩')" :class="{ 'list-li-focus':displayitem === '口罩' }">
+                <li class="list-li omouse" :class="{ 'list-li-focus':displayitem === '口罩' }" @click="changeitem">
                   <div>口罩</div>
                 </li>
-                <li class="list-li omouse" @click="selectmask('防毒面具')" :class="{ 'list-li-focus':displayitem === '防毒面具' }">
+                <li class="list-li omouse" :class="{ 'list-li-focus':displayitem === '防毒面具' }" @click="changeitem">
                   <div>防毒面具</div>
                 </li>
               </ul>
@@ -65,7 +65,7 @@
                 </div>
               </div>
             </div>
-            <frontpagination :getpagination="pagination" @userpage="getproducts" v-if="displaypage"></frontpagination>
+            <frontpagination :getpagination="pagination" @userpage="getpages" v-if="displaypage"></frontpagination>
           </div>
         </div>
       </div>
@@ -81,8 +81,8 @@ export default {
   data() {
     return {
       allproducts: [],
+      pagesproducts: [],
       displaypage: false,
-      products: [],
       pagination: {},
       isLoading: false,
       status: {
@@ -90,6 +90,8 @@ export default {
         display: false,
       },
       search: '',
+      searchitem: [],
+      find: true,
       displayitem: '',
       Cart: [],
       favorites: [],
@@ -99,30 +101,23 @@ export default {
     frontpagination,
   },
   methods: {
-    getproducts(page = 1) {
+    changeitem(e) {
+      this.displayitem = e.target.innerText;
+    },
+    getpages(page = 1) {
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`;
       vm.$http.get(url).then((response) => {
-        vm.allproducts = response.data.products;
-        vm.products = vm.allproducts;
-        vm.displaypage = true;
+        vm.pagesproducts = response.data.products;
         vm.pagination = response.data.pagination;
-        vm.displayitem = '全商品';
-        vm.isLoading = false;
         vm.scrollTop();
       });
     },
-    selectmask(id) {
+    getproducts() {
       const vm = this;
       const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
       vm.$http.get(url).then((response) => {
         vm.allproducts = response.data.products;
-        vm.products = vm.allproducts.filter((item) => {
-          vm.displayitem = id;
-          return item.category === id;
-        });
-        vm.displaypage = false;
-        vm.scrollTop();
         vm.isLoading = false;
       });
     },
@@ -169,27 +164,17 @@ export default {
       vm.status.display = true;
       if (vm.search) {
         vm.displayitem = vm.search;
-        const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
-        vm.$http.get(url).then((response) => {
-          vm.allproducts = response.data.products;
-          const find = vm.allproducts.every((item) => String(item.title).indexOf(vm.search) === -1 && String(item.category).indexOf(vm.search) === -1);
-          if (!find) {
-            vm.products = vm.allproducts.filter((item) => String(item.title).indexOf(vm.search) > -1 || String(item.category).indexOf(vm.search) > -1);
-          } else if (find) {
-            vm.$bus.$emit('message:push', '未搜尋到物品，請重新搜尋', 'danger');
-          }
-          vm.status.display = false;
-        });
+        vm.find = vm.allproducts.every((item) => String(item.title).indexOf(vm.search) === -1 && String(item.category).indexOf(vm.search) === -1);
+        if (!vm.find) {
+          vm.searchitem = vm.allproducts.filter((item) => String(item.title).indexOf(vm.search) > -1 || String(item.category).indexOf(vm.search) > -1);
+        } else if (vm.find) {
+          vm.$bus.$emit('message:push', `找不到符合搜尋「${vm.search}」，請重新搜尋`, 'danger');
+        }
+        vm.status.display = false;
         vm.displaypage = false;
       } else {
-        const url = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${1}`;
-        vm.$http.get(url).then((response) => {
-          vm.products = response.data.products;
-          vm.displaypage = true;
-          vm.pagination = response.data.pagination;
-          vm.status.display = false;
-          vm.displayitem = '全商品';
-        });
+        vm.displayitem = '全商品';
+        vm.status.display = false;
       }
     },
     gettoFavorite() {
@@ -220,13 +205,43 @@ export default {
       return this.favorites.some((product) => item.id === product.id);
     },
   },
+  computed: {
+    products() {
+      const vm = this;
+      vm.isLoading = false;
+      vm.displaypage = false;
+      let filter = [];
+      if (vm.allproducts.length > 10) {
+        if (vm.displayitem === '全商品') {
+          filter = vm.pagesproducts;
+          vm.displaypage = true;
+        } else if (vm.displayitem === vm.search && !vm.find) {
+          filter = vm.searchitem;
+        } else {
+          filter = vm.allproducts.filter((item) => item.category === vm.displayitem);
+        }
+      } else if (vm.allproducts.length < 10) {
+        if (vm.displayitem === '全商品') {
+          filter = vm.allproducts;
+          vm.displaypage = true;
+        } else if (vm.displayitem === vm.search && !vm.find) {
+          filter = vm.searchitem;
+        } else {
+          filter = vm.allproducts.filter((item) => item.category === vm.displayitem);
+        }
+      }
+      return filter;
+    },
+  },
   created() {
     const vm = this;
     vm.isLoading = true;
+    vm.getproducts();
+    vm.getpages();
     if (vm.$route.params.id) {
-      vm.selectmask(vm.$route.params.id);
+      vm.displayitem = vm.$route.params.id;
     } else {
-      vm.getproducts();
+      vm.displayitem = '全商品';
     }
     vm.gettoFavorite();
     vm.$bus.$off('addtocart');

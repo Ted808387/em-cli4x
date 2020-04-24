@@ -1,7 +1,7 @@
 <template>
   <div>
     <loading :active.sync="isLoading"></loading>
-    <div class="text-right mt-4">
+    <div class="text-right mt-md-4">
       <button class="btn btn-outline-primary" @click="openModals">建立新的優惠卷</button>
     </div>
     <table class="table mt-4">
@@ -135,6 +135,7 @@ export default {
         if (response.data.success) {
           $('#couponModal').modal('hide');
           vm.getcoupon();
+          vm.$bus.$emit('message:push', '更新優惠卷成功', 'success');
         } else {
           $('#couponModal').modal('hide');
           vm.getcoupon();

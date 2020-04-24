@@ -1,13 +1,13 @@
 <template>
   <nav class="col-md-2 d-none d-md-block bg-light sidebar">
     <div class="sidebar-sticky">
-      <h6 class="sidebar-heading d-flex justify-content-between align-items-center
+      <div class="sidebar-heading d-flex justify-content-between align-items-center
        px-3 mt-4 mb-1 text-muted">
-        <h4 class="text-primary font-weight-bold">管理員</h4>
+        <h5 class="text-black font-weight-bold">管理員</h5>
         <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
           <span data-feather="plus-circle"></span>
         </a>
-      </h6>
+      </div>
       <ul class="nav flex-column mb-2">
         <li class="nav-item">
           <router-link class="nav-link font-weight-bold" to="/Dashboard/Products">
@@ -28,13 +28,13 @@
           </router-link>
         </li>
       </ul>
-      <h6 class="sidebar-heading d-flex justify-content-between align-items-center
+      <div class="sidebar-heading d-flex justify-content-between align-items-center
        px-3 mt-4 mb-1 text-muted">
-        <h4 class="text-primary font-weight-bold">模擬功能</h4 >
+        <h5 class="text-black font-weight-bold">模擬功能</h5 >
         <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
           <span data-feather="plus-circle"></span>
         </a>
-      </h6>
+      </div>
       <ul class="nav flex-column mb-2">
         <li class="nav-item">
           <router-link class="nav-link font-weight-bold" to="/Dashboard/customer_order">

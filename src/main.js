@@ -18,7 +18,7 @@ import currencyFilter from './filters/currency';
 import DateFilter from './filters/Date';
 import 'swiper/css/swiper.css';
 
-axios.defaults.withCredentials = false;
+axios.defaults.withCredentials = true;
 Vue.config.productionTip = false;
 Vue.use(VueAxios, axios);
 Vue.component('Loading', Loading);

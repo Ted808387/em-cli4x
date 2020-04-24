@@ -1,12 +1,12 @@
-  .conpon-bg {
+  .coupon-bg {
     width: 100%;
     height: 250px;
-    background-image: url("../src/assets/frontbgimg/News.jpg");
+    background-image: url("../src/assets/img/frontbgimg/News.jpg");
     background-position: 50% 35%;
     background-size: cover;
     z-index: -10;
   }
-  .conpon-bg:after {
+  .coupon-bg:after {
     content: "";
     position: absolute;
     top: 0;

@@ -1,10 +1,10 @@
 .scrolltop {
-    position: fixed;
-    top: 80%;
-    right: 20px;
-    color: #094D2B;
-    z-index: 1000;
-    transition: all 0.3s;
+  position: fixed;
+  top: 80%;
+  right: 20px;
+  color: #094D2B;
+  z-index: 1000;
+  transition: all 0.3s;
 }
 .header{
   position: fixed;
@@ -15,7 +15,7 @@
   transition: all 0.4s;
 }
 .headercolor{
-    background-color: #fefefe;
+  background-color: #fefefe;
   box-shadow: 0 1px 3px rgba(0,0,0,0.5);
   transition: all 0.4s;
 }
@@ -24,19 +24,20 @@
   text-align: center;
 }
 .mask-logo_img {
-    width: 75px;
-    height: 45px;
-    display: flex;
-    align-self: center;
-    background-color: #ffffff;
-    -webkit-mask: url('../src/assets/frontimg/mask-log.png') no-repeat;
-    mask: url('../src/assets/frontimg/mask-log.png') no-repeat;
-    -webkit-mask-size: 100% 100%;
-    mask-size: 100% 100%;
+  width: 75px;
+  height: 45px;
+  display: flex;
+  align-self: center;
+  background-color: #ffffff;
+  -webkit-mask: url('../src/assets/img/frontimg/mask-log.png') no-repeat;
+  mask: url('../src/assets/img/frontimg/mask-log.png') no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
 }
 .icon-size .mask-logo_img{
   width: 50px;
   height: 30px;
+  margin-top: 5px;
 }
 .mask-logo_text{
   display: flex;
@@ -99,9 +100,6 @@ transition: all 0.4s;
   display: none;
   visibility: hidden;
 }
-// .popupClose .menu-close:hover {
-//   color: #008443;
-// }
 .popupClose .menu-close {
   display: block;
   text-align: center;

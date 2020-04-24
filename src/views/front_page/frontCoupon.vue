@@ -2,7 +2,7 @@
   <div>
     <loading :active.sync="isLoading"></loading>
     <section class="conpon page-expand">
-      <div class="conpon-bg"></div>
+      <div class="coupon-bg"></div>
       <div class="coupon-title">
         <h2 class="text-center font-weight-bold mt-5">最新資訊</h2>
         <div class="coupon-code mt-5">
