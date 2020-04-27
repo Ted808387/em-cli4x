@@ -1,6 +1,6 @@
 # Mask E-commerce
 [Demo](https://ted808387.github.io/em-cli4x/#/)
-![Imgur](https://i.imgur.com/I2GrIxA.gif)
+<img src='https://i.imgur.com/I2GrIxA.gif'>
 
 ## Description
 - SPA電商demo
