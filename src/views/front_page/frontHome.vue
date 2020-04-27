@@ -91,7 +91,8 @@
         <div class="coupon-img">
         </div>
         <div class="container text-center text-shadow coupon-content">
-          <h1 class="text-white font-weight-bold mb-3">20% 折扣，熱門優惠中!!!</h1>
+          <h1 class="text-white font-weight-bold mb-3">自己健康自己救</h1>
+          <h2 class="text-white font-weight-bold mb-3">20% 折扣，熱門優惠中!</h2>
           <router-link to="/frontcoupon">
             <button class="discount-btn btn btn-primary btn-lg font-weight-bold">取得優惠碼</button>
           </router-link>

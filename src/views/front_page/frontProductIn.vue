@@ -45,16 +45,16 @@
                 </h5>
                 <p class="text-danger">快拆式濾罐與呼吸閥須定時清理更換，避免影響吸入之空氣品質</p>
                 <div class="buyproduct mt-3">
-                  <div class="select-quantity">
-                    <input class="select-down select-outline bg-white" type="button" value="-" @click="selectdown"/>
-                    <input type="number" class="quantity select-outline" placeholder="0" min="0" max="100" v-model.number="num" :key="num"/>
-                    <input class="select-up select-outline bg-white" type="button" value="+" @click="selectup"/>
+                  <div class="select_quantity">
+                    <button class="down select-outline bg-white" @click="selectdown">-</button>
+                    <input class="quantity select-outline" type="number" placeholder="1" min="1" max="100" v-model.number="num" :key="num">
+                    <button class="up select-outline bg-white" @click="selectup">+</button>
                   </div>
                   <button type="button" class="btn btn-primary addcart font-weight-bold" @click="addtoCar(product.id, num, product.title)">加到購物車</button>
-                  <div class="product-price">
-                    <div class="total-price text-muted text-nowrap mt-3">
-                      <strong class="text-">NT {{ product.price*num | currency }}</strong> 元
-                    </div>
+                </div>
+                <div class="product-price">
+                  <div class="total-price text-muted text-nowrap mt-3">
+                    <strong class="text-">NT {{ product.price*num | currency }}</strong> 元
                   </div>
                 </div>
               </div>
@@ -116,7 +116,7 @@ import recommend from '../../components/Recommend.vue';
 export default {
   data() {
     return {
-      num: 0,
+      num: 1,
       isLoading: false,
       product: {},
       itemcategory: '',
@@ -210,8 +210,14 @@ export default {
   background-size: cover;
   background-position: center;
 }
-.select-quantity {
-  display: inline-block;
+.buyproduct {
+  display: flex;
+  justify-content: space-between;
+}
+.select_quantity {
+  display: flex;
+  justify-content: start;
+  align-items: center;
 }
 .select-outline:focus {
   outline-color: #8bcc8c;
@@ -220,43 +226,43 @@ export default {
   border: 1px solid #8bcc8c;
 }
 .quantity {
-  width: 62px;
-  height: 49px;
+  max-width: 60px;
+  width: 60%;
+  height: 50px;
+  line-height: 46px;
   border: 1px solid gray;
   display: inline-block;
   text-align: center;
   font-size: 20px;
 }
-.select-down {
+.down {
   display: inline-block;
   border: 1px solid gray;
-  font-size: 20px;
-  width: 40px;
-  height: 49px;
+  font-size: 18px;
+  width: 30%;
+  height: 50px;
   border-right: none;
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
-  margin-top: 1px;
 }
-.select-up {
+.up {
   display: inline-block;
   border: 1px solid gray;
-  font-size: 20px;
-  width: 40px;
-  height: 49px;
+  font-size: 18px;
+  /* min-width: 16px; */
+  width: 30%;
+  height: 50px;
   border-left: none;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
-  margin-top: 1px;
 }
 .total-price {
   font-size: 24px;
   float: right;
 }
 .addcart {
-  position: absolute;
-  margin-left: 30px;
-  height: 49px;
-  width: 140px;
+  height: 50px;
+  width: 120px;
+  font-size: 1rem;
 }
 </style>
