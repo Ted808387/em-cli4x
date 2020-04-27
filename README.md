@@ -1,5 +1,6 @@
 # Mask E-commerce
 [Demo](https://ted808387.github.io/em-cli4x/#/)
+[Imgur](https://i.imgur.com/I2GrIxA.gifv)
 
 ## Description
 - SPA電商demo
@@ -29,7 +30,5 @@
 [Unsplash](https://unsplash.com/)
 [3M](https://www.3m.com.tw/3M/zh_TW/company-tw/)
 
-## 555
-![Imgur](https://i.imgur.com/I2GrIxA.gif)
 
 
