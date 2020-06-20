@@ -50,7 +50,7 @@
       <div class="col-md-3 col-6">
         <div class="customerimgbox">
           <div class="customerimgbox-inner">
-            <div class="customerimg omouse" style="background-image:url('https://scontent-yyz1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c144.0.1066.1066a/s640x640/83984370_186474759081453_6399856911404758233_n.jpg?_nc_ht=scontent-yyz1-1.cdninstagram.com&_nc_cat=109&_nc_ohc=dQ2CpTOPlV8AX_sCBcl&oh=21a6c204f13d2ad3356b094b1175f332&oe=5EC9043B');">
+            <div class="customerimg omouse" style="background-image:url('https://images.unsplash.com/photo-1590176776264-ddfc30d4a4d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80');">
               <div class="customer_comment text-white">
                 <p>
                   <i class="far fa-star"></i>
@@ -112,7 +112,7 @@
       <div class="col-md-3 col-6">
         <div class="customerimgbox">
           <div class="customerimgbox-inner">
-            <div class="customerimg omouse" style="background-image:url('https://scontent-yyz1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c0.106.853.853a/s640x640/37617302_2139513476264923_6148583384617582592_n.jpg?_nc_ht=scontent-yyz1-1.cdninstagram.com&_nc_cat=107&_nc_ohc=DVFPim1X9tUAX82H_ej&oh=b8cb810ce3f52bc4e3d13b7383f5d80c&oe=5EA73B6C');">
+            <div class="customerimg omouse" style="background-image:url('https://images.unsplash.com/photo-1582974006777-1117ffbdd7d6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80');">
               <div class="customer_comment text-white">
                 <p>
                   <i class="far fa-star"></i>
